@@ -39,6 +39,7 @@ Proeve van Bekwaamheid.
  * Always commit a working build.
  * Always add protection level to method/variable.
  * Use events if you want a static function except if it has to be called every frame.
+ * Use SceneController when loading scenes.
 
 ## Contributors
 Lieske Timmermans, Sharon Jansen, Angelina Mendes Duarte, Dejorden Moerman, Kerim Birlik, Jesse Stam, Petar Dimitrov.
