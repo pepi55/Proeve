@@ -1,0 +1,3 @@
+[submodule "HTML5/phaser"]
+	path = HTML5/phaser
+	url = https://github.com/photonstorm/phaser.git
