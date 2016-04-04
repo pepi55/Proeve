@@ -63,4 +63,13 @@
  * Maximal game resolution is: 1920x1080.
 
 ## Contributors
-Lieske Timmermans, Sharon Jansen, Angelina Mendes Duarte, Dejorden Moerman, Kerim Birlik, Jesse Stam, Petar Dimitrov.
+### Artists
+Lieske Timmermans,
+Sharon Jansen,
+Angelina Mendes Duarte,
+Dejorden Moerman.
+
+### Developers
+Kerim Birlik,
+Jesse Stam,
+Petar Dimitrov.
