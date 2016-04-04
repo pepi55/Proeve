@@ -60,7 +60,7 @@
  * SFX goes into the Art/SFX folder and BGM goes into Art/BGM.
 
  * Minimal game resolution is: 800x600.
- * Maximal game resolution is: 1920x1080.
+ * Maximum game resolution is: 1920x1080.
 
 ## Contributors
 ### Artists
