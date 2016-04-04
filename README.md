@@ -62,6 +62,13 @@
  * Minimal game resolution is: 800x600.
  * Maximum game resolution is: 1920x1080.
 
+### Responsibilities
+Each artist is responsible for importing his/her own work in Unity.
+Lieske and Kerim are responsible for keeping track of the scrum board.
+Each programmer is responsible for coding in the code conventions.
+Petar is responsible for issues with git.
+Dejorden is responsible for art issues.
+
 ## Contributors
 ### Artists
 Lieske Timmermans,
