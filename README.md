@@ -48,7 +48,6 @@
  * Each class has its own seperate JS file named after itself (i.e.: wall class would be wallClass.js).
 
 ### Art conventions
-
  * Art assets are to be imported in Unity.
  * If the art is faulty, it is to be sent back to the artists so they can fix it.
 
