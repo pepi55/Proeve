@@ -5,8 +5,8 @@ public class Benchmark : MonoBehaviour {
 
     int j = 0;
 
-    public delegate void Delegate();
-    public static event Delegate onStuff;
+    delegate void Delegate();
+    event Delegate onStuff;
 
 	// Use this for initialization
 	void Start () {
