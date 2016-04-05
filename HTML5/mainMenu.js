@@ -6,7 +6,7 @@ var mainMenuState = {
 
 	create: function() {
 		game.stage.backgroundColor = '#CCCCCC';
-		game.physics.startSystem(Phaser.Physics.ARCADE);
+		//game.physics.startSystem(Phaser.Physics.ARCADE);
 
 		game.add.button(game.world.centerX, game.world.centerY, 'button', startGame, this);
 
