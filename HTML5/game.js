@@ -9,9 +9,13 @@ var gameState = {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         game.physics.arcade.gravity.y = 1000;
 
+        // Ball setup
         this.ball = game.add.sprite(game.world.centerX, 20, 'ball');
         this.ball.anchor.setTo(0.5, 0.5);
+
         game.physics.arcade.enable(this.ball);
+        this.ball.body.collideWorldBounds = true;
+        this.ball.body.bounce.setTo(0.9, 0.9);
 
         var escButton = game.input.keyboard.addKey(Phaser.Keyboard.Q);
         escButton.onDown.add(this.goToMain, this);
