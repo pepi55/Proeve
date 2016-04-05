@@ -29,6 +29,7 @@ public class InputManager : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             OnClick(touches[i].position);
+            return;
         }
     }
 
