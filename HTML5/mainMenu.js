@@ -5,9 +5,11 @@ var mainMenuState = {
 	},
 
 	create: function() {
-		game.stage.backgroundColor = '#CCCCCC';
+		game.stage.backgroundColor = '#BBBBBB';
 
-		game.add.button(game.world.centerX, game.world.centerY, 'button', startGame, this);
+		var button;
+		button = game.add.button(game.world.centerX, game.world.centerY, 'button', startGame, this);
+		button.anchor.setTo(0.5, 0.5);
 
 		function startGame() {
 			game.state.start('game');

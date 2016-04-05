@@ -5,7 +5,7 @@ var gameState = {
     },
 
     create: function() {
-        game.stage.backgroundColor = '#FCFCFC';
+        game.stage.backgroundColor = '#CCCCCC';
         game.physics.startSystem(Phaser.Physics.ARCADE);
         game.physics.arcade.gravity.y = 1000;
 
