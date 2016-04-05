@@ -3,7 +3,8 @@
 
 ## Contribution
 ### Code Conventions
- * Enter Bracket
+ * Enter Bracket for C#
+ * Bracket enter for HTML5/JS
  * Folders are UpperCamelCase.
  * __No one letter variables.__ (Except in for loops.)
  * __No public variables, use properties.__
@@ -40,6 +41,11 @@
  * Always add protection level to method/variable.
  * Use events if you want a static function except if it has to be called every frame.
  * Use SceneController when loading scenes.
+
+#### HTML5/JS naming conventions.
+ * lowerCamelCase names.
+ * Names are in English.
+ * Each class has its own seperate JS file named after itself (i.e.: wall class would be wallClass.js).
 
 ### Art conventions
 
