@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\Util\SceneControler.cs" />
     <Compile Include="Assets\Scripts\Util\SceneUtils.cs" />
     <Compile Include="Assets\Scripts\Util\SliderSetter.cs" />
+    <Compile Include="Assets\Scripts\Util\SnapToScreenPoint.cs" />
     <Compile Include="Assets\Scripts\Util\ValueDebugger.cs" />
     <Compile Include="Assets\Scripts\Util\ValueWrapper.cs" />
     <Compile Include="Assets\Scripts\Util\XML\DataContainer.cs" />
