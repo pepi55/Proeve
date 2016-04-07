@@ -2,6 +2,7 @@
 var walls;
 var tweenAPosition;
 var tweenBPosition;
+var hardMode;
 
 var gameState = {
     preload: function() {
@@ -19,9 +20,6 @@ var gameState = {
         game.stage.backgroundColor = '#CCCCCC';
         game.physics.startSystem(Phaser.Physics.ARCADE);
         game.physics.arcade.gravity.y = 1000;
-
-        var tweenA;
-        var tweenB;
 
         tweenAPosition = 750;
         tweenBPosition = 70;
@@ -79,7 +77,7 @@ var gameState = {
         game.physics.arcade.collide(this.goal, this.ball, this.goalCollisionHandler);
 
         if (this.ball.world.y >= game.world.height) {
-            game.state.start('mainMenu');
+            this.goToMain();
         }
 
         if(this.goal.world.x == tweenAPosition) {
@@ -97,7 +95,7 @@ var gameState = {
 
     // Custom functions
     goalCollisionHandler: function() {
-        game.state.start('game');
+        //game.state.start('game');
     },
 
     bounce: function() {
@@ -105,14 +103,20 @@ var gameState = {
 
         if (game.input.activePointer.y > this.ball.y) {
             yVelocity = -400;
-        } else {
-            yVelocity = 400;
+            } else {
+                yVelocity = 400;
+            }
+        if(hardMode == true)
+        {
+            if (game.input.activePointer.x > this.ball.x) {
+                this.ball.body.velocity.setTo(this.ball.body.velocity.x + -Phaser.Math.difference(game.input.activePointer.x, this.ball.x), yVelocity);
+            } else {
+                this.ball.body.velocity.setTo(this.ball.body.velocity.x + Phaser.Math.difference(game.input.activePointer.x, this.ball.x), yVelocity);
+            }
         }
-
-        if (game.input.activePointer.x > this.ball.x) {
-            this.ball.body.velocity.setTo(this.ball.body.velocity.x + -Phaser.Math.difference(game.input.activePointer.x, this.ball.x), yVelocity);
-        } else {
-            this.ball.body.velocity.setTo(this.ball.body.velocity.x + Phaser.Math.difference(game.input.activePointer.x, this.ball.x), yVelocity);
+        else{
+            console.log(yVelocity);
+            this.ball.body.velocity.setTo(this.ball.body.velocity.x,yVelocity);
         }
     },
 
