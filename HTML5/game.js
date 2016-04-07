@@ -28,8 +28,8 @@ var gameState = {
         this.ball = game.add.sprite(game.world.centerX, 20, 'ball');
         this.goal = game.add.sprite(tweenAPosition, game.world.height - 50, 'goal');
 
-        this.wall1 = game.add.sprite(0, game.world.height, 'wall1');
-        this.wall2 = game.add.sprite(game.world.width, game.world.height, 'wall2');
+        this.wall1 = game.add.sprite(-50, game.world.height, 'wall1');
+        this.wall2 = game.add.sprite(game.world.width + 50, game.world.height, 'wall2');
 
         game.physics.arcade.enable([
                 this.ball,

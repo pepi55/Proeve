@@ -3,7 +3,7 @@ var mainMenuState = {
 	preload: function() {
 		// TODO: Add screen resize.
 		game.load.image('button', 'assets/image.png');
-		game.load.image('InvisibleButton', 'assets/InvisibleButton.png');
+		game.load.image('invisibleButton', 'assets/invisibleButton.png');
 	},
 
 	create: function() {
@@ -14,7 +14,7 @@ var mainMenuState = {
 		button.anchor.setTo(0.5, 0.5);
 
 		var modeButton;
-		modeButton = game.add.button(20, 20, 'InvisibleButton', ChangeMode, this);
+		modeButton = game.add.button(20, 20, 'invisibleButton', ChangeMode, this);
 		modeButton.anchor.setTo(0.5, 0.5);
 
 
