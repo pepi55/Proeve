@@ -19,7 +19,7 @@ var mainMenuState = {
 
 
 		function ChangeMode() {
-			hardMode = true;
+			hardMode = !hardMode;
 		}
 
 		function startGame() {

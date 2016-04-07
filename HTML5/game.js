@@ -2,7 +2,7 @@
 var walls;
 var tweenAPosition;
 var tweenBPosition;
-var hardMode;
+var hardMode = true;
 
 var gameState = {
     preload: function() {
@@ -11,18 +11,19 @@ var gameState = {
 
         game.load.image('wall1', 'assets/image.png');
         game.load.image('wall2', 'assets/image.png');
-
-        // this has to be active for the fps to be counting.
-        game.time.advancedTiming = true;
     },
 
     create: function() {
+        // this has to be active for the fps to be counting.
+        game.time.advancedTiming = true;
+
         game.stage.backgroundColor = '#CCCCCC';
         game.physics.startSystem(Phaser.Physics.ARCADE);
         game.physics.arcade.gravity.y = 1000;
 
         tweenAPosition = 750;
         tweenBPosition = 70;
+
         // Add gameobjects to game
         this.ball = game.add.sprite(game.world.centerX, 20, 'ball');
         this.goal = game.add.sprite(tweenAPosition, game.world.height - 50, 'goal');
@@ -49,8 +50,8 @@ var gameState = {
         // Walls setup
         this.wall1.anchor.setTo(0.5, 1);
         this.wall2.anchor.setTo(0.5, 1);
-        this.wall1.scale.setTo(1, 20);
-        this.wall2.scale.setTo(1, 20);
+        this.wall1.scale.setTo(0.5, 50);
+        this.wall2.scale.setTo(0.5, 50);
 
         this.wall1.body.immovable = true;
         this.wall2.body.immovable = true;
@@ -74,7 +75,7 @@ var gameState = {
 
     update: function() {
         game.physics.arcade.collide(walls, this.ball);
-        game.physics.arcade.collide(this.goal, this.ball, this.goalCollisionHandler);
+        game.physics.arcade.collide(this.goal, this.ball, this.goalCollisionHandler, null, this);
 
         if (this.ball.world.y >= game.world.height) {
             this.goToMain();
@@ -94,8 +95,13 @@ var gameState = {
     },
 
     // Custom functions
-    goalCollisionHandler: function() {
+    goalCollisionHandler: function(obj1, obj2) {
         //game.state.start('game');
+        //TODO: Score++;
+
+        this.ball.body.velocity.setTo(0, 0);
+        this.ball.position.x = game.world.randomX;
+        this.ball.position.y = 0;
     },
 
     bounce: function() {
@@ -103,20 +109,18 @@ var gameState = {
 
         if (game.input.activePointer.y > this.ball.y) {
             yVelocity = -400;
-            } else {
-                yVelocity = 400;
-            }
-        if(hardMode == true)
-        {
+        } else {
+            yVelocity = 400;
+        }
+
+        if(hardMode == true) {
             if (game.input.activePointer.x > this.ball.x) {
                 this.ball.body.velocity.setTo(this.ball.body.velocity.x + -Phaser.Math.difference(game.input.activePointer.x, this.ball.x), yVelocity);
             } else {
                 this.ball.body.velocity.setTo(this.ball.body.velocity.x + Phaser.Math.difference(game.input.activePointer.x, this.ball.x), yVelocity);
             }
-        }
-        else{
-            console.log(yVelocity);
-            this.ball.body.velocity.setTo(this.ball.body.velocity.x,yVelocity);
+        } else {
+            this.ball.body.velocity.setTo(this.ball.body.velocity.x, yVelocity);
         }
     },
 
