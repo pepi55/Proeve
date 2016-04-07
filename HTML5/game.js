@@ -1,7 +1,5 @@
 // Game state.
 var walls;
-var tweenA;
-var tweenB;
 var tweenAPosition;
 var tweenBPosition;
 
@@ -21,6 +19,9 @@ var gameState = {
         game.stage.backgroundColor = '#CCCCCC';
         game.physics.startSystem(Phaser.Physics.ARCADE);
         game.physics.arcade.gravity.y = 1000;
+
+        var tweenA;
+        var tweenB;
 
         tweenAPosition = 750;
         tweenBPosition = 70;
@@ -80,12 +81,10 @@ var gameState = {
         if (this.ball.world.y >= game.world.height) {
             game.state.start('mainMenu');
         }
-        if(this.goal.world.x == tweenAPosition)
-        {
+
+        if(this.goal.world.x == tweenAPosition) {
             tweenB.start();
-        }
-        else if(this.goal.world.x == tweenBPosition)
-        {
+        } else if(this.goal.world.x == tweenBPosition) {
             tweenA.start();
         }
     },
