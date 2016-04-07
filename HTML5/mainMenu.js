@@ -1,6 +1,7 @@
 // Main menu state.
 var mainMenuState = {
 	preload: function() {
+		// TODO: Add screen resize.
 		game.load.image('button', 'assets/image.png');
 	},
 
