@@ -10,6 +10,7 @@ var gameState = {
     tweenBPosition: 70,
 
     tempScore: 0,
+    text: null,
 
     walls: null,
 
@@ -88,10 +89,13 @@ var gameState = {
         //set the goals tweens.
         tweenA = game.add.tween(this.goal).to({ x: this.tweenAPosition }, 2500, 'Linear', true, 0);
         tweenB = game.add.tween(this.goal).to({ x: this.tweenBPosition }, 2500, 'Linear', true, 0);
+
+        //set score text
+        scoreText = game.add.text(game.world.centerX, 20, "0");
     },
 
     update: function() {
-        game.physics.arcade.collide(walls, this.ball, this.wallsCollsionHandler, null, this);
+        game.physics.arcade.collide(walls, this.ball, this.wallsCollisionHandler, null, this);
         game.physics.arcade.collide(this.goal, this.ball, this.goalCollisionHandler, null, this);
 
         if (this.ball.world.y >= game.world.height) {
@@ -112,14 +116,14 @@ var gameState = {
     },
 
     // Custom functions
-    wallsCollsionHandler: function() {
+    wallsCollisionHandler: function() {
         tempScore++;
     },
 
     goalCollisionHandler: function() {
         //game.state.start('game');
         score += tempScore + 1;
-
+        scoreText.text = "" + score;
         this.ball.body.velocity.setTo(0, 0);
         this.ball.position.x = game.world.randomX;
         this.ball.position.y = 0;
@@ -160,7 +164,7 @@ var gameState = {
         if (score > highScore) {
             localStorage.setItem('highScore', score);
         }
-
+        score = 0;
         game.state.start('mainMenu');
     },
 };
