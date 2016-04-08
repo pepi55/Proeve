@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>WebGL:20</UnityBuildTarget>
     <UnityVersion>5.3.4f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -66,7 +68,8 @@
     <Compile Include="Assets\Scripts\Controlers\BallControler.cs" />
     <Compile Include="Assets\Scripts\Controlers\GroundControler.cs" />
     <Compile Include="Assets\Scripts\Controlers\MainMenu.cs" />
-    <Compile Include="Assets\Scripts\Events\ClickDelegate.cs" />
+    <Compile Include="Assets\Scripts\Events\IScore.cs" />
+    <Compile Include="Assets\Scripts\Events\Delegates.cs" />
     <Compile Include="Assets\Scripts\Events\IPause.cs" />
     <Compile Include="Assets\Scripts\ExampleEvents.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />

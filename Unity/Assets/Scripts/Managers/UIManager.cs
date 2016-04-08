@@ -7,13 +7,15 @@ public class UIManager : MonoBehaviour {
     [SerializeField]
     Text ScoreText;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	void Awake()
+    {
+        GameManager.OnScoreUpdate += GameManager_OnScoreUpdate;
+
+        ScoreText.text = GameManager.Score.ToString();
+    }
+
+    private void GameManager_OnScoreUpdate()
+    {
+        ScoreText.text = GameManager.Score.ToString();
+    }
 }
