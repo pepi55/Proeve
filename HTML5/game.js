@@ -9,6 +9,7 @@ var gameState = {
     tweenAPosition: 750,
     tweenBPosition: 70,
 
+    textTween: null,
     tempScore: 0,
     text: null,
 
@@ -16,7 +17,6 @@ var gameState = {
 
     // Native functions.
     preload: function() {
-        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.load.image('ball', 'assets/image.png');
         game.load.image('goal', 'assets/image.png');
 
@@ -28,7 +28,7 @@ var gameState = {
         // this has to be active for the fps to be counting.
         game.time.advancedTiming = true;
 
-        game.stage.backgroundColor = '#CCCCCC';
+        game.stage.backgroundColor = '#C85A17';
         game.physics.startSystem(Phaser.Physics.ARCADE);
         game.physics.arcade.gravity.y = 1000;
 
@@ -92,6 +92,18 @@ var gameState = {
 
         //set score text
         scoreText = game.add.text(game.world.centerX, 20, "0");
+
+        //	Font style
+        scoreText.font = 'Arial Black';
+        scoreText.fontSize = 50;
+        scoreText.fontWeight = 'bold';
+
+        //	Stroke color and thickness
+        scoreText.stroke = '#0020C2';
+        scoreText.strokeThickness = 5;
+        scoreText.fill = '#2B65EC';
+
+        textTween = game.add.tween(scoreText).to({ fontSize:100}, 100, Phaser.Easing.Linear.None, false, 0,0,true);
     },
 
     update: function() {
@@ -123,10 +135,14 @@ var gameState = {
     goalCollisionHandler: function() {
         //game.state.start('game');
         score += tempScore + 1;
-        scoreText.text = "" + score;
+        this.setScoreText();
         this.ball.body.velocity.setTo(0, 0);
         this.ball.position.x = game.world.randomX;
         this.ball.position.y = 0;
+    },
+    setScoreText: function() {
+       scoreText.text = "" + score;
+       textTween.start();
     },
 
     bounce: function() {

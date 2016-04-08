@@ -6,6 +6,7 @@ var mainMenuState = {
 		game.load.image('InvisibleButton', 'assets/invisibleButton.png');
 
 		startButtonImage = startButtonImage.crossOrigin = "Anonymous";
+		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 	},
 
 	create: function() {
