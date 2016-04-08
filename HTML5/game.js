@@ -1,11 +1,21 @@
 // Game state.
-var walls;
-var tweenAPosition;
-var tweenBPosition;
+var highScore = 0;
+var score = 0;
+
 var hardMode = true;
 
 var gameState = {
+    // Custom "variables".
+    tweenAPosition: 750,
+    tweenBPosition: 70,
+
+    tempScore: 0,
+
+    walls: null,
+
+    // Native functions.
     preload: function() {
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.load.image('ball', 'assets/image.png');
         game.load.image('goal', 'assets/image.png');
 
@@ -21,12 +31,19 @@ var gameState = {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         game.physics.arcade.gravity.y = 1000;
 
-        tweenAPosition = 750;
-        tweenBPosition = 70;
+        var str_score = localStorage.getItem('highScore');
+
+        if (str_score == null || str_score == "null") {
+            highscore = 0;
+        } else {
+            highScore = parseInt(str_score);
+        }
+
+        localStorage.clear();
 
         // Add gameobjects to game
         this.ball = game.add.sprite(game.world.centerX, 20, 'ball');
-        this.goal = game.add.sprite(tweenAPosition, game.world.height - 50, 'goal');
+        this.goal = game.add.sprite(this.tweenAPosition, game.world.height - 50, 'goal');
 
         this.wall1 = game.add.sprite(-50, game.world.height, 'wall1');
         this.wall2 = game.add.sprite(game.world.width + 50, game.world.height, 'wall2');
@@ -69,21 +86,21 @@ var gameState = {
         game.input.onDown.add(this.bounce, this);
 
         //set the goals tweens.
-        tweenA = game.add.tween(this.goal).to({ x: tweenAPosition }, 2500, 'Linear', true, 0);
-        tweenB = game.add.tween(this.goal).to({ x: tweenBPosition }, 2500, 'Linear', true, 0);
+        tweenA = game.add.tween(this.goal).to({ x: this.tweenAPosition }, 2500, 'Linear', true, 0);
+        tweenB = game.add.tween(this.goal).to({ x: this.tweenBPosition }, 2500, 'Linear', true, 0);
     },
 
     update: function() {
-        game.physics.arcade.collide(walls, this.ball);
+        game.physics.arcade.collide(walls, this.ball, this.wallsCollsionHandler, null, this);
         game.physics.arcade.collide(this.goal, this.ball, this.goalCollisionHandler, null, this);
 
         if (this.ball.world.y >= game.world.height) {
             this.goToMain();
         }
 
-        if(this.goal.world.x == tweenAPosition) {
+        if(this.goal.world.x == this.tweenAPosition) {
             tweenB.start();
-        } else if(this.goal.world.x == tweenBPosition) {
+        } else if(this.goal.world.x == this.tweenBPosition) {
             tweenA.start();
         }
     },
@@ -95,9 +112,13 @@ var gameState = {
     },
 
     // Custom functions
-    goalCollisionHandler: function(obj1, obj2) {
+    wallsCollsionHandler: function() {
+        tempScore++;
+    },
+
+    goalCollisionHandler: function() {
         //game.state.start('game');
-        //TODO: Score++;
+        score += tempScore + 1;
 
         this.ball.body.velocity.setTo(0, 0);
         this.ball.position.x = game.world.randomX;
@@ -106,20 +127,28 @@ var gameState = {
 
     bounce: function() {
         var yVelocity = 0;
+        tempScore = 0;
 
         if (game.input.activePointer.y > this.ball.y) {
             yVelocity = -400;
         } else {
-            yVelocity = 400;
+            yVelocity = this.ball.body.velocity.y + 400;
         }
 
         if(hardMode == true) {
-            if (game.input.activePointer.x > this.ball.x) {
-                this.ball.body.velocity.setTo(this.ball.body.velocity.x + -Phaser.Math.difference(game.input.activePointer.x, this.ball.x), yVelocity);
-            } else {
-                this.ball.body.velocity.setTo(this.ball.body.velocity.x + Phaser.Math.difference(game.input.activePointer.x, this.ball.x), yVelocity);
+            var xVelocity = Phaser.Math.difference(game.input.activePointer.x, this.ball.x);
+            /*
+            if (xVelocity < 0) {
+                xVelocity = 0;
             }
-        } else {
+            */
+
+            if (game.input.activePointer.x > this.ball.x) {
+                this.ball.body.velocity.setTo(this.ball.body.velocity.x + -xVelocity, yVelocity);
+            } else {
+                this.ball.body.velocity.setTo(this.ball.body.velocity.x + xVelocity, yVelocity);
+            }
+          } else {
             this.ball.body.velocity.setTo(this.ball.body.velocity.x, yVelocity);
         }
     },
@@ -128,6 +157,10 @@ var gameState = {
     },
 
     goToMain: function() {
+        if (score > highScore) {
+            localStorage.setItem('highScore', score);
+        }
+
         game.state.start('mainMenu');
     },
 };
