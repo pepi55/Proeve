@@ -24,16 +24,24 @@ public class GroundControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        EndLeft = LeftWall.position;
+        EndLeft.y = transform.position.y;
+        EndLeft.z = transform.position.z;
+
+        EndRight = RightWall.position;
+        EndRight.y = transform.position.y;
+        EndRight.z = transform.position.z;
+
         if (dir > 0)
         {
-            if (Vector3.Distance(EndRight, transform.position) < 0.5f)
+            if (Vector3.Distance(EndRight, transform.position) < 1f)
             {
                 dir = -1;
             }
         }
         else if (dir < 0) 
         {
-            if (Vector3.Distance(EndLeft, transform.position) < 0.5f)
+            if (Vector3.Distance(EndLeft, transform.position) < 1f)
             {
                 dir = 1;
             }
