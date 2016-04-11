@@ -3,13 +3,24 @@ using System.Collections;
 
 public class GroundControler : MonoBehaviour
 {
+
+    //bounderies the target moves in
     [SerializeField]
     Transform LeftWall, RightWall;
     Vector3 EndLeft, EndRight;
 
+    /// <summary>
+    /// Move direction 1 = right, left = -1, none = 0;
+    /// </summary>
     int dir = 1;
+
+    /// <summary>
+    /// Speed the ball moves it
+    /// </summary>
     [SerializeField]
     float speed = 3f;
+
+  
     void Start()
     {
         EndLeft = LeftWall.position;

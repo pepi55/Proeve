@@ -5,46 +5,48 @@ using System.IO;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
+using System.Runtime.InteropServices;
 
 namespace Util
 {
     public static class Serialization
     {
+        [DllImport("__Internal")]
+        private static extern void SyncFiles();
+
+        [DllImport("__Internal")]
+        private static extern void WindowAlert(string message);
+
         #region fileSaveSettings
         public enum fileTypes
         {
-            wave,
-            save,
-            settings,
-            indexFile,
-            binary
+            binary,
+            text
         }
 
         public static string saveFolderName = "GameData";
         readonly public static Dictionary<fileTypes, string> fileExstentions = new Dictionary<fileTypes, string>
         {
-            { fileTypes.save,       ".sav"  },
-            { fileTypes.settings,   ".set"  },
-            { fileTypes.wave,       ".wva"  },
-            { fileTypes.indexFile,  ".idex" },
-            { fileTypes.binary,     ".bin"  }
+            { fileTypes.binary,     ".bin"      },
+            { fileTypes.text,       ".text"     }
         },
 
-            FileLocations = new Dictionary<fileTypes, string>
-            {
-            { fileTypes.save,       "Save"      },
-            { fileTypes.settings,   "Settings"  },
-            { fileTypes.wave,       "Waves"     },
-            { fileTypes.binary,     "Data"      }
-            };
+        FileLocations = new Dictionary<fileTypes, string>
+        {
+            { fileTypes.binary,     "Data"      },
+            { fileTypes.text,       "Data"      }
+        };
         #endregion
 
         public static string SaveLocation(fileTypes fileType)
         {
-
+            
             string saveLocation = Application.dataPath;
             if (!Application.isEditor)
                 saveLocation += "/..";
+            if (Application.platform == RuntimePlatform.WebGLPlayer)
+                saveLocation = Application.persistentDataPath;
+
             saveLocation += "/" + saveFolderName + "/" + FileLocations[fileType] + "/";
             if (!Directory.Exists(saveLocation))
             {
@@ -63,10 +65,22 @@ namespace Util
             string saveFile = SaveLocation(fileType);
             saveFile += GetFileType(fileName, fileType);
 
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(saveFile, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
-            formatter.Serialize(stream, data);
-            stream.Close();
+            try
+            {
+                IFormatter formatter = new BinaryFormatter();
+                Stream stream = new FileStream(saveFile, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
+                formatter.Serialize(stream, data);
+                stream.Close();
+            }
+            catch (Exception e)
+            {
+
+                PlatformSafeMessage("Failed to Save: " + e.Message);
+            }
+            
+
+            if (Application.platform == RuntimePlatform.WebGLPlayer)
+                Application.ExternalCall("SyncFiles");
 
             Debug.Log("Saved file: " + saveFile);
 
@@ -96,5 +110,18 @@ namespace Util
             }
             return returnval;
         }
+
+        private static void PlatformSafeMessage(string message)
+        {
+            if (Application.platform == RuntimePlatform.WebGLPlayer)
+            {
+                WindowAlert(message);
+            }
+            else
+            {
+                Debug.Log(message);
+            }
+        }
+
     }
 }

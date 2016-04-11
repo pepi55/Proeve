@@ -7,6 +7,9 @@ public class BallControler : MonoBehaviour
 
     new Rigidbody2D rigidbody2D;
 
+    //tempvalue for when game is paused
+    Vector2 savedSpeed;
+
     bool useLocalRelativePosition;
     bool UseXAxis;
     // Use this for initialization
@@ -19,9 +22,22 @@ public class BallControler : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
+    /// <summary>
+    /// Called when pause state has changed
+    /// </summary>
+    /// <param name="pause"></param>
     void OnPause(Events.IPause pause)
     {
         enabled = !pause.State;
+        if (pause.State)
+        {
+            savedSpeed = rigidbody2D.velocity;
+            rigidbody2D.velocity = Vector2.zero;
+        }
+        else
+        {
+            rigidbody2D.velocity = savedSpeed;
+        }
     }
 
     private void InputManager_onClick(Vector2 position)
@@ -55,11 +71,21 @@ public class BallControler : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.transform.tag == "ScoreTarget")
+        if (collision.transform.tag == "ScoreTarget")
         {
             Events.GlobalEvents.Invoke(new Events.IScore());
             transform.position = Vector3.zero;
             rigidbody2D.velocity = Vector2.zero;
+        }
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.transform.tag == "Bottom")
+        {
+            transform.position = Vector3.zero;
+            rigidbody2D.velocity = Vector2.zero;
+            Events.GlobalEvents.Invoke(new Events.IPlayerHitBottom());
         }
     }
 

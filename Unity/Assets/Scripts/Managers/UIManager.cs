@@ -14,6 +14,9 @@ public class UIManager : MonoBehaviour {
         ScoreText.text = GameManager.Score.ToString();
     }
 
+    /// <summary>
+    /// Called after the score number is changed.
+    /// </summary>
     private void GameManager_OnScoreUpdate()
     {
         ScoreText.text = GameManager.Score.ToString();
