@@ -47,6 +47,12 @@
  * Names are in English.
  * Each class has its own seperate JS file named after itself (i.e.: wall class would be wallClass.js).
 
+### How to use issue tracker
+ * Note the engine for the issue in the header.
+ * Describe the bug as accurate as possible.
+ * Important: Add the steps to reproduce the problem.
+ * Bugs that are not fixable within 5 minutes are to be put in the tracker.
+
 ### Art conventions
  * Art assets are to be imported in Unity.
  * If the art is faulty, it is to be sent back to the artists so they can fix it.
