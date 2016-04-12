@@ -18,17 +18,26 @@ namespace Util
         private static extern void WindowAlert(string message);
 
         #region fileSaveSettings
+        /// <summary>
+        /// File types that are defined.
+        /// </summary>
         public enum fileTypes
         {
             binary,
             text
         }
 
+        /// <summary>
+        /// Location of the save data
+        /// </summary>
         public static string saveFolderName = "GameData";
+        /// <summary>
+        /// A dictonary contain information related to a filetype
+        /// </summary>
         readonly public static Dictionary<fileTypes, string> fileExstentions = new Dictionary<fileTypes, string>
         {
             { fileTypes.binary,     ".bin"      },
-            { fileTypes.text,       ".text"     }
+            { fileTypes.text,       ".txt"     }
         },
 
         FileLocations = new Dictionary<fileTypes, string>
@@ -38,7 +47,12 @@ namespace Util
         };
         #endregion
 
-        public static string SaveLocation(fileTypes fileType)
+        /// <summary>
+        /// Generates a string for where the file is located
+        /// </summary>
+        /// <param name="fileType">The type of file can matter for directory</param>
+        /// <returns></returns>
+        private static string SaveLocation(fileTypes fileType)
         {
             
             string saveLocation = Application.dataPath;
@@ -55,11 +69,24 @@ namespace Util
             return saveLocation;
         }
 
-        public static string GetFileType(string fileName, fileTypes fileType)
+        /// <summary>
+        /// Returns file type with name attached
+        /// </summary>
+        /// <param name="fileName">The name of the file</param>
+        /// <param name="fileType">The type of file</param>
+        /// <returns>Name + Type </returns>
+        private static string GetFileType(string fileName, fileTypes fileType)
         {
             return fileName + fileExstentions[fileType];
         }
-
+        
+        /// <summary>
+        /// Save file to disk
+        /// </summary>
+        /// <typeparam name="T">Type of the file</typeparam>
+        /// <param name="fileName">File name with out exstentions</param>
+        /// <param name="fileType">The type of file</param>
+        /// <param name="data">The actual data fo the file</param>
         public static void Save<T>(string fileName, fileTypes fileType, T data)
         {
             string saveFile = SaveLocation(fileType);
@@ -86,6 +113,14 @@ namespace Util
 
         }
 
+        /// <summary>
+        /// Loads a file from disk
+        /// </summary>
+        /// <typeparam name="T">Type of the file</typeparam>
+        /// <param name="fileName"> Name of the file</param>
+        /// <param name="fileType">The file exstention Type</param>
+        /// <param name="outputData">A ref for the file that will be loaded</param>
+        /// <returns>if the loading was succesfull. Needed because a save file can be non existant</returns>
         public static bool Load<T>(string fileName, fileTypes fileType, ref T outputData)
         {
             string saveFile = SaveLocation(fileType);
@@ -111,6 +146,10 @@ namespace Util
             return returnval;
         }
 
+        /// <summary>
+        /// Used to generate an error when there is one while saving or loading
+        /// </summary>
+        /// <param name="message">The message that will be shown</param>
         private static void PlatformSafeMessage(string message)
         {
             if (Application.platform == RuntimePlatform.WebGLPlayer)
