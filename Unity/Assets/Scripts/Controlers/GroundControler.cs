@@ -19,7 +19,10 @@ public class GroundControler : MonoBehaviour
     /// </summary>
     [SerializeField]
     float speed = 3f;
-
+    [SerializeField]
+    float MaxSpeed = 4f;
+    [SerializeField]
+    int scoreCurvMax;
   
     void Start()
     {
@@ -60,7 +63,13 @@ public class GroundControler : MonoBehaviour
 
         if(dir!=0)
         {
-            transform.Translate(Vector3.right * 3f * dir * Time.deltaTime * speed);
+            transform.Translate(Vector3.right * dir * Time.deltaTime * speed);
         }
+
+        if (GameManager.Score > 0)
+            speed = 0.5f + (-1 * Mathf.Exp(-GameManager.Score / (float)scoreCurvMax) + 1) * MaxSpeed;
+        else
+            speed = 0.5f;
+        //1 - 2·exp(-x / 400)
     }
 }

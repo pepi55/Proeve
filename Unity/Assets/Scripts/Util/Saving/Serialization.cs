@@ -77,10 +77,10 @@ namespace Util
 
                 PlatformSafeMessage("Failed to Save: " + e.Message);
             }
-            
+
 
             if (Application.platform == RuntimePlatform.WebGLPlayer)
-                Application.ExternalCall("SyncFiles");
+                SyncFiles();
 
             Debug.Log("Saved file: " + saveFile);
 

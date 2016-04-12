@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     //used to trigger the UI or anything else that needs to be update when the score changes
     public static event VoidDelegate OnScoreUpdate;
 
+    [SerializeField]
     private int score;
 
     /// <summary>
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour {
         score = 0;
         instance = this;
         Events.GlobalEvents.AddEventListener<Events.IScore>(AddPoint);
+        Events.GlobalEvents.AddEventListener<Events.IPlayerHitBottom>(BallHitGround);
 
         //TEST for Saving
         SaveTest t = new SaveTest();
@@ -46,6 +48,14 @@ public class GameManager : MonoBehaviour {
     private void AddPoint(Events.IScore obj)
     {
         score++;
+
+        if (OnScoreUpdate != null)
+            OnScoreUpdate();
+    }
+
+    private void BallHitGround(Events.IPlayerHitBottom obj)
+    {
+        score = 0;
 
         if (OnScoreUpdate != null)
             OnScoreUpdate();

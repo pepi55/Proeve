@@ -10,8 +10,13 @@ public class BallControler : MonoBehaviour
     //tempvalue for when game is paused
     Vector2 savedSpeed;
 
-    bool useLocalRelativePosition;
-    bool UseXAxis;
+    bool useLocalRelativePosition = true;
+    bool UseXAxis = true;
+
+    /// <summary>
+    /// ball is frozen into place
+    /// </summary>
+    bool frozen;
     // Use this for initialization
     void Start()
     {
@@ -20,6 +25,8 @@ public class BallControler : MonoBehaviour
         Events.GlobalEvents.AddEventListener<Events.IPause>(OnPause);
 
         rigidbody2D = GetComponent<Rigidbody2D>();
+
+        SetConstraints();
     }
 
     /// <summary>
@@ -40,10 +47,17 @@ public class BallControler : MonoBehaviour
         }
     }
 
+/// <summary>
+/// Call in inputManager handles force adding for the ball
+/// </summary>
+/// <param name="position"></param>
     private void InputManager_onClick(Vector2 position)
     {
         if (isActiveAndEnabled)
         {
+            frozen = false;
+            SetConstraints();
+
             if (transform.position.y < 12f)
             {
                 Vector2 dir;
@@ -61,7 +75,7 @@ public class BallControler : MonoBehaviour
                     dir = Util.Common.AngleToVector(Util.Common.VectorToAngle(dir));
                 }
                 //dir = new Vector2(-dir.x, dir.y * Physics2D.gravity.y);
-                dir = -dir * 200 * rigidbody2D.mass;
+                dir = -dir * 300 * rigidbody2D.mass;
                 dir.y *= rigidbody2D.gravityScale;
                 rigidbody2D.AddForce(dir);
 
@@ -69,12 +83,17 @@ public class BallControler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Unity Function
+    /// </summary>
+    /// <param name="collision"></param>
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.tag == "ScoreTarget")
         {
             Events.GlobalEvents.Invoke(new Events.IScore());
-            transform.position = Vector3.zero;
+            StartCoroutine(ballResetDelay(0.2f));
+            StartCoroutine(ballFreeze(0.5f, 0.2f));
             rigidbody2D.velocity = Vector2.zero;
         }
     }
@@ -82,13 +101,68 @@ public class BallControler : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.transform.tag == "Bottom")
-        {
-            transform.position = Vector3.zero;
+        {           
             rigidbody2D.velocity = Vector2.zero;
+            StartCoroutine(ballResetDelay(0.2f));
+            StartCoroutine(ballFreeze(0.5f, 0.2f));
             Events.GlobalEvents.Invoke(new Events.IPlayerHitBottom());
         }
     }
 
+    /// <summary>
+    /// Used to induce a delay for when the ball resets
+    /// </summary>
+    /// <param name="Delay">Delay Time in seconds</param>
+    /// <returns></returns>
+    IEnumerator ballResetDelay(float Delay)
+    {
+        yield return new WaitForSeconds(Delay);
+
+        transform.position = Vector3.zero;
+
+    }
+
+    IEnumerator ballFreeze(float duration,float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        float d = duration;
+
+        frozen = true;
+        SetConstraints();
+
+        while(d>0 && frozen)
+        {
+            d -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        frozen = false;
+        SetConstraints();
+        
+    }
+
+    void SetConstraints()
+    {
+        if (frozen)
+        {
+            rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
+            return;
+        }
+
+        if (UseXAxis)
+        {
+            rigidbody2D.constraints = RigidbodyConstraints2D.None;
+        }
+        else
+        {
+            transform.position = new Vector3(0, transform.position.y, transform.position.z);
+            rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX;
+        }
+    }
+
+    /// <summary>
+    /// Used for Debuging and Trying out diffrent styles of ball movement and controle
+    /// </summary>
     public void OnGUI()
     {
         if (GUI.Button(new Rect(new Vector2(0, 0), new Vector2(230, 30)), useLocalRelativePosition ? "Switch to static center point mode" : "Switch to relative to ball mode"))
@@ -100,15 +174,7 @@ public class BallControler : MonoBehaviour
         {
             UseXAxis = !UseXAxis;
 
-            if (UseXAxis)
-            {
-                rigidbody2D.constraints = RigidbodyConstraints2D.None;
-            }
-            else
-            {
-                transform.position = new Vector3(0, transform.position.y, transform.position.z);
-                rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX;
-            }
+            SetConstraints();
         }
 
     }
