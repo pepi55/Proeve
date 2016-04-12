@@ -509,14 +509,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1181793032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 663c748a4d7d120498aeffc7357dc7be, type: 3}
+  m_Script: {fileID: 11500000, guid: 14e40687831824b47aa535c756c85dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   LeftWall: {fileID: 2111408525}
   RightWall: {fileID: 1902307368}
   speed: 0
-  MaxSpeed: 4
-  scoreCurvMax: 55
+  MaxSpeed: 8
+  scoreCurvMax: 20
 --- !u!23 &1181793034
 MeshRenderer:
   m_ObjectHideFlags: 0

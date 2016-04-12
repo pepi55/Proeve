@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GroundControler : MonoBehaviour
+public class TargetControler : MonoBehaviour
 {
 
     //bounderies the target moves in
