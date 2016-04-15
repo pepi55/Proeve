@@ -6,8 +6,8 @@ public class TargetControler : MonoBehaviour
 
     //bounderies the target moves in
     [SerializeField]
-    Transform LeftWall, RightWall;
-    Vector3 EndLeft, EndRight;
+    Transform LeftWall = null, RightWall = null;
+    Vector3 EndLeft = Vector3.zero, EndRight = Vector3.zero;
 
     /// <summary>
     /// Move direction 1 = right, left = -1, none = 0;
@@ -22,7 +22,7 @@ public class TargetControler : MonoBehaviour
     [SerializeField]
     float MaxSpeed = 4f;
     [SerializeField]
-    int scoreCurvMax;
+    int scoreCurvMax = 0;
   
     void Start()
     {

@@ -28,17 +28,6 @@ public class GameManager : MonoBehaviour {
         instance = this;
         Events.GlobalEvents.AddEventListener<Events.IScore>(AddPoint);
         Events.GlobalEvents.AddEventListener<Events.IPlayerHitBottom>(BallHitGround);
-
-        //TEST for Saving
-        SaveTest t = new SaveTest();
-        t.TEST = "";
-
-        if (Util.Serialization.Load("Test", Util.Serialization.fileTypes.text, ref t))
-            Debug.Log(t.TEST);
-        else
-            t = new SaveTest();
-        t.TEST = Random.Range(-1000000, 1000000).ToString();
-        Util.Serialization.Save("Test", Util.Serialization.fileTypes.text, t);
     }
 
     /// <summary>
@@ -54,6 +43,25 @@ public class GameManager : MonoBehaviour {
     }
 
     private void BallHitGround(Events.IPlayerHitBottom obj)
+    {
+        if (SaveManager.CheckNewScore(score))
+        {
+
+        }
+        else
+        {
+            ResetScore();
+        }
+        
+        
+    }
+
+    private void OpenScoreSubmitScreen()
+    {
+
+    }
+
+    private void ResetScore()
     {
         score = 0;
 

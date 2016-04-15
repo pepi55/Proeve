@@ -73,7 +73,12 @@
     <Compile Include="Assets\Scripts\ExampleEvents.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\InputManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\PauseManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\SaveManager.cs" />
     <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
+    <Compile Include="Assets\Scripts\SaveData.cs" />
+    <Compile Include="Assets\Scripts\UI\HighScoreDisplayObject.cs" />
+    <Compile Include="Assets\Scripts\UI\HighScoreMenu.cs" />
     <Compile Include="Assets\Scripts\Util\Axis.cs" />
     <Compile Include="Assets\Scripts\Util\Common.cs" />
     <Compile Include="Assets\Scripts\Util\CustomGrid.cs" />
@@ -97,6 +102,9 @@
     <Compile Include="Assets\Scripts\Util\ValueWrapper.cs" />
     <Compile Include="Assets\Scripts\Util\XML\DataContainer.cs" />
     <Compile Include="Assets\Scripts\Util\XML\XMLHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\GameData\Data\SavaData.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
