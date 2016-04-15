@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private int score;
 
+    [SerializeField]
+    HighScoreSubmitScreen submitMenu;
+
     /// <summary>
     /// The Points earned of the player
     /// </summary>
@@ -30,6 +33,12 @@ public class GameManager : MonoBehaviour {
         Events.GlobalEvents.AddEventListener<Events.IPlayerHitBottom>(BallHitGround);
     }
 
+    void Start()
+    {
+        submitMenu.Close();
+        ContinueGame();
+    }
+
     /// <summary>
     /// Event Handler for IScore
     /// </summary>
@@ -42,31 +51,36 @@ public class GameManager : MonoBehaviour {
             OnScoreUpdate();
     }
 
+    /// <summary>
+    /// Event Handler for IPlayerHitBottom
+    /// </summary>
+    /// <param name="obj">Object Argument does not contain anyvalue only used as identifier</param>
     private void BallHitGround(Events.IPlayerHitBottom obj)
     {
-        if (SaveManager.CheckNewScore(score))
+        if (SaveManager.CheckNewScore(score) && score != 0)
         {
-
+            OpenScoreSubmitScreen();
         }
         else
         {
-            ResetScore();
-        }
-        
-        
+            ResetGame();
+        }  
     }
 
     private void OpenScoreSubmitScreen()
     {
-
+        submitMenu.Open();
+        submitMenu.onClose += ResetGame;
     }
 
-    private void ResetScore()
+    private void ResetGame()
     {
         score = 0;
 
         if (OnScoreUpdate != null)
             OnScoreUpdate();
+
+        Events.GlobalEvents.Invoke<Events.IResetGameState>(new Events.IResetGameState());
     }
 
     /// <summary>
@@ -84,10 +98,4 @@ public class GameManager : MonoBehaviour {
     {
         Events.GlobalEvents.Invoke(new Events.IPause(true));
     }
-}
-
-[System.Serializable]
-class SaveTest
-{
-    public string TEST = "";
 }

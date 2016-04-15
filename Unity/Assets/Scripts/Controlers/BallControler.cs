@@ -17,16 +17,27 @@ public class BallControler : MonoBehaviour
     /// ball is frozen into place
     /// </summary>
     bool frozen;
+
+    bool PauseState = false;
+
     // Use this for initialization
     void Start()
     {
         InputManager.onClick += InputManager_onClick;
 
         Events.GlobalEvents.AddEventListener<Events.IPause>(OnPause);
-
+        Events.GlobalEvents.AddEventListener<Events.IResetGameState>(ResetBall);
         rigidbody2D = GetComponent<Rigidbody2D>();
 
         SetConstraints();
+    }
+
+    public void OnDestroy()
+    {
+        InputManager.onClick -= InputManager_onClick;
+
+        Events.GlobalEvents.RemoveEventListener<Events.IPause>(OnPause);
+        Events.GlobalEvents.RemoveEventListener<Events.IResetGameState>(ResetBall);
     }
 
     /// <summary>
@@ -40,11 +51,24 @@ public class BallControler : MonoBehaviour
         {
             savedSpeed = rigidbody2D.velocity;
             rigidbody2D.velocity = Vector2.zero;
+            frozen = true;
+            SetConstraints();
         }
         else
         {
+            frozen = false;
+            SetConstraints();
             rigidbody2D.velocity = savedSpeed;
+
         }
+    }
+
+    void ResetBall(Events.IResetGameState obj)
+    {
+        transform.position = Vector3.zero;
+        rigidbody2D.velocity = Vector2.zero;
+
+        StartCoroutine(ballFreeze(0.5f, 0.0f));
     }
 
 /// <summary>
@@ -103,8 +127,8 @@ public class BallControler : MonoBehaviour
         if(collision.transform.tag == "Bottom")
         {           
             rigidbody2D.velocity = Vector2.zero;
-            StartCoroutine(ballResetDelay(0.2f));
-            StartCoroutine(ballFreeze(0.5f, 0.2f));
+           // StartCoroutine(ballResetDelay(0.2f));
+           // StartCoroutine(ballFreeze(0.5f, 0.2f));
             Events.GlobalEvents.Invoke(new Events.IPlayerHitBottom());
         }
     }
@@ -122,6 +146,12 @@ public class BallControler : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Freezes the Ball in place for x seconds
+    /// </summary>
+    /// <param name="duration">time ball will befrozen</param>
+    /// <param name="delay">a delay for this action to happen</param>
+    /// <returns></returns>
     IEnumerator ballFreeze(float duration,float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -141,6 +171,9 @@ public class BallControler : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Used to change the contrians of the object easily
+    /// </summary>
     void SetConstraints()
     {
         if (frozen)

@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>WebGL:20</UnityBuildTarget>
     <UnityVersion>5.3.4f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -69,6 +71,7 @@
     <Compile Include="Assets\Scripts\Events\Delegates.cs" />
     <Compile Include="Assets\Scripts\Events\IPause.cs" />
     <Compile Include="Assets\Scripts\Events\IPlayerHitBottom.cs" />
+    <Compile Include="Assets\Scripts\Events\IResetGameState.cs" />
     <Compile Include="Assets\Scripts\Events\IScore.cs" />
     <Compile Include="Assets\Scripts\ExampleEvents.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
@@ -79,6 +82,7 @@
     <Compile Include="Assets\Scripts\SaveData.cs" />
     <Compile Include="Assets\Scripts\UI\HighScoreDisplayObject.cs" />
     <Compile Include="Assets\Scripts\UI\HighScoreMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\HighScoreSubmitScreen.cs" />
     <Compile Include="Assets\Scripts\Util\Axis.cs" />
     <Compile Include="Assets\Scripts\Util\Common.cs" />
     <Compile Include="Assets\Scripts\Util\CustomGrid.cs" />

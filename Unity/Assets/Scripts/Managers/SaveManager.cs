@@ -35,7 +35,8 @@ public static class SaveManager
         {
             for (int i = 0; i < savaData.highScores.Length; i++)
             {
-                if (Score < savaData.highScores[i].score)
+                Debug.Log((Score > savaData.highScores[i].score) + " i : " + i);
+                if (Score > savaData.highScores[i].score)
                 {
                     savaData.highScores[i].score = Score;
                     savaData.highScores[i].name = Name;
@@ -55,7 +56,8 @@ public static class SaveManager
     {
         for (int i = 0; i < savaData.highScores.Length; i++)
         {
-            if (Score < savaData.highScores[i].score)
+            Debug.Log((Score > savaData.highScores[i].score) + " i : " + i);
+            if (Score > savaData.highScores[i].score)
                 return true;
         }
         return false;

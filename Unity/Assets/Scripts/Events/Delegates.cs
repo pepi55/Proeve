@@ -11,3 +11,9 @@ public delegate void ClickDelegate(Vector2 position);
 /// Generic Delegate that needs no arguments
 /// </summary>
 public delegate void VoidDelegate();
+
+/// <summary>
+/// Sends a string trough it's argument
+/// </summary>
+/// <param name="s">String Value</param>
+public delegate void StringDelegate(string s);
