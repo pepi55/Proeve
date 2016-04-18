@@ -1,0 +1,4 @@
+// Shop state.
+var shopState = {
+
+};
