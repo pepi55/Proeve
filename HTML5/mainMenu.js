@@ -19,13 +19,13 @@ var mainMenuState = {
 		startButton.anchor.setTo(0.5, 0.5);
 
 		var shopButton;
-		shopButton = game.add.button(game.world.centerX, game.world.centerY + 50, 'button', function() {
+		shopButton = game.add.button(game.world.centerX, game.world.centerY + 100, 'button', function() {
 			game.state.start('shop');
 		}, this);
 		shopButton.anchor.setTo(0.5, 0.5);
 
 		var optionsButton;
-		optionsButton = game.add.button(game.world.centerX, game.world.centerY + 150, 'button', function() {
+		optionsButton = game.add.button(game.world.centerX, game.world.centerY + 200, 'button', function() {
 			game.state.start('options');
 		}, this);
 		optionsButton.anchor.setTo(0.5, 0.5);
