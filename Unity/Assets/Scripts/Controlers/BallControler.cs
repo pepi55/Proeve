@@ -7,27 +7,81 @@ public class BallControler : MonoBehaviour
 
     new Rigidbody2D rigidbody2D;
 
-    bool useLocalRelativePosition;
-    bool UseXAxis;
+    //tempvalue for when game is paused
+    Vector2 savedSpeed;
+
+    bool useLocalRelativePosition = true;
+    bool UseXAxis = true;
+
+    /// <summary>
+    /// ball is frozen into place
+    /// </summary>
+    bool frozen;
+
+    bool PauseState = false;
+
     // Use this for initialization
     void Start()
     {
         InputManager.onClick += InputManager_onClick;
 
         Events.GlobalEvents.AddEventListener<Events.IPause>(OnPause);
-
+        Events.GlobalEvents.AddEventListener<Events.IResetGameState>(ResetBall);
         rigidbody2D = GetComponent<Rigidbody2D>();
+
+        SetConstraints();
     }
 
+    public void OnDestroy()
+    {
+        InputManager.onClick -= InputManager_onClick;
+
+        Events.GlobalEvents.RemoveEventListener<Events.IPause>(OnPause);
+        Events.GlobalEvents.RemoveEventListener<Events.IResetGameState>(ResetBall);
+    }
+
+    /// <summary>
+    /// Called when pause state has changed
+    /// </summary>
+    /// <param name="pause"></param>
     void OnPause(Events.IPause pause)
     {
         enabled = !pause.State;
+        if (pause.State)
+        {
+            savedSpeed = rigidbody2D.velocity;
+            rigidbody2D.velocity = Vector2.zero;
+            frozen = true;
+            SetConstraints();
+        }
+        else
+        {
+            frozen = false;
+            SetConstraints();
+            rigidbody2D.velocity = savedSpeed;
+
+        }
     }
 
+    void ResetBall(Events.IResetGameState obj)
+    {
+        transform.position = Vector3.zero;
+        rigidbody2D.velocity = Vector2.zero;
+
+        StartCoroutine(ballFreeze(0.5f, 0.0f));
+    }
+
+/// <summary>
+/// Call in inputManager handles force adding for the ball
+/// </summary>
+/// <param name="position"></param>
     private void InputManager_onClick(Vector2 position)
     {
         if (isActiveAndEnabled)
         {
+            frozen = false;
+            SetConstraints();
+
             if (transform.position.y < 12f)
             {
                 Vector2 dir;
@@ -45,7 +99,7 @@ public class BallControler : MonoBehaviour
                     dir = Util.Common.AngleToVector(Util.Common.VectorToAngle(dir));
                 }
                 //dir = new Vector2(-dir.x, dir.y * Physics2D.gravity.y);
-                dir = -dir * 200 * rigidbody2D.mass;
+                dir = -dir * 300 * rigidbody2D.mass;
                 dir.y *= rigidbody2D.gravityScale;
                 rigidbody2D.AddForce(dir);
 
@@ -53,16 +107,95 @@ public class BallControler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Unity Function
+    /// </summary>
+    /// <param name="collision"></param>
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.transform.tag == "ScoreTarget")
+        if (collision.transform.tag == "ScoreTarget")
         {
             Events.GlobalEvents.Invoke(new Events.IScore());
-            transform.position = Vector3.zero;
+            StartCoroutine(ballResetDelay(0.2f));
+            StartCoroutine(ballFreeze(0.5f, 0.2f));
             rigidbody2D.velocity = Vector2.zero;
         }
     }
 
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.transform.tag == "Bottom")
+        {           
+            rigidbody2D.velocity = Vector2.zero;
+           // StartCoroutine(ballResetDelay(0.2f));
+           // StartCoroutine(ballFreeze(0.5f, 0.2f));
+            Events.GlobalEvents.Invoke(new Events.IPlayerHitBottom());
+        }
+    }
+
+    /// <summary>
+    /// Used to induce a delay for when the ball resets
+    /// </summary>
+    /// <param name="Delay">Delay Time in seconds</param>
+    /// <returns></returns>
+    IEnumerator ballResetDelay(float Delay)
+    {
+        yield return new WaitForSeconds(Delay);
+
+        transform.position = Vector3.zero;
+
+    }
+
+    /// <summary>
+    /// Freezes the Ball in place for x seconds
+    /// </summary>
+    /// <param name="duration">time ball will befrozen</param>
+    /// <param name="delay">a delay for this action to happen</param>
+    /// <returns></returns>
+    IEnumerator ballFreeze(float duration,float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        float d = duration;
+
+        frozen = true;
+        SetConstraints();
+
+        while(d>0 && frozen)
+        {
+            d -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        frozen = false;
+        SetConstraints();
+        
+    }
+
+    /// <summary>
+    /// Used to change the contrians of the object easily
+    /// </summary>
+    void SetConstraints()
+    {
+        if (frozen)
+        {
+            rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
+            return;
+        }
+
+        if (UseXAxis)
+        {
+            rigidbody2D.constraints = RigidbodyConstraints2D.None;
+        }
+        else
+        {
+            transform.position = new Vector3(0, transform.position.y, transform.position.z);
+            rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX;
+        }
+    }
+
+    /// <summary>
+    /// Used for Debuging and Trying out diffrent styles of ball movement and controle
+    /// </summary>
     public void OnGUI()
     {
         if (GUI.Button(new Rect(new Vector2(0, 0), new Vector2(230, 30)), useLocalRelativePosition ? "Switch to static center point mode" : "Switch to relative to ball mode"))
@@ -74,15 +207,7 @@ public class BallControler : MonoBehaviour
         {
             UseXAxis = !UseXAxis;
 
-            if (UseXAxis)
-            {
-                rigidbody2D.constraints = RigidbodyConstraints2D.None;
-            }
-            else
-            {
-                transform.position = new Vector3(0, transform.position.y, transform.position.z);
-                rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX;
-            }
+            SetConstraints();
         }
 
     }

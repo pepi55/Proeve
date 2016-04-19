@@ -8,11 +8,19 @@ namespace Util
 {
     public static class SceneControler
     {
+        /// <summary>
+        /// Loads a single scene into the game and unload any otherloaded scenes
+        /// </summary>
+        /// <param name="SceneName">Name of the scene that will be loaded</param>
         public static void Load(string SceneName)
         {
             SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
         }
 
+        /// <summary>
+        /// Loads a scene as a aditive
+        /// </summary>
+        /// <param name="SceneName"></param>
         public static void LoadAddative(string SceneName)
         {
             SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);

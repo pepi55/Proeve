@@ -3,9 +3,9 @@ using System.Collections;
 namespace Events
 {
     /// <summary>
-    /// Called when the player hits the target
+    /// Empty event class that is called when the player hits the ground
     /// </summary>
-    public class IScore : IEvent
+    public class IPlayerHitBottom : IEvent
     {
     }
 }

@@ -3,11 +3,6 @@ using System.Collections;
 
 public class ScaleToCameraView : MonoBehaviour
 {
-
-    [SerializeField]
-    Vector3 OrignalObjectSize = Vector3.one;
-    [SerializeField]
-    Vector3 TextureSize = Vector3.one;
     [SerializeField]
     Camera cam;
     [SerializeField]

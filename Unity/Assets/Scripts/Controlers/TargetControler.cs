@@ -1,15 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GroundControler : MonoBehaviour
+public class TargetControler : MonoBehaviour
 {
-    [SerializeField]
-    Transform LeftWall, RightWall;
-    Vector3 EndLeft, EndRight;
 
+    //bounderies the target moves in
+    [SerializeField]
+    Transform LeftWall = null, RightWall = null;
+    Vector3 EndLeft = Vector3.zero, EndRight = Vector3.zero;
+
+    /// <summary>
+    /// Move direction 1 = right, left = -1, none = 0;
+    /// </summary>
     int dir = 1;
+
+    /// <summary>
+    /// Speed the ball moves it
+    /// </summary>
     [SerializeField]
     float speed = 3f;
+    [SerializeField]
+    float MaxSpeed = 4f;
+    [SerializeField]
+    int scoreCurvMax = 0;
+  
     void Start()
     {
         EndLeft = LeftWall.position;
@@ -49,7 +63,13 @@ public class GroundControler : MonoBehaviour
 
         if(dir!=0)
         {
-            transform.Translate(Vector3.right * 3f * dir * Time.deltaTime * speed);
+            transform.Translate(Vector3.right * dir * Time.deltaTime * speed);
         }
+
+        if (GameManager.Score > 0)
+            speed = 0.5f + (-1 * Mathf.Exp(-GameManager.Score / (float)scoreCurvMax) + 1) * MaxSpeed;
+        else
+            speed = 0.5f;
+        //1 - 2·exp(-x / 400)
     }
 }

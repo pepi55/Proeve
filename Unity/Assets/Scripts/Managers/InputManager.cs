@@ -5,9 +5,14 @@ public class InputManager : MonoBehaviour
 {
     public static event ClickDelegate onClick;
 
-    void Start()
+    void Awake()
     {
         Events.GlobalEvents.AddEventListener<Events.IPause>(OnPause);
+    }
+
+    public void OnDestroy()
+    {
+        Events.GlobalEvents.RemoveEventListener<Events.IPause>(OnPause);
     }
 
     void OnPause(Events.IPause pause)
@@ -28,8 +33,7 @@ public class InputManager : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            OnClick(touches[i].position);
-            return;
+            OnClick(touches[i].position);            
         }
     }
 
