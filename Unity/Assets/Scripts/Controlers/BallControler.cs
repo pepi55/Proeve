@@ -16,7 +16,7 @@ public class BallControler : MonoBehaviour
     /// <summary>
     /// ball is frozen into place
     /// </summary>
-    bool frozen;
+    bool frozen; //TODO Change frozen to is kinametic from ridgidbody2d
 
     // Use this for initialization
     void Start()
@@ -27,7 +27,7 @@ public class BallControler : MonoBehaviour
         Events.GlobalEvents.AddEventListener<Events.IResetGameState>(ResetBall);
         rigidbody2D = GetComponent<Rigidbody2D>();
 
-        SetConstraints();
+        ResetBall(new Events.IResetGameState());
     }
 
     public void OnDestroy()
@@ -65,8 +65,9 @@ public class BallControler : MonoBehaviour
     {
         transform.position = Vector3.zero;
         rigidbody2D.velocity = Vector2.zero;
-
-        StartCoroutine(ballFreeze(0.5f, 0.0f));
+        frozen = true;
+        SetConstraints();
+        //StartCoroutine(ballFreeze(0.5f, 0.0f));
     }
 
 /// <summary>
@@ -93,7 +94,6 @@ public class BallControler : MonoBehaviour
                     dir = ((Vector2)Camera.main.WorldToViewportPoint(transform.position));
                     dir.Scale(new Vector2(Screen.width, Screen.height));
                     dir = position - dir;
-
                     dir = Util.Common.AngleToVector(Util.Common.VectorToAngle(dir));
                 }
                 //dir = new Vector2(-dir.x, dir.y * Physics2D.gravity.y);

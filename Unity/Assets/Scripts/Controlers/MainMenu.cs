@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour {
     [SerializeField]
-    HighScoreMenu HighScoreScreen;
+    HighScoreMenu HighScoreScreen = null;
 
     void Awake()
     {

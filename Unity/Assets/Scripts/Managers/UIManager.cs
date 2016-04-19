@@ -5,7 +5,7 @@ using System.Collections;
 public class UIManager : MonoBehaviour {
 
     [SerializeField]
-    Text ScoreText;
+    Text ScoreText = null;
 
 	void Awake()
     {
