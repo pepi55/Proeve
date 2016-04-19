@@ -43,7 +43,7 @@
  * Use SceneController when loading scenes.
 
 #### HTML5/JS naming conventions.
- * lowerCamelCase names.
+ * lowerCamelCase names (applies to folders, classes, variables, etc.).
  * Names are in English.
  * Each class has its own seperate JS file named after itself (i.e.: wall class would be wallClass.js).
 
@@ -72,6 +72,9 @@
 
  * Minimal game resolution is: 800x600.
  * Maximum game resolution is: 1920x1080.
+
+#### JS art conventions
+ * Character's png's should be named: "image.IMAGE_NUMBER.png", where IMAGE_NUMBER is the number of the character made.
 
 ### Responsibilities
 Each artist is responsible for importing his/her own work in Unity.
