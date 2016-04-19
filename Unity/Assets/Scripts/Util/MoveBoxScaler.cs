@@ -6,7 +6,7 @@ namespace Util
     {
 
         [SerializeField]
-        new Camera camera;
+        new Camera camera = null;
 
         public Vector3 screenSize = Vector3.zero;
         void Awake()

@@ -4,11 +4,9 @@ using System.Collections;
 public class ScaleToCameraView : MonoBehaviour
 {
     [SerializeField]
-    Camera cam;
+    Camera cam = null;
     [SerializeField]
-    Vector2 ScaleSize;
-    [SerializeField]
-    bool keepAspect;
+    Vector2 ScaleSize = Vector2.zero;
 
     void Start()
     {
