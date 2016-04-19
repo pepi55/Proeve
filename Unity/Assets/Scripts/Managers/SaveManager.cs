@@ -38,6 +38,7 @@ public static class SaveManager
                 Debug.Log((Score > savaData.highScores[i].score) + " i : " + i);
                 if (Score > savaData.highScores[i].score)
                 {
+                    pushDown(i);
                     savaData.highScores[i].score = Score;
                     savaData.highScores[i].name = Name;
                     Save();
@@ -46,6 +47,23 @@ public static class SaveManager
             }
             
         }      
+    }
+
+    /// <summary>
+    /// Reorders list so the new score can be placed on the right position
+    /// </summary>
+    /// <param name="FromPosition">The location in the array where the new score will be placed</param>
+    static void pushDown(int FromPosition)
+    {
+        int l = savaData.highScores.Length;
+
+        for (int i = l-1; i > FromPosition; i--)
+        {
+            if (i - 1 >= 0)
+            {
+                savaData.highScores[i] = savaData.highScores[i - 1];
+            }
+        }
     }
 
     /// <summary>
