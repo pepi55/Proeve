@@ -40,10 +40,11 @@ public static class SaveManager
                 {
                     savaData.highScores[i].score = Score;
                     savaData.highScores[i].name = Name;
+                    Save();
                     return;
                 }
             }
-            Save();
+            
         }      
     }
 

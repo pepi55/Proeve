@@ -18,8 +18,6 @@ public class BallControler : MonoBehaviour
     /// </summary>
     bool frozen;
 
-    bool PauseState = false;
-
     // Use this for initialization
     void Start()
     {
