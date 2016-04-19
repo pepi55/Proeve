@@ -23,7 +23,13 @@ public class TargetControler : MonoBehaviour
     float MaxSpeed = 4f;
     [SerializeField]
     int scoreCurvMax = 0;
-  
+
+    /// <summary>
+    /// When a active the target does not move
+    /// </summary>
+    bool frozen = false;
+
+
     void Start()
     {
         EndLeft = LeftWall.position;
@@ -33,18 +39,27 @@ public class TargetControler : MonoBehaviour
         EndRight = RightWall.position;
         EndRight.y = transform.position.y;
         EndRight.z = transform.position.z;
+
+        Events.GlobalEvents.AddEventListener<Events.IPause>(OnPause);
+        Events.GlobalEvents.AddEventListener<Events.IResetGameState>(OnBallReset);
+
+        InputManager.onClick += InputManager_onClick;
     }
 
+    public void OnDestroy()
+    {
+        InputManager.onClick -= InputManager_onClick;
+
+        Events.GlobalEvents.RemoveEventListener<Events.IPause>(OnPause);
+        Events.GlobalEvents.RemoveEventListener<Events.IResetGameState>(OnBallReset);
+    }
     // Update is called once per frame
     void Update()
     {
-        //EndLeft = LeftWall.position;
-        //EndLeft.y = transform.position.y;
-        //EndLeft.z = transform.position.z;
-
-        //EndRight = RightWall.position;
-        //EndRight.y = transform.position.y;
-        //EndRight.z = transform.position.z;
+        if (frozen)
+        {
+            return;
+        }
 
         if (dir > 0)
         {
@@ -66,10 +81,29 @@ public class TargetControler : MonoBehaviour
             transform.Translate(Vector3.right * dir * Time.deltaTime * speed);
         }
 
-        if (GameManager.Score > 0)
+        if (GameManager.Score > 0 && scoreCurvMax != 0)
             speed = 0.5f + (-1 * Mathf.Exp(-GameManager.Score / (float)scoreCurvMax) + 1) * MaxSpeed;
         else
             speed = 0.5f;
         //1 - 2·exp(-x / 400)
+    }
+
+    void OnPause(Events.IPause obj)
+    {
+        enabled = !obj.State;
+    }
+
+    private void InputManager_onClick(Vector2 position)
+    {
+        if(enabled)
+        {
+            Debug.Log("toggled Frozen");
+            frozen = false;
+        }
+    }
+
+    void OnBallReset(Events.IResetGameState obj)
+    {
+        frozen = true;
     }
 }

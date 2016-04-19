@@ -12,7 +12,10 @@ public class HighScoreSubmitScreen : MonoBehaviour
 
     public void Open()
     {
-        gameObject.SetActive(true);
+        if (gameObject)
+        {
+            gameObject.SetActive(true);
+        }
         ScoreDisplay.text = "Congratulations you scored " + GameManager.Score.ToString() + " points!";
     }
 
