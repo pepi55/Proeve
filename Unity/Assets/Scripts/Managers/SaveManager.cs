@@ -55,9 +55,7 @@ public static class SaveManager
     /// <param name="FromPosition">The location in the array where the new score will be placed</param>
     static void pushDown(int FromPosition)
     {
-        int l = savaData.highScores.Length;
-
-        for (int i = l-1; i > FromPosition; i--)
+        for (int i = savaData.highScores.Length - 1; i > FromPosition; i--)
         {
             if (i - 1 >= 0)
             {
