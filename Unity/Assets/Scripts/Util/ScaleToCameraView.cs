@@ -4,11 +4,9 @@ using System.Collections;
 public class ScaleToCameraView : MonoBehaviour
 {
     [SerializeField]
-    Camera cam;
+    Camera cam = null;
     [SerializeField]
-    Vector2 ScaleSize;
-    [SerializeField]
-    bool keepAspect;
+    Vector2 ScaleSize = Vector2.zero;
 
     void Start()
     {
@@ -28,16 +26,9 @@ public class ScaleToCameraView : MonoBehaviour
         if (newScale.z < 0)
             newScale.z = -newScale.z;
 
-
-
-
         transform.localScale = newScale;
        // transform.position = pos;
         transform.rotation = cam.transform.rotation;
-
-        Debug.Log(newScale);
-
-
     }
 
     void OnDrawGizmosSelected()

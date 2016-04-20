@@ -6,11 +6,11 @@ var hardMode = true;
 
 var gameState = {
   // Custom "variables".
-  tweenAPosition: 750,
+  tweenAPosition: 900,
   tweenBPosition: 70,
 
   textTween: null,
-  tempScore: 0,
+	tempScore: 0,
   text: null,
 
   walls: null,
@@ -30,14 +30,14 @@ var gameState = {
 		var str_character = localStorage.getItem('character');
 
 		if (str_character == null || str_character == "null") {
-			character = 'image';
+			character = 0;
 		} else {
-			character = str_character;
+			character = parseInt(str_character);
 		}
 
 		localStorage.clear();
 
-		game.load.image('ball', 'assets/' + character + '.png');
+		game.load.image('ball', 'assets/balls/image.' + character + '.png');
 		game.load.image('goal', 'assets/image.png');
 
 		game.load.image('wall1', 'assets/image.png');
@@ -56,8 +56,8 @@ var gameState = {
 		this.ball = game.add.sprite(game.world.centerX, 20, 'ball');
 		this.goal = game.add.sprite(this.tweenAPosition, game.world.height - 50, 'goal');
 
-		this.wall1 = game.add.sprite(-50, game.world.height, 'wall1');
-		this.wall2 = game.add.sprite(game.world.width + 50, game.world.height, 'wall2');
+		this.wall1 = game.add.sprite(-64, game.world.height, 'wall1');
+		this.wall2 = game.add.sprite(game.world.width + 64, game.world.height, 'wall2');
 
 		game.physics.arcade.enable([
 			this.ball,
@@ -139,12 +139,13 @@ var gameState = {
 
   // Custom functions
   wallsCollisionHandler: function() {
-    tempScore++;
+    this.tempScore++;
   },
 
   goalCollisionHandler: function() {
     //game.state.start('game');
-    this.score += tempScore + 1;
+    this.score += this.tempScore + 1;
+    this.tempScore = 0;
     points += this.score;
 
     this.setScoreText();
@@ -160,7 +161,7 @@ var gameState = {
 
   bounce: function() {
 		var yVelocity = 0;
-		tempScore = 0;
+		this.tempScore = 0;
 
 		if (game.input.activePointer.y > this.ball.y) {
 		  yVelocity = -400;

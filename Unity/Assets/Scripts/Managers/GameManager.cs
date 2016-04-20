@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
     private int score;
 
     [SerializeField]
-    HighScoreSubmitScreen submitMenu;
+    HighScoreSubmitScreen submitMenu = null;
 
     /// <summary>
     /// The Points earned of the player
@@ -24,6 +24,20 @@ public class GameManager : MonoBehaviour {
             return instance.score;
         }
     }
+
+    /// <summary>
+    /// Show that game is paused
+    /// </summary>
+    public static bool GamePaused
+    {
+        get { return instance.gamePaused; }
+    }
+
+    private bool gamePaused;
+    /// <summary>
+    /// if is waiting for High score submision
+    /// </summary>
+    private bool waitForSubmit;
 
     void Awake()
     {
@@ -60,10 +74,15 @@ public class GameManager : MonoBehaviour {
         if (SaveManager.CheckNewScore(score) && score != 0)
         {
             OpenScoreSubmitScreen();
+
+            gamePaused = true;
+            waitForSubmit = true;
         }
         else
         {
             ResetGame();
+            gamePaused = false;
+            
         }  
     }
 
@@ -76,6 +95,12 @@ public class GameManager : MonoBehaviour {
     private void ResetGame()
     {
         score = 0;
+        if (waitForSubmit)
+        {
+            gamePaused = false;
+        }
+
+        waitForSubmit = false;
 
         if (OnScoreUpdate != null)
             OnScoreUpdate();
@@ -88,7 +113,12 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     public void ContinueGame()
     {
+        if(waitForSubmit)
+        {
+            return;
+        }
         Events.GlobalEvents.Invoke(new Events.IPause(false));
+        gamePaused = false;
     }
 
     /// <summary>
@@ -96,6 +126,12 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     public void PauseGame()
     {
+        if (waitForSubmit)
+        {
+            return;
+        }
+
         Events.GlobalEvents.Invoke(new Events.IPause(true));
+        gamePaused = true;
     }
 }
