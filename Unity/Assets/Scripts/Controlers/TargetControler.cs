@@ -56,7 +56,7 @@ public class TargetControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.GamePaused)
+        if (GameManager.GamePaused || frozen)
         {
             return;
         }
