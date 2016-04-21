@@ -6,6 +6,9 @@ public static class SaveManager
     public static SaveData savaData { get { return _saveData; } }
     static SaveData _saveData;
 
+    /// <summary>
+    /// Loads up the savedata when ever this class is accesed for the first time
+    /// </summary>
     static SaveManager()
     {
         _saveData = new SaveData();
@@ -16,7 +19,10 @@ public static class SaveManager
         }
     }
 
-    static void Save()
+    /// <summary>
+    /// Saves the save data to disk
+    /// </summary>
+    public static void Save()
     {
         if (_saveData != null)
         {

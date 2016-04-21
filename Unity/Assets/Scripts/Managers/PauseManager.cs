@@ -5,10 +5,6 @@ using System;
 
 public class PauseManager : MonoBehaviour
 {
-
-    [SerializeField]
-    GameObject pauseButton = null;
-
     void Awake()
     {
         Events.GlobalEvents.AddEventListener<Events.IPause>(OnPause);
