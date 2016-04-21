@@ -32,7 +32,7 @@ var shopState = {
 		for (var i = 0; i < this.amountOfCharacters; i++) {
 			var charNum = i;
 
-			var characteButton = game.add.button(100, 200 + 150 * i, 'character' + i, function(num) {
+			var characteButton = game.add.button(100, 200 + 150 * i, 'character' + i, function() {
 				localStorage.setItem('character', this.num);
 			}, { num: i, });
 
