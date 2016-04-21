@@ -37,6 +37,8 @@ var gameState = {
 
 		localStorage.clear();
 
+		walls = game.add.group();
+
 		game.load.image('ball', 'assets/balls/image.' + character + '.png');
 		game.load.image('goal', 'assets/image.png');
 
@@ -85,8 +87,6 @@ var gameState = {
 		this.wall2.body.immovable = true;
 		this.wall1.body.allowGravity = false;
 		this.wall2.body.allowGravity = false;
-
-		walls = game.add.group();
 
 		walls.add(this.wall1);
 		walls.add(this.wall2);
