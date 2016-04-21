@@ -6,6 +6,8 @@ public class ShopMenuData : MonoBehaviour {
     [SerializeField]
     Sprite[] characters;
     [SerializeField]
+    Sprite[] characterPreviewImages;
+    [SerializeField]
     Sprite[] backgrounds;
 
     public Sprite[] Characters
@@ -21,6 +23,14 @@ public class ShopMenuData : MonoBehaviour {
         get
         {
             return backgrounds;
+        }
+    }
+
+    public Sprite[] CharacterPreviewImages
+    {
+        get
+        {
+            return characterPreviewImages;
         }
     }
 }

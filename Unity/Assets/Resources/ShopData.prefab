@@ -42,9 +42,13 @@ MonoBehaviour:
   characters:
   - {fileID: 21300000, guid: 1c51a81e19b13864c9775fbdd7d93a8e, type: 3}
   - {fileID: 21300000, guid: 868b8ed53f5d9504e8cd7705fb9390b3, type: 3}
-  - {fileID: 21300000, guid: 1c51a81e19b13864c9775fbdd7d93a8e, type: 3}
+  - {fileID: 21300000, guid: e821dcb3d63b4d740972348c2b2da747, type: 3}
   - {fileID: 21300000, guid: 868b8ed53f5d9504e8cd7705fb9390b3, type: 3}
   - {fileID: 21300000, guid: 1c51a81e19b13864c9775fbdd7d93a8e, type: 3}
+  characterPreviewImages:
+  - {fileID: 21300000, guid: ab225cd553e4614448435f582555d1cc, type: 3}
+  - {fileID: 21300000, guid: 3b378c55a586a254984e0a00e81832a6, type: 3}
+  - {fileID: 21300000, guid: 8ce673b3678eaa847b76d1a6d8dd6999, type: 3}
   backgrounds: []
 --- !u!1001 &100100000
 Prefab:

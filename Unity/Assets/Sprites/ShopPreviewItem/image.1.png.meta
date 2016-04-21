@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 1c51a81e19b13864c9775fbdd7d93a8e
-timeCreated: 1461073759
+guid: 3b378c55a586a254984e0a00e81832a6
+timeCreated: 1461238379
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -51,7 +51,7 @@ TextureImporter:
   spriteSheet:
     sprites: []
     outline: []
-  spritePackingTag: Balls
+  spritePackingTag: ShopPreview
   userData: 
   assetBundleName: 
   assetBundleVariant: 

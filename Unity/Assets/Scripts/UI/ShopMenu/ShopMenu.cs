@@ -31,7 +31,7 @@ public class ShopMenu : MonoBehaviour
     {
 
         Characters = new List<MenuItem>();
-        int l = data.Characters.Length;
+        int l = data.CharacterPreviewImages.Length;
 
         GameObject gameObj;
         MenuItem MI;
@@ -46,8 +46,8 @@ public class ShopMenu : MonoBehaviour
             foreach(Image img in images)
             {
                 if(img.name == "previewImg")
-                {
-                    img.sprite = data.Characters[i];
+                {               
+                    img.sprite = data.CharacterPreviewImages[i];
                 }
                 else if(img.name == "selector")
                 {
