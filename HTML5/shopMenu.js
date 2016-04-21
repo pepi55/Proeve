@@ -3,15 +3,18 @@ var character = 0;
 
 var shopState = {
   // Custom "variables".
-  characters: new Phaser.Group(),
-  backgrounds: new Phaser.Group(),
+  characters: null,
+  backgrounds: null,
 
   amountOfCharacters: 2, // The amount of images to load.
 
 	// Phaser functions.
 	preload: function() {
+		characters = game.add.group();
+		backgrounds = game.add.group();
+
 		for (var i = 0; i < this.amountOfCharacters; i++) {
-			// Load images.
+			game.load.image('character' + i, 'assets/balls/image.' + i + '.png');
 		}
 
 		var str_points = localStorage.getItem('points');
@@ -21,9 +24,22 @@ var shopState = {
 		} else {
 			points = parseInt(str_points);
 		}
+
+		localStorage.clear();
 	},
 
   create: function() {
+		for (var i = 0; i < this.amountOfCharacters; i++) {
+			var charNum = i;
+
+			var characteButton = game.add.button(100, 200 + 150 * i, 'character' + i, function() {
+				localStorage.setItem('character', charNum);
+				console.log(charNum);
+			});
+
+			characters.add(characteButton);
+		}
+
 		var escKey = game.input.keyboard.addKey(Phaser.Keyboard.Q);
 		escKey.onDown.add(this.goToMain, this);
 
@@ -42,7 +58,6 @@ var shopState = {
   },
 
 	update: function() {
-
 	},
 
 	// Custom functions.
