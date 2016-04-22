@@ -28,6 +28,23 @@ public class BallControler : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
 
         ResetBall(new Events.IResetGameState());
+
+        ChangeLooks();
+    }
+
+    public void ChangeLooks()
+    {
+        ShopMenuData data;
+
+        data = FindObjectOfType<ShopMenuData>();
+        if(!data)
+        {
+            GameObject gameobj = Instantiate(Resources.Load(ShopMenuData.ResourceName)) as GameObject;
+
+            data = gameobj.GetComponent<ShopMenuData>();
+        }
+
+        GetComponent<SpriteRenderer>().sprite = data.Characters[SaveManager.savaData.SelectedCharacter];
     }
 
     public void OnDestroy()

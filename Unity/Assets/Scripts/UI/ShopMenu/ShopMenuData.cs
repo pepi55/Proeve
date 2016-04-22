@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ShopMenuData : MonoBehaviour {
 
+    public const string ResourceName = "ShopData";
+
     [SerializeField]
     Sprite[] characters;
     [SerializeField]

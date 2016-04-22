@@ -39,9 +39,17 @@ public class HighScoreMenu : MonoBehaviour
 
     public void Close()
     {
+
+        if (!gameObject.activeSelf)
+        {
+            return;
+        }
+
         gameObject.SetActive(false);
         if (onClose != null)
+        {
             onClose();
-        onClose = null;
+            onClose = null;
+        }
     }
 }

@@ -21,20 +21,24 @@ public class MainMenu : MonoBehaviour {
     public void OpenHighScore()
     {
         HighScoreScreen.Open();
-        Close();
+        ShopMenuScreen.Close();        
         HighScoreScreen.onClose += Open;
+        Close();
     }
 
     public void OpenStore()
     {
         ShopMenuScreen.Open();
-        Close();
         HighScoreScreen.Close();
+        Close();
+
+        ShopMenuScreen.onClose += Open;
     }
 
     public void Open()
     {
         gameObject.SetActive(true);
+
         ShopMenuScreen.Close();
         HighScoreScreen.Close();
     }

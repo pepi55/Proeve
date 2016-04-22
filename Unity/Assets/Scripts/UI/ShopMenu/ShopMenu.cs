@@ -5,7 +5,9 @@ using System.Collections.Generic;
 
 public class ShopMenu : MonoBehaviour
 {
-    
+
+    public VoidDelegate onClose;
+
     ShopMenuData data;
 
     List<MenuItem> Characters;
@@ -29,6 +31,10 @@ public class ShopMenu : MonoBehaviour
         data = temp.GetComponent<ShopMenuData>();
 
         InitCharacters();
+        InitBackgrounds();
+
+        UpdateDisplayList(Characters, SaveManager.savaData.SelectedCharacter);
+        UpdateDisplayList(Backgrounds, SaveManager.savaData.SelectedBackground);
     }
 
     public void Open()
@@ -39,7 +45,18 @@ public class ShopMenu : MonoBehaviour
 
     public void Close()
     {
+        if (!gameObject.activeSelf)
+        {
+            return;
+        }
+
         gameObject.SetActive(false);
+
+        if (onClose != null)
+        {
+            onClose();
+            onClose = null;
+        }
     }
 
     public void OpenCharacter()
@@ -98,7 +115,7 @@ public class ShopMenu : MonoBehaviour
 
     void InitBackgrounds()
     {
-        Characters = new List<MenuItem>();
+        Backgrounds = new List<MenuItem>();
         int l = data.Backgrounds.Length;
 
         GameObject gameObj;
@@ -138,27 +155,28 @@ public class ShopMenu : MonoBehaviour
     public void ClickCharacter(int Index)
     {
         SaveManager.savaData.SelectedCharacter = Index;
+        SaveManager.Save();
 
-        foreach(MenuItem MI in Characters)
-        {
-            if(MI.indexPosition == Index)
-            {
-                MI.Selector.color = Color.white;
-            }
-            else
-            {
-                MI.Selector.color = Color.gray;
-            }
-        }
+        UpdateDisplayList(Characters, Index);
     }
+
+    
 
     public void ClickBackground(int Index)
     {
         SaveManager.savaData.SelectedBackground = Index;
+        SaveManager.Save();
 
-        foreach (MenuItem MI in Backgrounds)
+        UpdateDisplayList(Backgrounds, Index);
+    }
+
+    void UpdateDisplayList(List<MenuItem> list, int SelectedItemIndex)
+    {
+        if (list.Count == 0)
+            return;
+        foreach (MenuItem MI in list)
         {
-            if (MI.indexPosition == Index)
+            if (MI.indexPosition == SelectedItemIndex)
             {
                 MI.Selector.color = Color.white;
             }
@@ -168,7 +186,6 @@ public class ShopMenu : MonoBehaviour
             }
         }
     }
-
     class MenuItem
     {
         public Button SelectButton;
