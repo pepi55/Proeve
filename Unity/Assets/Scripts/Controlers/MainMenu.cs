@@ -4,6 +4,8 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour {
     [SerializeField]
     HighScoreMenu HighScoreScreen = null;
+    [SerializeField]
+    ShopMenu ShopMenuScreen = null;
 
     void Awake()
     {
@@ -25,12 +27,16 @@ public class MainMenu : MonoBehaviour {
 
     public void OpenStore()
     {
-        
+        ShopMenuScreen.Open();
+        Close();
+        HighScoreScreen.Close();
     }
 
     public void Open()
     {
         gameObject.SetActive(true);
+        ShopMenuScreen.Close();
+        HighScoreScreen.Close();
     }
 
     public void Close()
