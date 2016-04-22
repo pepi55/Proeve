@@ -114,8 +114,14 @@ public class BallControler : MonoBehaviour
                     dir = Util.Common.AngleToVector(Util.Common.VectorToAngle(dir));
                 }
                 //dir = new Vector2(-dir.x, dir.y * Physics2D.gravity.y);
-                dir = -dir * 300 * rigidbody2D.mass;
+                dir = -dir * 500 * rigidbody2D.mass; //TODO tweak with force to make the ball more reactive
                 dir.y *= rigidbody2D.gravityScale;
+
+                rigidbody2D.AddTorque(dir.x/10);
+                if (rigidbody2D.angularVelocity > 10)
+                    rigidbody2D.angularVelocity = 10;
+                if (rigidbody2D.angularVelocity < -10)
+                    rigidbody2D.angularVelocity = -10;
                 rigidbody2D.AddForce(dir);
 
             }
