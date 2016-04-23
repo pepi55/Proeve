@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
     private void BallHitGround(Events.IPlayerHitBottom obj)
     {
         SaveManager.savaData.StorePoints += score;
+        SaveManager.Save();
 
         if (SaveManager.CheckNewScore(score) && score != 0)
         {
