@@ -12,23 +12,51 @@ public class ShopMenu : MonoBehaviour
 
     List<MenuItem> Characters;
     List<MenuItem> Backgrounds;
-
+    
     [SerializeField]
     GameObject PrefabDisplayObject;
 
+    [Header("Selection")]
     [SerializeField]
-    RectTransform CharacterContent, BackgroundContent;
-
+    RectTransform CharacterContent;
+    [SerializeField]
+    RectTransform BackgroundContent;
     [SerializeField]
     GameObject BackgroundGameObj, CharacterGameObj;
 
+    [Header("Navigation and indicators")]
     [SerializeField]
-    Button BackgroundButton, CharacterButton;
+    Button BackgroundButton;
+    [SerializeField]
+    Button CharacterButton;
 
-   private void Start()
+    [SerializeField]
+    Text StorePointsIndicator;
+
+   private void Awake()
     {
         GameObject temp = Instantiate(Resources.Load("ShopData")) as GameObject;
         data = temp.GetComponent<ShopMenuData>();
+
+        if(SaveManager.savaData.UnlockedCharacters == null)
+        {
+            SaveManager.savaData.UnlockedCharacters = new bool[0];
+        }
+
+        if(SaveManager.savaData.UnlockedBackgrounds == null)
+        {
+            SaveManager.savaData.UnlockedBackgrounds = new bool[0];
+        }
+
+        if(SaveManager.savaData.UnlockedCharacters.Length != data.Characters.Length)
+        {
+            SaveManager.savaData.UnlockedCharacters = (bool[])Util.Common.ResizeArray(SaveManager.savaData.UnlockedCharacters, new int[] { data.Characters.Length });
+        }
+
+        if(SaveManager.savaData.UnlockedBackgrounds.Length != data.Backgrounds.Length)
+        {
+            SaveManager.savaData.UnlockedBackgrounds = (bool[])Util.Common.ResizeArray(SaveManager.savaData.UnlockedBackgrounds, new int[] { data.Backgrounds.Length });
+        }
 
         InitCharacters();
         InitBackgrounds();
@@ -39,8 +67,19 @@ public class ShopMenu : MonoBehaviour
 
     public void Open()
     {
+        UpdateStorePointText();
+
         gameObject.SetActive(true);
         OpenCharacter();
+        if (data.Characters.Length > 0)
+        {
+            CharacterGameObj.GetComponentInChildren<ScrollRect>().horizontalNormalizedPosition = (float)SaveManager.savaData.SelectedCharacter / data.Characters.Length;
+        }
+
+        if (data.Backgrounds.Length > 0)
+        {
+            BackgroundGameObj.GetComponentInChildren<ScrollRect>().horizontalNormalizedPosition = (float)SaveManager.savaData.SelectedBackground / data.Backgrounds.Length;
+        }
     }
 
     public void Close()
@@ -79,38 +118,35 @@ public class ShopMenu : MonoBehaviour
     {
 
         Characters = new List<MenuItem>();
-        int l = data.CharacterPreviewImages.Length;
+        int l = data.Characters.Length;
 
         GameObject gameObj;
         MenuItem MI;
         CharacterContent.sizeDelta = new Vector2(CharacterContent.sizeDelta.x * l, CharacterContent.sizeDelta.y);
         for (int i = 0; i < l; i++)
         {
-
-            MI = new MenuItem(i);
+            //setting up template Object
             gameObj = Instantiate(PrefabDisplayObject);
             gameObj.SetActive(true);
+            gameObj.transform.SetParent(CharacterContent, false);
 
-            Image[] images = gameObj.GetComponentsInChildren<Image>();
-            foreach(Image img in images)
-            {
-                if(img.name == "previewImg")
-                {               
-                    img.sprite = data.CharacterPreviewImages[i];
-                }
-                else if(img.name == "selector")
-                {
-                    MI.Selector = img;
-                }
-            }
+            //setting up menu item
+            MI = new MenuItem(i, gameObj, data.Characters);
 
-            MI.SelectButton = gameObj.GetComponentInChildren<Button>();
             MI.setupButtonCharacter();
 
-            Characters.Add(MI);
+            if(data.Characters[i].Cost <= 0)
+            {
+                SaveManager.savaData.UnlockedCharacters[i] = true;
+            }
 
-            gameObj.transform.SetParent(CharacterContent, false);
-        }
+            if(SaveManager.savaData.UnlockedCharacters[i])
+            {
+                MI.HasBeenUnlocked();
+            }
+
+            Characters.Add(MI);
+        }       
     }
 
     void InitBackgrounds()
@@ -123,47 +159,71 @@ public class ShopMenu : MonoBehaviour
 
         for (int i = 0; i < l; i++)
         {
-
-            MI = new MenuItem(i);
-
+            //setting up template Object
             gameObj = Instantiate(PrefabDisplayObject);
             gameObj.SetActive(true);
+            gameObj.transform.SetParent(BackgroundContent, false);
 
-            Image[] images = gameObj.GetComponentsInChildren<Image>();
-            foreach (Image img in images)
+            //setting up menu item
+            MI = new MenuItem(i, gameObj, data.Backgrounds);
+
+            MI.setupButtonBackgrounds();
+
+            if (data.Backgrounds[i].Cost <= 0)
             {
-                if (img.name == "previewImg")
-                {
-                    img.sprite = data.Backgrounds[i];
-                }
-                else if (img.name == "selector")
-                {
-                    MI.Selector = img;
-                }
+                SaveManager.savaData.UnlockedBackgrounds[i] = true;
             }
 
-            MI.SelectButton = gameObj.GetComponentInChildren<Button>();
-            MI.setupButtonCharacter();
+            if (SaveManager.savaData.UnlockedBackgrounds[i])
+            {
+                MI.HasBeenUnlocked();
+            }
 
             Backgrounds.Add(MI);
-
-            gameObj.transform.SetParent(BackgroundContent, false);
         }
 
     }
 
     public void ClickCharacter(int Index)
     {
+        if (!SaveManager.savaData.UnlockedCharacters[Index])
+        {
+            if (SaveManager.savaData.StorePoints >= data.Characters[Index].Cost)
+            {
+                SaveManager.savaData.UnlockedCharacters[Index] = true;
+                SaveManager.savaData.StorePoints -= data.Characters[Index].Cost;
+                UpdateStorePointText();
+                Characters[Index].HasBeenUnlocked();
+            }
+            else
+            {
+                return;
+            }
+        }
+
         SaveManager.savaData.SelectedCharacter = Index;
         SaveManager.Save();
 
         UpdateDisplayList(Characters, Index);
     }
 
-    
-
     public void ClickBackground(int Index)
     {
+        if (!SaveManager.savaData.UnlockedBackgrounds[Index])
+        {
+            if(SaveManager.savaData.StorePoints >= data.Backgrounds[Index].Cost)
+            {
+                SaveManager.savaData.UnlockedBackgrounds[Index] = true;
+                SaveManager.savaData.StorePoints -= data.Backgrounds[Index].Cost;
+                UpdateStorePointText();
+                Backgrounds[Index].HasBeenUnlocked();
+            }
+            else
+            {
+                return;
+            }
+        }
+
         SaveManager.savaData.SelectedBackground = Index;
         SaveManager.Save();
 
@@ -178,24 +238,74 @@ public class ShopMenu : MonoBehaviour
         {
             if (MI.indexPosition == SelectedItemIndex)
             {
-                MI.Selector.color = Color.white;
+                MI.SelectorImage.color = Color.white;
             }
             else
             {
-                MI.Selector.color = Color.gray;
+                MI.SelectorImage.color = Color.gray;
             }
         }
     }
+
+    void UpdateStorePointText()
+    {
+        StorePointsIndicator.text = "You have " + SaveManager.savaData.StorePoints + " left to spent";
+    }
+
     class MenuItem
     {
         public Button SelectButton;
-        public Image Selector;
+        public Image SelectorImage;
+        public GameObject LockObj;
 
         public int indexPosition;
 
-        public MenuItem (int indexPosition)
+        /// <summary>
+        /// Init for Menu Item
+        /// </summary>
+        /// <param name="indexPosition">the position in the array</param>
+        /// <param name="gameObj">game object that contains all visual elements</param>
+        /// <param name="data">Array that contains all data to build up a menu Item</param>
+        public MenuItem (int indexPosition, GameObject gameObj, ShopMenuData.StoreObject[] data)
         {
             this.indexPosition = indexPosition;
+
+            //Setting up images
+            Image[] images = gameObj.GetComponentsInChildren<Image>();
+            foreach (Image img in images)
+            {
+                switch (img.name)
+                {
+                    case "previewImg":
+                        img.sprite = data[indexPosition].HighRes;
+                        break;
+
+                    case "selector":
+                        this.SelectorImage = img;
+                        break;
+
+                    case "lockObj":
+                        this.LockObj = img.gameObject;
+                        break;
+                }
+            }
+
+            //setting up texts
+            Text[] textObjs = gameObj.GetComponentsInChildren<Text>();
+            foreach (Text tex in textObjs)
+            {
+                switch (tex.name)
+                {
+                    case "cost":
+                        tex.text = "Requires " + data[indexPosition].Cost + " points to buy";
+                        break;
+
+                    case "name":
+                        break;
+                }
+            }
+
+            this.SelectButton = gameObj.GetComponentInChildren<Button>();
         }
 
         public void setupButtonCharacter()
@@ -214,6 +324,11 @@ public class ShopMenu : MonoBehaviour
                 ShopMenu m = FindObjectOfType<ShopMenu>();
                 m.ClickBackground(indexPosition);
             });
+        }
+
+        public void HasBeenUnlocked()
+        {
+            LockObj.gameObject.SetActive(false);
         }
     }
 }

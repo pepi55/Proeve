@@ -79,7 +79,6 @@ public static class SaveManager
     {
         for (int i = 0; i < savaData.highScores.Length; i++)
         {
-            Debug.Log((Score > savaData.highScores[i].score) + " i : " + i);
             if (Score > savaData.highScores[i].score)
                 return true;
         }

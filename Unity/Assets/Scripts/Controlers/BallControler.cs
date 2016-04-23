@@ -44,7 +44,7 @@ public class BallControler : MonoBehaviour
             data = gameobj.GetComponent<ShopMenuData>();
         }
 
-        GetComponent<SpriteRenderer>().sprite = data.Characters[SaveManager.savaData.SelectedCharacter];
+        GetComponent<SpriteRenderer>().sprite = data.Characters[SaveManager.savaData.SelectedCharacter].LowRes;
     }
 
     public void OnDestroy()

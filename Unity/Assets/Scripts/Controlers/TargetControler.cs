@@ -97,7 +97,6 @@ public class TargetControler : MonoBehaviour
     {
         if(enabled)
         {
-            Debug.Log("toggled Frozen");
             frozen = false;
         }
     }
