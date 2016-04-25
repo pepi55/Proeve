@@ -4,6 +4,7 @@ using System.Collections;
 public class InputManager : MonoBehaviour
 {
     public static event ClickDelegate onClick;
+    public static event VoidDelegate onEscapePress;
 
     void Awake()
     {
@@ -49,5 +50,16 @@ public class InputManager : MonoBehaviour
     {
         if (onClick != null)
             onClick(Position);
+    }
+
+    void KeyBoardChecks()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (onEscapePress != null)
+            {
+                onEscapePress();
+            }
+        }
     }
 }

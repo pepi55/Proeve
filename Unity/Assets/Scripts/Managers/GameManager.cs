@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
     //needed a private instance for score. 
     private static GameManager instance;
 
@@ -47,6 +48,12 @@ public class GameManager : MonoBehaviour {
         Events.GlobalEvents.AddEventListener<Events.IPlayerHitBottom>(BallHitGround);
     }
 
+    public void OnDestroy()
+    {
+        Events.GlobalEvents.RemoveEventListener<Events.IScore>(AddPoint);
+        Events.GlobalEvents.RemoveEventListener<Events.IPlayerHitBottom>(BallHitGround);        
+    }
+
     void Start()
     {
         submitMenu.Close();
@@ -71,6 +78,9 @@ public class GameManager : MonoBehaviour {
     /// <param name="obj">Object Argument does not contain anyvalue only used as identifier</param>
     private void BallHitGround(Events.IPlayerHitBottom obj)
     {
+        SaveManager.savaData.StorePoints += score;
+        SaveManager.Save();
+
         if (SaveManager.CheckNewScore(score) && score != 0)
         {
             OpenScoreSubmitScreen();
@@ -82,16 +92,22 @@ public class GameManager : MonoBehaviour {
         {
             ResetGame();
             gamePaused = false;
-            
-        }  
+
+        }
     }
 
+    /// <summary>
+    /// Opens Score Submit Screen
+    /// </summary>
     private void OpenScoreSubmitScreen()
     {
         submitMenu.Open();
         submitMenu.onClose += ResetGame;
     }
 
+    /// <summary>
+    /// Reset Game state to how it started
+    /// </summary>
     private void ResetGame()
     {
         score = 0;
@@ -113,12 +129,21 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     public void ContinueGame()
     {
-        if(waitForSubmit)
+        if (waitForSubmit)
         {
             return;
         }
-        Events.GlobalEvents.Invoke(new Events.IPause(false));
+        //needed a short delay between pressing the unpause button and acctualy unpausing the game.
+        //Cause the ball would be moved by the inputclick will pressing pause button;
+        Invoke("continueEventFunc", 0.1f);
         gamePaused = false;
+    }
+    /// <summary>
+    /// Calls the unpause event
+    /// </summary>
+    void continueEventFunc()
+    {
+        Events.GlobalEvents.Invoke(new Events.IPause(false));
     }
 
     /// <summary>
