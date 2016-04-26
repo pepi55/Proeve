@@ -35,6 +35,7 @@ public class ShopMenu : BaseMenu
         GameObject temp = Instantiate(Resources.Load("ShopData")) as GameObject;
         data = temp.GetComponent<ShopMenuData>();
 
+        //check if unlock data exists
         if(SaveManager.savaData.UnlockedCharacters == null)
         {
             SaveManager.savaData.UnlockedCharacters = new bool[0];
@@ -45,6 +46,7 @@ public class ShopMenu : BaseMenu
             SaveManager.savaData.UnlockedBackgrounds = new bool[0];
         }
 
+        //check if lenght is the same as the number of characters
         if(SaveManager.savaData.UnlockedCharacters.Length != data.Characters.Length)
         {
             SaveManager.savaData.UnlockedCharacters = (bool[])Util.Common.ResizeArray(SaveManager.savaData.UnlockedCharacters, new int[] { data.Characters.Length });
@@ -79,6 +81,9 @@ public class ShopMenu : BaseMenu
         }
     }
 
+    /// <summary>
+    /// Opens character selection menu
+    /// </summary>
     public void OpenCharacter()
     {
         CharacterGameObj.SetActive(true);
@@ -87,6 +92,9 @@ public class ShopMenu : BaseMenu
         BackgroundButton.interactable = true;
     }
 
+    /// <summary>
+    /// Opens background selection menu
+    /// </summary>
     public void OpenBackgrounds()
     {
         CharacterGameObj.SetActive(false);
@@ -95,6 +103,10 @@ public class ShopMenu : BaseMenu
         BackgroundButton.interactable = false;
     }
 
+    /// <summary>
+    /// Init for character menu. 
+    /// This funtion creates the buttons that can be pressed to select a character
+    /// </summary>
     void InitCharacters()
     {
 
@@ -116,16 +128,19 @@ public class ShopMenu : BaseMenu
 
             MI.setupButtonCharacter();
 
+            //auto unlock character if cost is zero or smaller
             if(data.Characters[i].Cost <= 0)
             {
                 SaveManager.savaData.UnlockedCharacters[i] = true;
             }
 
+            //check if character has been unlocked and if it is then the lock image will be disabled
             if(SaveManager.savaData.UnlockedCharacters[i])
             {
                 MI.HasBeenUnlocked();
             }
 
+            //add character to list that contains all the display classes for the character selection screen
             Characters.Add(MI);
         }       
     }
@@ -150,21 +165,29 @@ public class ShopMenu : BaseMenu
 
             MI.setupButtonBackgrounds();
 
+            //auto unlock if background cost zero or less
             if (data.Backgrounds[i].Cost <= 0)
             {
                 SaveManager.savaData.UnlockedBackgrounds[i] = true;
             }
 
+            //check if background is unlocked if it is then run the hasbeenUnlock funtion
             if (SaveManager.savaData.UnlockedBackgrounds[i])
             {
                 MI.HasBeenUnlocked();
             }
 
+            //add background object to list that contains the value classes of all background selection buttons
             Backgrounds.Add(MI);
         }
 
     }
 
+    /// <summary>
+    /// Handels clicks on a character and checks if it has been unlocked and if it is then it will select that character
+    /// Else 
+    /// </summary>
+    /// <param name="Index">Index of the item that clicked</param>
     public void ClickCharacter(int Index)
     {
         if (!SaveManager.savaData.UnlockedCharacters[Index])
@@ -188,6 +211,11 @@ public class ShopMenu : BaseMenu
         UpdateDisplayList(Characters, Index);
     }
 
+    /// <summary>
+    /// Handels Clicks for the Backgrounds.
+    /// Also checks if a background as been unlocked
+    /// </summary>
+    /// <param name="Index">Index of the item that was clicked on</param>
     public void ClickBackground(int Index)
     {
         if (!SaveManager.savaData.UnlockedBackgrounds[Index])
@@ -210,7 +238,12 @@ public class ShopMenu : BaseMenu
 
         UpdateDisplayList(Backgrounds, Index);
     }
-
+    
+    /// <summary>
+    /// Updates the display list, it changes the visuale of the selected object. So the user knows what they selected
+    /// </summary>
+    /// <param name="list">The list that contains the selected item</param>
+    /// <param name="SelectedItemIndex">Location of the selected item</param>
     void UpdateDisplayList(List<MenuItem> list, int SelectedItemIndex)
     {
         if (list.Count == 0)
@@ -228,6 +261,9 @@ public class ShopMenu : BaseMenu
         }
     }
 
+    /// <summary>
+    /// Updates text field that contains how much points you have
+    /// </summary>
     void UpdateStorePointText()
     {
         StorePointsIndicator.text = "You have " + SaveManager.savaData.StorePoints + " left to spent";
@@ -282,6 +318,7 @@ public class ShopMenu : BaseMenu
                         break;
 
                     case "name":
+                        //TODO implement name into the game object
                         break;
                 }
             }
@@ -289,15 +326,22 @@ public class ShopMenu : BaseMenu
             this.SelectButton = gameObj.GetComponentInChildren<Button>();
         }
 
+        /// <summary>
+        /// Sets the button up as a Character selection button
+        /// </summary>
         public void setupButtonCharacter()
         {
             SelectButton.onClick.AddListener(() =>
             {
+                //Did it like this because is was getting null pointers if i did it on any otherway
                 ShopMenu m = FindObjectOfType<ShopMenu>();
                 m.ClickCharacter(indexPosition);
             });
         }
 
+        /// <summary>
+        /// Sets the button up as a Background selection button
+        /// </summary>
         public void setupButtonBackgrounds()
         {
             SelectButton.onClick.AddListener(() =>
@@ -307,6 +351,10 @@ public class ShopMenu : BaseMenu
             });
         }
 
+        /// <summary>
+        /// Called when the background or character has been unlocked
+        /// This only changes the visual look of the button
+        /// </summary>
         public void HasBeenUnlocked()
         {
             LockObj.gameObject.SetActive(false);
