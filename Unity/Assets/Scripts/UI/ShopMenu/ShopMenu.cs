@@ -3,11 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ShopMenu : MonoBehaviour
+public class ShopMenu : BaseMenu
 {
-
-    public VoidDelegate onClose;
-
     ShopMenuData data;
 
     List<MenuItem> Characters;
@@ -65,11 +62,11 @@ public class ShopMenu : MonoBehaviour
         UpdateDisplayList(Backgrounds, SaveManager.savaData.SelectedBackground);
     }
 
-    public void Open()
+    public override void Open()
     {
-        UpdateStorePointText();
+        base.Open();
 
-        gameObject.SetActive(true);
+        UpdateStorePointText();
         OpenCharacter();
         if (data.Characters.Length > 0)
         {
@@ -79,22 +76,6 @@ public class ShopMenu : MonoBehaviour
         if (data.Backgrounds.Length > 0)
         {
             BackgroundGameObj.GetComponentInChildren<ScrollRect>().horizontalNormalizedPosition = (float)SaveManager.savaData.SelectedBackground / data.Backgrounds.Length;
-        }
-    }
-
-    public void Close()
-    {
-        if (!gameObject.activeSelf)
-        {
-            return;
-        }
-
-        gameObject.SetActive(false);
-
-        if (onClose != null)
-        {
-            onClose();
-            onClose = null;
         }
     }
 
