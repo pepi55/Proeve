@@ -1,0 +1,12 @@
+{ "characters": [
+	{ "image":"image.0.png", "sound":"click2.wav", "characterPrice":"0" },
+	{ "image":"image.1.png", "sound":"click2.wav", "characterPrice":"20" },
+	{ "image":"image.2.png", "sound":"que_cut.mp3", "characterPrice":"30" },
+	{ "image":"image.3.png", "sound":"click2.wav", "characterPrice":"40" },
+	{ "image":"image.4.png", "sound":"click2.wav", "characterPrice":"50" },
+	{ "image":"image.5.png", "sound":"click2.wav", "characterPrice":"60" },
+	{ "image":"image.6.png", "sound":"click2.wav", "characterPrice":"70" },
+	{ "image":"image.7.png", "sound":"click2.wav", "characterPrice":"80" },
+	{ "image":"image.8.png", "sound":"click2.wav", "characterPrice":"90" },
+	{ "image":"image.9.png", "sound":"click2.wav", "characterPrice":"100" }
+]}
