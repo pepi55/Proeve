@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HighScoreMenu : MonoBehaviour
+public class HighScoreMenu : BaseMenu
 {
-
-    public VoidDelegate onClose;
-
     [SerializeField]
     GameObject HighScoreObjectTemplate = null;
     [SerializeField]
@@ -32,24 +29,5 @@ public class HighScoreMenu : MonoBehaviour
         HighScoreObjectTemplate.SetActive(false);
     }
 
-    public void Open()
-    {
-        gameObject.SetActive(true);
-    }
 
-    public void Close()
-    {
-
-        if (!gameObject.activeSelf)
-        {
-            return;
-        }
-
-        gameObject.SetActive(false);
-        if (onClose != null)
-        {
-            onClose();
-            onClose = null;
-        }
-    }
 }
