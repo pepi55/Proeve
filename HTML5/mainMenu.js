@@ -36,6 +36,12 @@ var mainMenuState = {
 		}, this);
 		highscoreButton.anchor.setTo(0.5, 0.5);
 
+		var resetLocalStorageButton;
+		resetLocalStorageButton = game.add.button(game.world.centerX, game.world.centerY + 500, 'button', function() {
+			localStorage.clear();
+		}, this);
+		resetLocalStorageButton.anchor.setTo(0.5, 0.5);
+
 		var modeButton;
 		modeButton = game.add.button(20, 20, 'invisibleButton', function() {
 		    hardMode = !hardMode;
