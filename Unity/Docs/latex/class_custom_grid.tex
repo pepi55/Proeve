@@ -14,49 +14,122 @@ Inheritance diagram for Custom\+Grid\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void {\bfseries Force\+Update} ()\hypertarget{class_custom_grid_a1b2b4541146de94aaead99bca2f78d7f}{}\label{class_custom_grid_a1b2b4541146de94aaead99bca2f78d7f}
-
-\end{DoxyCompactItemize}
+void \hyperlink{class_custom_grid_a1b2b4541146de94aaead99bca2f78d7f}{Force\+Update} ()
+\begin{DoxyCompactList}\small\item\em Used for force call a update \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-Vector2 {\bfseries Obj\+Size}\hypertarget{class_custom_grid_a0cf591b7ae82c985d1983171d9391712}{}\label{class_custom_grid_a0cf591b7ae82c985d1983171d9391712}
-
-\item 
-Vector2 {\bfseries padding}\hypertarget{class_custom_grid_aa1f53f156756dfe4d9d2795fe2c52754}{}\label{class_custom_grid_aa1f53f156756dfe4d9d2795fe2c52754}
-
-\item 
-Vector2 {\bfseries max\+Spacing}\hypertarget{class_custom_grid_a068ef9a666cd31142751320e2a653025}{}\label{class_custom_grid_a068ef9a666cd31142751320e2a653025}
-
-\item 
-Vector2 {\bfseries Anchor\+Point} = Vector2.\+zero\hypertarget{class_custom_grid_af7596d0b65aa5ea01ae27898c523b1b5}{}\label{class_custom_grid_af7596d0b65aa5ea01ae27898c523b1b5}
-
-\item 
-Vector2 {\bfseries Current\+Spacing} = Vector2.\+zero\hypertarget{class_custom_grid_ab9594c84442d7bd9f8cad31cd2d75c84}{}\label{class_custom_grid_ab9594c84442d7bd9f8cad31cd2d75c84}
-
-\item 
-int {\bfseries max\+Rows} = 2\hypertarget{class_custom_grid_a74432277987a0e6cc02d0db891ec77ba}{}\label{class_custom_grid_a74432277987a0e6cc02d0db891ec77ba}
-
-\item 
-int {\bfseries min\+Needed\+For\+First\+Row} = 2\hypertarget{class_custom_grid_a985fc1fc02418d3286ffbd41c98417a5}{}\label{class_custom_grid_a985fc1fc02418d3286ffbd41c98417a5}
-
-\item 
-float {\bfseries yoffset}\hypertarget{class_custom_grid_aa07b1f547bdbef9d050b5f57d96f744a}{}\label{class_custom_grid_aa07b1f547bdbef9d050b5f57d96f744a}
-
-\item 
-int {\bfseries local\+Index\+Off\+Set}\hypertarget{class_custom_grid_a3f5ed027b4c6fab8a01de11b7b780876}{}\label{class_custom_grid_a3f5ed027b4c6fab8a01de11b7b780876}
-
-\item 
-bool {\bfseries continues\+Updates} = false\hypertarget{class_custom_grid_a9bddd45525d796a4db2edcbe8f669773}{}\label{class_custom_grid_a9bddd45525d796a4db2edcbe8f669773}
-
-\item 
-bool {\bfseries use\+Animations} = false\hypertarget{class_custom_grid_ae7281905d1114c2582f02d0d1badf53f}{}\label{class_custom_grid_ae7281905d1114c2582f02d0d1badf53f}
-
-\end{DoxyCompactItemize}
+Vector2 \hyperlink{class_custom_grid_a0cf591b7ae82c985d1983171d9391712}{Obj\+Size}
+\begin{DoxyCompactList}\small\item\em Size that each object will have \end{DoxyCompactList}\item 
+Vector2 \hyperlink{class_custom_grid_aa1f53f156756dfe4d9d2795fe2c52754}{padding}
+\begin{DoxyCompactList}\small\item\em forced space between each object \end{DoxyCompactList}\item 
+Vector2 \hyperlink{class_custom_grid_a068ef9a666cd31142751320e2a653025}{max\+Spacing}
+\begin{DoxyCompactList}\small\item\em the maxium space between two objects \end{DoxyCompactList}\item 
+Vector2 \hyperlink{class_custom_grid_af7596d0b65aa5ea01ae27898c523b1b5}{Anchor\+Point} = Vector2.\+zero
+\begin{DoxyCompactList}\small\item\em The anchor point or from wich the object wil be centered \end{DoxyCompactList}\item 
+Vector2 \hyperlink{class_custom_grid_ab9594c84442d7bd9f8cad31cd2d75c84}{Current\+Spacing} = Vector2.\+zero
+\begin{DoxyCompactList}\small\item\em The current space between the objects \end{DoxyCompactList}\item 
+int \hyperlink{class_custom_grid_a74432277987a0e6cc02d0db891ec77ba}{max\+Rows} = 2
+\begin{DoxyCompactList}\small\item\em The maxium number of rows \end{DoxyCompactList}\item 
+int \hyperlink{class_custom_grid_a985fc1fc02418d3286ffbd41c98417a5}{min\+Needed\+For\+First\+Row} = 2
+\begin{DoxyCompactList}\small\item\em The minum objecs on a single row needed before it creates a second row \end{DoxyCompactList}\item 
+float \hyperlink{class_custom_grid_aa07b1f547bdbef9d050b5f57d96f744a}{yoffset}
+\begin{DoxyCompactList}\small\item\em The y offset used for when the objects are not well centered them selfs \end{DoxyCompactList}\item 
+bool \hyperlink{class_custom_grid_a9bddd45525d796a4db2edcbe8f669773}{continues\+Updates} = false
+\begin{DoxyCompactList}\small\item\em Does the grid update continuesly. usefull when debugging the grid or seeing if everything works correctly. Recommened to have it turned of when you are building the game because it saves preformance \end{DoxyCompactList}\item 
+bool \hyperlink{class_custom_grid_ae7281905d1114c2582f02d0d1badf53f}{use\+Animations} = false
+\begin{DoxyCompactList}\small\item\em Enable the animations so that the elements move towards the new points instead of teleporting \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 A grid sorting method that has the abilty create simple soothend animations. It also only does things when it detects changes making it quite light; 
+
+
+
+\subsection{Member Function Documentation}
+\index{Custom\+Grid@{Custom\+Grid}!Force\+Update@{Force\+Update}}
+\index{Force\+Update@{Force\+Update}!Custom\+Grid@{Custom\+Grid}}
+\subsubsection[{\texorpdfstring{Force\+Update()}{ForceUpdate()}}]{\setlength{\rightskip}{0pt plus 5cm}void Custom\+Grid.\+Force\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_custom_grid_a1b2b4541146de94aaead99bca2f78d7f}{}\label{class_custom_grid_a1b2b4541146de94aaead99bca2f78d7f}
+
+
+Used for force call a update 
+
+
+
+\subsection{Member Data Documentation}
+\index{Custom\+Grid@{Custom\+Grid}!Anchor\+Point@{Anchor\+Point}}
+\index{Anchor\+Point@{Anchor\+Point}!Custom\+Grid@{Custom\+Grid}}
+\subsubsection[{\texorpdfstring{Anchor\+Point}{AnchorPoint}}]{\setlength{\rightskip}{0pt plus 5cm}Vector2 Custom\+Grid.\+Anchor\+Point = Vector2.\+zero}\hypertarget{class_custom_grid_af7596d0b65aa5ea01ae27898c523b1b5}{}\label{class_custom_grid_af7596d0b65aa5ea01ae27898c523b1b5}
+
+
+The anchor point or from wich the object wil be centered 
+
+\index{Custom\+Grid@{Custom\+Grid}!continues\+Updates@{continues\+Updates}}
+\index{continues\+Updates@{continues\+Updates}!Custom\+Grid@{Custom\+Grid}}
+\subsubsection[{\texorpdfstring{continues\+Updates}{continuesUpdates}}]{\setlength{\rightskip}{0pt plus 5cm}bool Custom\+Grid.\+continues\+Updates = false}\hypertarget{class_custom_grid_a9bddd45525d796a4db2edcbe8f669773}{}\label{class_custom_grid_a9bddd45525d796a4db2edcbe8f669773}
+
+
+Does the grid update continuesly. usefull when debugging the grid or seeing if everything works correctly. Recommened to have it turned of when you are building the game because it saves preformance 
+
+\index{Custom\+Grid@{Custom\+Grid}!Current\+Spacing@{Current\+Spacing}}
+\index{Current\+Spacing@{Current\+Spacing}!Custom\+Grid@{Custom\+Grid}}
+\subsubsection[{\texorpdfstring{Current\+Spacing}{CurrentSpacing}}]{\setlength{\rightskip}{0pt plus 5cm}Vector2 Custom\+Grid.\+Current\+Spacing = Vector2.\+zero}\hypertarget{class_custom_grid_ab9594c84442d7bd9f8cad31cd2d75c84}{}\label{class_custom_grid_ab9594c84442d7bd9f8cad31cd2d75c84}
+
+
+The current space between the objects 
+
+\index{Custom\+Grid@{Custom\+Grid}!max\+Rows@{max\+Rows}}
+\index{max\+Rows@{max\+Rows}!Custom\+Grid@{Custom\+Grid}}
+\subsubsection[{\texorpdfstring{max\+Rows}{maxRows}}]{\setlength{\rightskip}{0pt plus 5cm}int Custom\+Grid.\+max\+Rows = 2}\hypertarget{class_custom_grid_a74432277987a0e6cc02d0db891ec77ba}{}\label{class_custom_grid_a74432277987a0e6cc02d0db891ec77ba}
+
+
+The maxium number of rows 
+
+\index{Custom\+Grid@{Custom\+Grid}!max\+Spacing@{max\+Spacing}}
+\index{max\+Spacing@{max\+Spacing}!Custom\+Grid@{Custom\+Grid}}
+\subsubsection[{\texorpdfstring{max\+Spacing}{maxSpacing}}]{\setlength{\rightskip}{0pt plus 5cm}Vector2 Custom\+Grid.\+max\+Spacing}\hypertarget{class_custom_grid_a068ef9a666cd31142751320e2a653025}{}\label{class_custom_grid_a068ef9a666cd31142751320e2a653025}
+
+
+the maxium space between two objects 
+
+\index{Custom\+Grid@{Custom\+Grid}!min\+Needed\+For\+First\+Row@{min\+Needed\+For\+First\+Row}}
+\index{min\+Needed\+For\+First\+Row@{min\+Needed\+For\+First\+Row}!Custom\+Grid@{Custom\+Grid}}
+\subsubsection[{\texorpdfstring{min\+Needed\+For\+First\+Row}{minNeededForFirstRow}}]{\setlength{\rightskip}{0pt plus 5cm}int Custom\+Grid.\+min\+Needed\+For\+First\+Row = 2}\hypertarget{class_custom_grid_a985fc1fc02418d3286ffbd41c98417a5}{}\label{class_custom_grid_a985fc1fc02418d3286ffbd41c98417a5}
+
+
+The minum objecs on a single row needed before it creates a second row 
+
+\index{Custom\+Grid@{Custom\+Grid}!Obj\+Size@{Obj\+Size}}
+\index{Obj\+Size@{Obj\+Size}!Custom\+Grid@{Custom\+Grid}}
+\subsubsection[{\texorpdfstring{Obj\+Size}{ObjSize}}]{\setlength{\rightskip}{0pt plus 5cm}Vector2 Custom\+Grid.\+Obj\+Size}\hypertarget{class_custom_grid_a0cf591b7ae82c985d1983171d9391712}{}\label{class_custom_grid_a0cf591b7ae82c985d1983171d9391712}
+
+
+Size that each object will have 
+
+\index{Custom\+Grid@{Custom\+Grid}!padding@{padding}}
+\index{padding@{padding}!Custom\+Grid@{Custom\+Grid}}
+\subsubsection[{\texorpdfstring{padding}{padding}}]{\setlength{\rightskip}{0pt plus 5cm}Vector2 Custom\+Grid.\+padding}\hypertarget{class_custom_grid_aa1f53f156756dfe4d9d2795fe2c52754}{}\label{class_custom_grid_aa1f53f156756dfe4d9d2795fe2c52754}
+
+
+forced space between each object 
+
+\index{Custom\+Grid@{Custom\+Grid}!use\+Animations@{use\+Animations}}
+\index{use\+Animations@{use\+Animations}!Custom\+Grid@{Custom\+Grid}}
+\subsubsection[{\texorpdfstring{use\+Animations}{useAnimations}}]{\setlength{\rightskip}{0pt plus 5cm}bool Custom\+Grid.\+use\+Animations = false}\hypertarget{class_custom_grid_ae7281905d1114c2582f02d0d1badf53f}{}\label{class_custom_grid_ae7281905d1114c2582f02d0d1badf53f}
+
+
+Enable the animations so that the elements move towards the new points instead of teleporting 
+
+\index{Custom\+Grid@{Custom\+Grid}!yoffset@{yoffset}}
+\index{yoffset@{yoffset}!Custom\+Grid@{Custom\+Grid}}
+\subsubsection[{\texorpdfstring{yoffset}{yoffset}}]{\setlength{\rightskip}{0pt plus 5cm}float Custom\+Grid.\+yoffset}\hypertarget{class_custom_grid_aa07b1f547bdbef9d050b5f57d96f744a}{}\label{class_custom_grid_aa07b1f547bdbef9d050b5f57d96f744a}
+
+
+The y offset used for when the objects are not well centered them selfs 
 
 
 

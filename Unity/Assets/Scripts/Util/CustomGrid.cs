@@ -8,25 +8,68 @@ using System.Collections.Generic;
 /// </summary>
 public class CustomGrid : MonoBehaviour
 {
-
+    /// <summary>
+    /// Size that each object will have
+    /// </summary>
     public Vector2 ObjSize;
+    /// <summary>
+    /// forced space between each object
+    /// </summary>
     public Vector2 padding;
+    /// <summary>
+    /// the maxium space between two objects
+    /// </summary>
     public Vector2 maxSpacing;
+    /// <summary>
+    /// The anchor point or from wich the object wil be centered
+    /// </summary>
     public Vector2 AnchorPoint = Vector2.zero;
+    /// <summary>
+    /// The current space between the objects
+    /// </summary>
     public Vector2 CurrentSpacing = Vector2.zero;
-    [Range(1, 50)] //can ve changed to anynumber above 0
+    /// <summary>
+    /// The maxium number of rows
+    /// </summary>
+    [Range(1, 500)] //can ve changed to anynumber above 0
     public int maxRows = 2;
-    [Range(1, 50)]
+    /// <summary>
+    /// The minum objecs on a single row needed before it creates a second row
+    /// </summary>
+    [Range(1, 500)]
     public int minNeededForFirstRow = 2;
+    /// <summary>
+    /// The y offset used for when the objects are not well centered them selfs
+    /// </summary>
     [Range(0, 1f)]
     public float yoffset;
-    public int localIndexOffSet;
+    /// <summary>
+    /// Does the grid update continuesly. usefull when debugging the grid or seeing if everything works correctly.
+    /// Recommened to have it turned of when you are building the game because it saves preformance
+    /// </summary>
     public bool continuesUpdates = false;
+    /// <summary>
+    /// Enable the animations so that the elements move towards the new points instead of teleporting
+    /// </summary>
     public bool useAnimations = false;
+
+    /// <summary>
+    /// used for the update tigger. When the number of childeren changes
+    /// </summary>
     int childCountLast = 0;
 
+    /// <summary>
+    /// Are they at the objects at there new positions
+    /// </summary>
     bool atNewPos = false;
+    /// <summary>
+    /// Used for the animations so they run smoothly
+    /// </summary>
     float StartTime;
+
+    /// <summary>
+    /// List that contains positional data for the objects
+    /// </summary>
     List<Vector2> newPos = new List<Vector2>(), startPos = new List<Vector2>();
 
     RectTransform t;
@@ -45,6 +88,9 @@ public class CustomGrid : MonoBehaviour
         atNewPos = false;
     }
 
+    /// <summary>
+    /// Used for force call a update
+    /// </summary>
     public void ForceUpdate()
     {
         OnEnable();
@@ -82,6 +128,9 @@ public class CustomGrid : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Applies size data to all the objects
+    /// </summary>
     void setChildSize()
     {
         RectTransform child;
@@ -95,6 +144,10 @@ public class CustomGrid : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// calculates the postion the object will need to go to. 
+    /// It also figures out the spacing that is allowed between the objects
+    /// </summary>
     void setChildPosition()
     {
         StartTime = Time.time;
@@ -216,6 +269,9 @@ public class CustomGrid : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Moves the objects around and used in the animation
+    /// </summary>
     void MoveObjectsToPos()
     {
         RectTransform child;
@@ -227,12 +283,19 @@ public class CustomGrid : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// rounds the position of the childeren so it seems a bit nicer
+    /// </summary>
+    /// <param name="t"></param>
     void RoundPos(RectTransform t)
     {
         Vector2 p = t.anchoredPosition;
         t.anchoredPosition = new Vector2(Mathf.Round(p.x), Mathf.Round(p.y));
     }
 
+    /// <summary>
+    /// Teleport them to there fingal position;
+    /// </summary>
     void SnapToPos()
     {
         RectTransform child;

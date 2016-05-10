@@ -1,0 +1,210 @@
+\hypertarget{class_events_1_1_event_dispatcher}{}\section{Events.\+Event\+Dispatcher Class Reference}
+\label{class_events_1_1_event_dispatcher}\index{Events.\+Event\+Dispatcher@{Events.\+Event\+Dispatcher}}
+
+
+Event dispatcher class.  
+
+
+Inheritance diagram for Events.\+Event\+Dispatcher\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_events_1_1_event_dispatcher}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_events_1_1_event_dispatcher_af8047b3f53861d56c27aa02e358486a2}{Add\+Event\+Listener} (Type type, Action handler)
+\begin{DoxyCompactList}\small\item\em Implementation of \hyperlink{interface_events_1_1_i_event_dispatcher_ac22d58973ca79fdaea1471704dba0e01}{I\+Event\+Dispatcher.\+Add\+Event\+Listener(\+Type, Action)} \end{DoxyCompactList}\item 
+void \hyperlink{class_events_1_1_event_dispatcher_ab90178e5a5bbfd90601347ab8489cf01}{Add\+Event\+Listener$<$ T $>$} (Action$<$ T $>$ handler)
+\begin{DoxyCompactList}\small\item\em Imprementation of \hyperlink{interface_events_1_1_i_event_dispatcher_a4c10e52a26a0c354bcaae21e0a240f93}{I\+Event\+Dispatcher.\+Add\+Event\+Listener$<$\+T$>$(\+Action$<$\+T$>$)} \end{DoxyCompactList}\item 
+void \hyperlink{class_events_1_1_event_dispatcher_a9644ebc4fb5655cda345b586e5749ea0}{Remove\+Event\+Listener} (Type type, Action handler)
+\begin{DoxyCompactList}\small\item\em Implementation of \hyperlink{interface_events_1_1_i_event_dispatcher_ae3209681ebdbcf8289905ff6ccdbd188}{I\+Event\+Dispatcher.\+Remove\+Event\+Listener(\+Type, Action)} \end{DoxyCompactList}\item 
+void \hyperlink{class_events_1_1_event_dispatcher_a88f24cbfab1022517830b3fc42155c15}{Remove\+Event\+Listener$<$ T $>$} (Action$<$ T $>$ handler)
+\begin{DoxyCompactList}\small\item\em Implementation of \hyperlink{interface_events_1_1_i_event_dispatcher_a86e3438c779746108c3f01dff0c43d23}{I\+Event\+Dispatcher.\+Remove\+Event\+Listener$<$\+T$>$(\+Action$<$\+T$>$)} \end{DoxyCompactList}\item 
+void \hyperlink{class_events_1_1_event_dispatcher_add2667245c85f8d781eed8d908450518}{Remove\+All\+Listeners} ()
+\begin{DoxyCompactList}\small\item\em Remove all registered Listeners. \end{DoxyCompactList}\item 
+void \hyperlink{class_events_1_1_event_dispatcher_a4bec3274dceea156c52248cac71e968c}{Invoke} (Type type, object evt)
+\begin{DoxyCompactList}\small\item\em Implementation of \hyperlink{interface_events_1_1_i_event_dispatcher_a3789c396884e0097a4efdd8fb6652214}{I\+Event\+Dispatcher.\+Invoke(\+Type, object)} \end{DoxyCompactList}\item 
+void \hyperlink{class_events_1_1_event_dispatcher_a7c1fe1b9738ea149420d19c1131f2f25}{Invoke$<$ T $>$} (T evt)
+\begin{DoxyCompactList}\small\item\em Implementation of \hyperlink{interface_events_1_1_i_event_dispatcher_ab6e50172a6c4a5ec91977f183278dc91}{I\+Event\+Dispatcher.\+Invoke$<$\+T$>$(\+T)} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Event dispatcher class. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Events\+::\+Event\+Dispatcher@{Events\+::\+Event\+Dispatcher}!Add\+Event\+Listener@{Add\+Event\+Listener}}
+\index{Add\+Event\+Listener@{Add\+Event\+Listener}!Events\+::\+Event\+Dispatcher@{Events\+::\+Event\+Dispatcher}}
+\subsubsection[{\texorpdfstring{Add\+Event\+Listener(\+Type type, Action handler)}{AddEventListener(Type type, Action handler)}}]{\setlength{\rightskip}{0pt plus 5cm}void Events.\+Event\+Dispatcher.\+Add\+Event\+Listener (
+\begin{DoxyParamCaption}
+\item[{Type}]{type, }
+\item[{Action}]{handler}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_events_1_1_event_dispatcher_af8047b3f53861d56c27aa02e358486a2}{}\label{class_events_1_1_event_dispatcher_af8047b3f53861d56c27aa02e358486a2}
+
+
+Implementation of \hyperlink{interface_events_1_1_i_event_dispatcher_ac22d58973ca79fdaea1471704dba0e01}{I\+Event\+Dispatcher.\+Add\+Event\+Listener(\+Type, Action)} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of event to be added.\\
+\hline
+{\em handler} & The handler.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interface_events_1_1_i_event_dispatcher_ac22d58973ca79fdaea1471704dba0e01}{Events.\+I\+Event\+Dispatcher}.
+
+\index{Events\+::\+Event\+Dispatcher@{Events\+::\+Event\+Dispatcher}!Add\+Event\+Listener$<$ T $>$@{Add\+Event\+Listener$<$ T $>$}}
+\index{Add\+Event\+Listener$<$ T $>$@{Add\+Event\+Listener$<$ T $>$}!Events\+::\+Event\+Dispatcher@{Events\+::\+Event\+Dispatcher}}
+\subsubsection[{\texorpdfstring{Add\+Event\+Listener$<$ T $>$(\+Action$<$ T $>$ handler)}{AddEventListener< T >(Action< T > handler)}}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf Events.\+Event\+Dispatcher.\+Add\+Event\+Listener}$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{Action$<$ T $>$}]{handler}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_events_1_1_event_dispatcher_ab90178e5a5bbfd90601347ab8489cf01}{}\label{class_events_1_1_event_dispatcher_ab90178e5a5bbfd90601347ab8489cf01}
+
+
+Imprementation of \hyperlink{interface_events_1_1_i_event_dispatcher_a4c10e52a26a0c354bcaae21e0a240f93}{I\+Event\+Dispatcher.\+Add\+Event\+Listener$<$\+T$>$(\+Action$<$\+T$>$)} 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of event to be added.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & The handler.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interface_events_1_1_i_event_dispatcher_a4c10e52a26a0c354bcaae21e0a240f93}{Events.\+I\+Event\+Dispatcher}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em I\+Event}]\end{description}
+\end{Desc}
+\index{Events\+::\+Event\+Dispatcher@{Events\+::\+Event\+Dispatcher}!Invoke@{Invoke}}
+\index{Invoke@{Invoke}!Events\+::\+Event\+Dispatcher@{Events\+::\+Event\+Dispatcher}}
+\subsubsection[{\texorpdfstring{Invoke(\+Type type, object evt)}{Invoke(Type type, object evt)}}]{\setlength{\rightskip}{0pt plus 5cm}void Events.\+Event\+Dispatcher.\+Invoke (
+\begin{DoxyParamCaption}
+\item[{Type}]{type, }
+\item[{object}]{evt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_events_1_1_event_dispatcher_a4bec3274dceea156c52248cac71e968c}{}\label{class_events_1_1_event_dispatcher_a4bec3274dceea156c52248cac71e968c}
+
+
+Implementation of \hyperlink{interface_events_1_1_i_event_dispatcher_a3789c396884e0097a4efdd8fb6652214}{I\+Event\+Dispatcher.\+Invoke(\+Type, object)} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & Type of event to be evoked.\\
+\hline
+{\em evt} & The event to be evoked.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interface_events_1_1_i_event_dispatcher_a3789c396884e0097a4efdd8fb6652214}{Events.\+I\+Event\+Dispatcher}.
+
+\index{Events\+::\+Event\+Dispatcher@{Events\+::\+Event\+Dispatcher}!Invoke$<$ T $>$@{Invoke$<$ T $>$}}
+\index{Invoke$<$ T $>$@{Invoke$<$ T $>$}!Events\+::\+Event\+Dispatcher@{Events\+::\+Event\+Dispatcher}}
+\subsubsection[{\texorpdfstring{Invoke$<$ T $>$(\+T evt)}{Invoke< T >(T evt)}}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf Events.\+Event\+Dispatcher.\+Invoke}$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{T}]{evt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_events_1_1_event_dispatcher_a7c1fe1b9738ea149420d19c1131f2f25}{}\label{class_events_1_1_event_dispatcher_a7c1fe1b9738ea149420d19c1131f2f25}
+
+
+Implementation of \hyperlink{interface_events_1_1_i_event_dispatcher_ab6e50172a6c4a5ec91977f183278dc91}{I\+Event\+Dispatcher.\+Invoke$<$\+T$>$(\+T)} 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type of event to be evoked.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em evt} & The event to be evoked.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interface_events_1_1_i_event_dispatcher_ab6e50172a6c4a5ec91977f183278dc91}{Events.\+I\+Event\+Dispatcher}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em I\+Event}]\end{description}
+\end{Desc}
+\index{Events\+::\+Event\+Dispatcher@{Events\+::\+Event\+Dispatcher}!Remove\+All\+Listeners@{Remove\+All\+Listeners}}
+\index{Remove\+All\+Listeners@{Remove\+All\+Listeners}!Events\+::\+Event\+Dispatcher@{Events\+::\+Event\+Dispatcher}}
+\subsubsection[{\texorpdfstring{Remove\+All\+Listeners()}{RemoveAllListeners()}}]{\setlength{\rightskip}{0pt plus 5cm}void Events.\+Event\+Dispatcher.\+Remove\+All\+Listeners (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_events_1_1_event_dispatcher_add2667245c85f8d781eed8d908450518}{}\label{class_events_1_1_event_dispatcher_add2667245c85f8d781eed8d908450518}
+
+
+Remove all registered Listeners. 
+
+\index{Events\+::\+Event\+Dispatcher@{Events\+::\+Event\+Dispatcher}!Remove\+Event\+Listener@{Remove\+Event\+Listener}}
+\index{Remove\+Event\+Listener@{Remove\+Event\+Listener}!Events\+::\+Event\+Dispatcher@{Events\+::\+Event\+Dispatcher}}
+\subsubsection[{\texorpdfstring{Remove\+Event\+Listener(\+Type type, Action handler)}{RemoveEventListener(Type type, Action handler)}}]{\setlength{\rightskip}{0pt plus 5cm}void Events.\+Event\+Dispatcher.\+Remove\+Event\+Listener (
+\begin{DoxyParamCaption}
+\item[{Type}]{type, }
+\item[{Action}]{handler}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_events_1_1_event_dispatcher_a9644ebc4fb5655cda345b586e5749ea0}{}\label{class_events_1_1_event_dispatcher_a9644ebc4fb5655cda345b586e5749ea0}
+
+
+Implementation of \hyperlink{interface_events_1_1_i_event_dispatcher_ae3209681ebdbcf8289905ff6ccdbd188}{I\+Event\+Dispatcher.\+Remove\+Event\+Listener(\+Type, Action)} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of event to be removed.\\
+\hline
+{\em handler} & The handler.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interface_events_1_1_i_event_dispatcher_ae3209681ebdbcf8289905ff6ccdbd188}{Events.\+I\+Event\+Dispatcher}.
+
+\index{Events\+::\+Event\+Dispatcher@{Events\+::\+Event\+Dispatcher}!Remove\+Event\+Listener$<$ T $>$@{Remove\+Event\+Listener$<$ T $>$}}
+\index{Remove\+Event\+Listener$<$ T $>$@{Remove\+Event\+Listener$<$ T $>$}!Events\+::\+Event\+Dispatcher@{Events\+::\+Event\+Dispatcher}}
+\subsubsection[{\texorpdfstring{Remove\+Event\+Listener$<$ T $>$(\+Action$<$ T $>$ handler)}{RemoveEventListener< T >(Action< T > handler)}}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf Events.\+Event\+Dispatcher.\+Remove\+Event\+Listener}$<$ T $>$ (
+\begin{DoxyParamCaption}
+\item[{Action$<$ T $>$}]{handler}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_events_1_1_event_dispatcher_a88f24cbfab1022517830b3fc42155c15}{}\label{class_events_1_1_event_dispatcher_a88f24cbfab1022517830b3fc42155c15}
+
+
+Implementation of \hyperlink{interface_events_1_1_i_event_dispatcher_a86e3438c779746108c3f01dff0c43d23}{I\+Event\+Dispatcher.\+Remove\+Event\+Listener$<$\+T$>$(\+Action$<$\+T$>$)} 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of event to be removed.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & The handler.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interface_events_1_1_i_event_dispatcher_a86e3438c779746108c3f01dff0c43d23}{Events.\+I\+Event\+Dispatcher}.
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em I\+Event}]\end{description}
+\end{Desc}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Assets/\+Scripts/\+Util/\+Events/Event\+Dispatcher.\+cs\end{DoxyCompactItemize}

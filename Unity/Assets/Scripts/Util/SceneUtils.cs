@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace Util
 {
+    /// <summary>
+    /// Used in quick prototyping of buttons for the UI sytem
+    /// </summary>
     public class SceneUtils : MonoBehaviour
     {
 

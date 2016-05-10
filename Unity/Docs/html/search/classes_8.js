@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['targetcontroler',['TargetControler',['../class_target_controler.html',1,'']]]
+  ['pausemenu',['PauseMenu',['../class_pause_menu.html',1,'']]]
 ];

@@ -9,6 +9,9 @@ using UnityEngine;
 
 namespace Util
 {
+    /// <summary>
+    /// class that handels serialization and writing to disk
+    /// </summary>
     public static class Serialization
     {
         [DllImport("__Internal")]

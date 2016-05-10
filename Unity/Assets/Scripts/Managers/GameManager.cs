@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     private int score;
 
     [SerializeField]
-    HighScoreSubmitScreen submitMenu = null;
+    Menus.HighScoreSubmitScreen submitMenu = null;
 
     /// <summary>
     /// The Points earned of the player

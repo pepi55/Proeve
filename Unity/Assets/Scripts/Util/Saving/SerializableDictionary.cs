@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Util
 {
+
     [Serializable()]
     public class SerializableDictionary<TKey, TVal> : Dictionary<TKey, TVal>, IXmlSerializable, ISerializable
     {

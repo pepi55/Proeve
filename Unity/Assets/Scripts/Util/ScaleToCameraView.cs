@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// 3d version of Scale to ScreenSize
+/// </summary>
 public class ScaleToCameraView : MonoBehaviour
 {
     [SerializeField]

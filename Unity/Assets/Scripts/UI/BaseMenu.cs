@@ -1,29 +1,42 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-public class BaseMenu : MonoBehaviour {
-
-    public event VoidDelegate onClose;
-
-	public virtual void Open()
+namespace Menus
+{
+    public class BaseMenu : MonoBehaviour
     {
-        gameObject.SetActive(true);
-    }
 
-    public virtual void Close()
-    {
-        if (!gameObject.activeSelf)
+        public event VoidDelegate onClose;
+
+        /// <summary>
+        /// Open menu
+        /// by default it just enables and disables the game object
+        /// </summary>
+        public virtual void Open()
         {
-            return;
+            gameObject.SetActive(true);
         }
 
-        gameObject.SetActive(false);
-
-        if (onClose != null)
+        /// <summary>
+        /// Closes menu
+        /// 
+        /// by default it sends a event when the menu is closed
+        /// the menu is closed by disabling the game object
+        /// </summary>
+        public virtual void Close()
         {
-            onClose();
-            onClose = null;
+            if (!gameObject.activeSelf)
+            {
+                return;
+            }
+
+            gameObject.SetActive(false);
+
+            if (onClose != null)
+            {
+                onClose();
+                onClose = null;
+            }
+
         }
-        
     }
 }

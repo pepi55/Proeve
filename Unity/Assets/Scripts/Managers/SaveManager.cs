@@ -1,8 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Manages save data
+/// </summary>
 public static class SaveManager
 {
+    /// <summary>
+    /// Save data read only the save manager controles the data privately so you can't accidently overwrite it.
+    /// </summary>
     public static SaveData savaData { get { return _saveData; } }
     static SaveData _saveData;
 

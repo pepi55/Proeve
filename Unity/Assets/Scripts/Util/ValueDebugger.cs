@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace Util
 {
+    /// <summary>
+    /// On screen debugger usefull when working with a game build but you want to do some error tracking
+    /// </summary>
     public class ValueDebugger : MonoBehaviour
     {
         static ValueDebugger instance;
@@ -14,11 +17,23 @@ namespace Util
         protected Dictionary<string, object> Values;
         protected Text t;
 
+        /// <summary>
+        /// Value that will be logged. 
+        /// Also create the object that will be rendered onscreen completely by code so it does not need a prefab
+        /// </summary>
+        /// <param name="name">Value's name so you can find it back</param>
+        /// <param name="value">Value of the object</param>
         public static void ValueLog(string name, object value)
         {
             if (instance == null)
             {
+                // if it just lost it's instance
+                instance = FindObjectOfType<ValueDebugger>();
+            }
 
+            if (instance == null)
+            {
+                ///Make object if it does not exist
                 //Canvas 
                 GameObject g = new GameObject();
 
@@ -101,6 +116,10 @@ namespace Util
         }
 
         string ts;
+
+        /// <summary>
+        /// create the string that will be displayed on screen
+        /// </summary>
         void Process()
         {
             ts = "";
@@ -114,10 +133,19 @@ namespace Util
         }
     }
 
+    /// <summary>
+    /// On screen debugger call class
+    /// </summary>
     public static class Debugger
     {
         public static bool DebugEnabled = true;
 
+        /// <summary>
+        /// Value that will be logged. 
+        /// Also create the object that will be rendered onscreen completely by code so it does not need a prefab
+        /// </summary>
+        /// <param name="name">Value's name so you can find it back</param>
+        /// <param name="value">Value of the object</param>
         public static void Log(string name, object value)
         {
             if (DebugEnabled)

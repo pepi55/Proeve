@@ -4,28 +4,86 @@
 \begin{DoxyCompactItemize}
 \item 
 struct \hyperlink{struct_save_data_1_1_score_block}{Score\+Block}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Struct that represents a single score in the highscore list \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_save_data_a2da03a58cf0deb69ccd73c938780df3d}{Save\+Data} ()
+\begin{DoxyCompactList}\small\item\em Used when creating a new blank savedata. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{struct_save_data_1_1_score_block}{Score\+Block}\mbox{[}$\,$\mbox{]} {\bfseries high\+Scores}\hypertarget{class_save_data_ad6b597fae588561b2cab802255210781}{}\label{class_save_data_ad6b597fae588561b2cab802255210781}
+\hyperlink{struct_save_data_1_1_score_block}{Score\+Block}\mbox{[}$\,$\mbox{]} \hyperlink{class_save_data_ad6b597fae588561b2cab802255210781}{high\+Scores}
+\begin{DoxyCompactList}\small\item\em Value that contains all the highscore players submitted should have a size of 10 \end{DoxyCompactList}\item 
+bool\mbox{[}$\,$\mbox{]} \hyperlink{class_save_data_af0386c50f7a6c086d961118aa6f80b24}{Unlocked\+Characters} = new bool\mbox{[}0\mbox{]}
+\begin{DoxyCompactList}\small\item\em Bools that says if a Charater on that index is unlocked yes or no \end{DoxyCompactList}\item 
+bool\mbox{[}$\,$\mbox{]} \hyperlink{class_save_data_a6989ed440d66cee33ae1a8501af3d1be}{Unlocked\+Backgrounds} = new bool\mbox{[}0\mbox{]}
+\begin{DoxyCompactList}\small\item\em Bool that says if a Background on that index is unlocked yes or no \end{DoxyCompactList}\item 
+int \hyperlink{class_save_data_a6f8a789b4a102c7ae5038ff8a8c86088}{Selected\+Character} = 0
+\begin{DoxyCompactList}\small\item\em Current selected character \end{DoxyCompactList}\item 
+int \hyperlink{class_save_data_a96bd1137583a956bca2e7bd26cd11f89}{Store\+Points} = 0
+\begin{DoxyCompactList}\small\item\em The points the player can spent in the the store \end{DoxyCompactList}\item 
+int \hyperlink{class_save_data_afc48c9d7e880061617adfc388800f8bb}{Selected\+Background} = 0
+\begin{DoxyCompactList}\small\item\em That background that is currently selected \end{DoxyCompactList}\end{DoxyCompactItemize}
 
-\item 
-bool\mbox{[}$\,$\mbox{]} {\bfseries Unlocked\+Characters} = new bool\mbox{[}0\mbox{]}\hypertarget{class_save_data_af0386c50f7a6c086d961118aa6f80b24}{}\label{class_save_data_af0386c50f7a6c086d961118aa6f80b24}
 
-\item 
-bool\mbox{[}$\,$\mbox{]} {\bfseries Unlocked\+Backgrounds} = new bool\mbox{[}0\mbox{]}\hypertarget{class_save_data_a6989ed440d66cee33ae1a8501af3d1be}{}\label{class_save_data_a6989ed440d66cee33ae1a8501af3d1be}
+\subsection{Constructor \& Destructor Documentation}
+\index{Save\+Data@{Save\+Data}!Save\+Data@{Save\+Data}}
+\index{Save\+Data@{Save\+Data}!Save\+Data@{Save\+Data}}
+\subsubsection[{\texorpdfstring{Save\+Data()}{SaveData()}}]{\setlength{\rightskip}{0pt plus 5cm}Save\+Data.\+Save\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_save_data_a2da03a58cf0deb69ccd73c938780df3d}{}\label{class_save_data_a2da03a58cf0deb69ccd73c938780df3d}
 
-\item 
-int {\bfseries Selected\+Character} = 0\hypertarget{class_save_data_a6f8a789b4a102c7ae5038ff8a8c86088}{}\label{class_save_data_a6f8a789b4a102c7ae5038ff8a8c86088}
 
-\item 
-int {\bfseries Store\+Points} = 0\hypertarget{class_save_data_a96bd1137583a956bca2e7bd26cd11f89}{}\label{class_save_data_a96bd1137583a956bca2e7bd26cd11f89}
+Used when creating a new blank savedata. 
 
-\item 
-int {\bfseries Selected\+Background} = 0\hypertarget{class_save_data_afc48c9d7e880061617adfc388800f8bb}{}\label{class_save_data_afc48c9d7e880061617adfc388800f8bb}
 
-\end{DoxyCompactItemize}
+
+\subsection{Member Data Documentation}
+\index{Save\+Data@{Save\+Data}!high\+Scores@{high\+Scores}}
+\index{high\+Scores@{high\+Scores}!Save\+Data@{Save\+Data}}
+\subsubsection[{\texorpdfstring{high\+Scores}{highScores}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Score\+Block} \mbox{[}$\,$\mbox{]} Save\+Data.\+high\+Scores}\hypertarget{class_save_data_ad6b597fae588561b2cab802255210781}{}\label{class_save_data_ad6b597fae588561b2cab802255210781}
+
+
+Value that contains all the highscore players submitted should have a size of 10 
+
+\index{Save\+Data@{Save\+Data}!Selected\+Background@{Selected\+Background}}
+\index{Selected\+Background@{Selected\+Background}!Save\+Data@{Save\+Data}}
+\subsubsection[{\texorpdfstring{Selected\+Background}{SelectedBackground}}]{\setlength{\rightskip}{0pt plus 5cm}int Save\+Data.\+Selected\+Background = 0}\hypertarget{class_save_data_afc48c9d7e880061617adfc388800f8bb}{}\label{class_save_data_afc48c9d7e880061617adfc388800f8bb}
+
+
+That background that is currently selected 
+
+\index{Save\+Data@{Save\+Data}!Selected\+Character@{Selected\+Character}}
+\index{Selected\+Character@{Selected\+Character}!Save\+Data@{Save\+Data}}
+\subsubsection[{\texorpdfstring{Selected\+Character}{SelectedCharacter}}]{\setlength{\rightskip}{0pt plus 5cm}int Save\+Data.\+Selected\+Character = 0}\hypertarget{class_save_data_a6f8a789b4a102c7ae5038ff8a8c86088}{}\label{class_save_data_a6f8a789b4a102c7ae5038ff8a8c86088}
+
+
+Current selected character 
+
+\index{Save\+Data@{Save\+Data}!Store\+Points@{Store\+Points}}
+\index{Store\+Points@{Store\+Points}!Save\+Data@{Save\+Data}}
+\subsubsection[{\texorpdfstring{Store\+Points}{StorePoints}}]{\setlength{\rightskip}{0pt plus 5cm}int Save\+Data.\+Store\+Points = 0}\hypertarget{class_save_data_a96bd1137583a956bca2e7bd26cd11f89}{}\label{class_save_data_a96bd1137583a956bca2e7bd26cd11f89}
+
+
+The points the player can spent in the the store 
+
+\index{Save\+Data@{Save\+Data}!Unlocked\+Backgrounds@{Unlocked\+Backgrounds}}
+\index{Unlocked\+Backgrounds@{Unlocked\+Backgrounds}!Save\+Data@{Save\+Data}}
+\subsubsection[{\texorpdfstring{Unlocked\+Backgrounds}{UnlockedBackgrounds}}]{\setlength{\rightskip}{0pt plus 5cm}bool \mbox{[}$\,$\mbox{]} Save\+Data.\+Unlocked\+Backgrounds = new bool\mbox{[}0\mbox{]}}\hypertarget{class_save_data_a6989ed440d66cee33ae1a8501af3d1be}{}\label{class_save_data_a6989ed440d66cee33ae1a8501af3d1be}
+
+
+Bool that says if a Background on that index is unlocked yes or no 
+
+\index{Save\+Data@{Save\+Data}!Unlocked\+Characters@{Unlocked\+Characters}}
+\index{Unlocked\+Characters@{Unlocked\+Characters}!Save\+Data@{Save\+Data}}
+\subsubsection[{\texorpdfstring{Unlocked\+Characters}{UnlockedCharacters}}]{\setlength{\rightskip}{0pt plus 5cm}bool \mbox{[}$\,$\mbox{]} Save\+Data.\+Unlocked\+Characters = new bool\mbox{[}0\mbox{]}}\hypertarget{class_save_data_af0386c50f7a6c086d961118aa6f80b24}{}\label{class_save_data_af0386c50f7a6c086d961118aa6f80b24}
+
+
+Bools that says if a Charater on that index is unlocked yes or no 
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

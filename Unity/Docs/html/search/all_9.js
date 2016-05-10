@@ -1,11 +1,8 @@
 var searchData=
 [
-  ['savedata',['SaveData',['../class_save_data.html',1,'']]],
-  ['scaletocameraview',['ScaleToCameraView',['../class_scale_to_camera_view.html',1,'']]],
-  ['sceneutils',['SceneUtils',['../class_util_1_1_scene_utils.html',1,'Util']]],
-  ['score',['Score',['../class_game_manager.html#a77a552c74394d1e18c0bb2893bd27cb0',1,'GameManager']]],
-  ['scoreblock',['ScoreBlock',['../struct_save_data_1_1_score_block.html',1,'SaveData']]],
-  ['slidersetter',['SliderSetter',['../class_util_1_1_slider_setter.html',1,'Util']]],
-  ['snaptoscreenpoint',['SnapToScreenPoint',['../class_snap_to_screen_point.html',1,'']]],
-  ['splashscreen',['SplashScreen',['../class_splash_screen.html',1,'']]]
+  ['mainmenu',['MainMenu',['../class_menus_1_1_main_menu.html',1,'Menus']]],
+  ['maxrows',['maxRows',['../class_custom_grid.html#a74432277987a0e6cc02d0db891ec77ba',1,'CustomGrid']]],
+  ['maxspacing',['maxSpacing',['../class_custom_grid.html#a068ef9a666cd31142751320e2a653025',1,'CustomGrid']]],
+  ['menus',['Menus',['../namespace_menus.html',1,'']]],
+  ['minneededforfirstrow',['minNeededForFirstRow',['../class_custom_grid.html#a985fc1fc02418d3286ffbd41c98417a5',1,'CustomGrid']]]
 ];

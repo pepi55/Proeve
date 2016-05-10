@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['customgrid',['CustomGrid',['../class_custom_grid.html',1,'']]]
+  ['eventdispatcher',['EventDispatcher',['../class_events_1_1_event_dispatcher.html',1,'Events']]]
 ];
