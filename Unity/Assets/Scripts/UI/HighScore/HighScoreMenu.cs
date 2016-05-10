@@ -13,6 +13,7 @@ namespace Menus
         void Start()
         {
             HighScoreObjectTemplate.SetActive(false);
+            MakeHighScoreList();
         }
 
         /// <summary>

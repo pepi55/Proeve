@@ -38,7 +38,7 @@ public class SaveData
     /// </summary>
     public SaveData()
     {
-        highScores = new ScoreBlock[] { new ScoreBlock(1000, "Kelling the mellon"), new ScoreBlock(750, "Skipper Pipper"), new ScoreBlock(500, "Mc ball"), new ScoreBlock(), new ScoreBlock(), new ScoreBlock(), new ScoreBlock(), new ScoreBlock(), new ScoreBlock(), new ScoreBlock() };
+        highScores = new ScoreBlock[] { new ScoreBlock(1000, "Kelling the mellon"), new ScoreBlock(750, "Skipper Pipper"), new ScoreBlock(500, "Mc ball"), new ScoreBlock(375,"Ewan Highwind"), new ScoreBlock(250, "Jan Cruck"), new ScoreBlock(125, "Putter Dutter"), new ScoreBlock(), new ScoreBlock(), new ScoreBlock(), new ScoreBlock() };
     }
 
     /// <summary>
