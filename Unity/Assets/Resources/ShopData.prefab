@@ -54,19 +54,19 @@ MonoBehaviour:
     lowRes: {fileID: 21300000, guid: e821dcb3d63b4d740972348c2b2da747, type: 3}
   - Cost: 25
     Name: 
-    highRes: {fileID: 0}
+    highRes: {fileID: 21300000, guid: e58b86fe04e28674a874883e5b050fda, type: 3}
     lowRes: {fileID: 21300000, guid: e58b86fe04e28674a874883e5b050fda, type: 3}
   - Cost: 50
     Name: 
-    highRes: {fileID: 0}
+    highRes: {fileID: 21300000, guid: b1bbd365990ee284e8f4a631e579dfd5, type: 3}
     lowRes: {fileID: 21300000, guid: b1bbd365990ee284e8f4a631e579dfd5, type: 3}
   - Cost: 75
     Name: 
-    highRes: {fileID: 0}
+    highRes: {fileID: 21300000, guid: 7c7b982609f3aa94886b504259cd95b1, type: 3}
     lowRes: {fileID: 21300000, guid: 7c7b982609f3aa94886b504259cd95b1, type: 3}
   - Cost: 75
     Name: 
-    highRes: {fileID: 0}
+    highRes: {fileID: 21300000, guid: 0c65c1e406b6b9f4482d300c0df09ab1, type: 3}
     lowRes: {fileID: 21300000, guid: 0c65c1e406b6b9f4482d300c0df09ab1, type: 3}
   - Cost: 75
     Name: 

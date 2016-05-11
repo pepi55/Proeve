@@ -64,6 +64,8 @@ namespace Menus
 
             UpdateDisplayList(Characters, SaveManager.savaData.SelectedCharacter);
             UpdateDisplayList(Backgrounds, SaveManager.savaData.SelectedBackground);
+
+            PrefabDisplayObject.SetActive(false);
         }
 
         public override void Open()
@@ -287,6 +289,7 @@ namespace Menus
             /// <param name="data">Array that contains all data to build up a menu Item</param>
             public MenuItem(int indexPosition, GameObject gameObj, ShopMenuData.StoreObject[] data)
             {
+                gameObj.SetActive(true);
                 this.indexPosition = indexPosition;
 
                 //Setting up images
