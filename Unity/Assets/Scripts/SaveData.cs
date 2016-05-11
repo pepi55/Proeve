@@ -4,29 +4,54 @@ using System.Collections;
 [System.Serializable]
 public class SaveData
 {
-    //The value in this class are public as it would make no sense to have them private as this class is only used as save class
+    /// <summary>
+    /// Value that contains all the highscore players submitted should have a size of 10
+    /// </summary>
     public ScoreBlock[] highScores;
-
-    //Values used to see if a skin has been bought
+    
+    /// <summary>
+    /// Bools that says if a Charater on that index is unlocked yes or no
+    /// </summary>
     public bool[] UnlockedCharacters = new bool[0];
+    /// <summary>
+    /// Bool that says if a Background on that index is unlocked yes or no
+    /// </summary>
     public bool[] UnlockedBackgrounds = new bool[0];
 
-    //Character/Ball Selected in shop Screen
+    /// <summary>
+    /// Current selected character
+    /// </summary>
     public int SelectedCharacter = 0;
 
-    //The total score the player got overAllTime
+    /// <summary>
+    /// The points the player can spent in the the store
+    /// </summary>
     public int StorePoints = 0;
 
-    //Background/Stage Selected in shop Screen
+    /// <summary>
+    /// That background that is currently selected
+    /// </summary>
     public int SelectedBackground = 0;
+
+    /// <summary>
+    /// Used when creating a new blank savedata.
+    /// </summary>
     public SaveData()
     {
-        highScores = new ScoreBlock[] { new ScoreBlock(1000, "Kelling the mellon"), new ScoreBlock(750, "Skipper Pipper"), new ScoreBlock(500, "Mc ball"), new ScoreBlock(), new ScoreBlock(), new ScoreBlock(), new ScoreBlock(), new ScoreBlock(), new ScoreBlock(), new ScoreBlock() };
+        highScores = new ScoreBlock[] { new ScoreBlock(1000, "Kelling the mellon"), new ScoreBlock(750, "Skipper Pipper"), new ScoreBlock(500, "Mc ball"), new ScoreBlock(375,"Ewan Highwind"), new ScoreBlock(250, "Jan Cruck"), new ScoreBlock(125, "Putter Dutter"), new ScoreBlock(), new ScoreBlock(), new ScoreBlock(), new ScoreBlock() };
     }
 
+    /// <summary>
+    /// Struct that represents a single score in the highscore list
+    /// </summary>
     [System.Serializable]
     public struct ScoreBlock
     {
+        /// <summary>
+        /// Constructor for Scoreblock
+        /// </summary>
+        /// <param name="score">Points scored that the player got durring there run</param>
+        /// <param name="name">Name the player gave up when submitting there score to the highscore table</param>
         public ScoreBlock(int score, string name)
         {
             this.score = score;

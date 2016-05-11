@@ -3,6 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 namespace Util
 {
+    /// <summary>
+    /// A classes that is used to create a slider for the Scrollrect thatdoes not change size
+    /// </summary>
     public class SliderSetter : MonoBehaviour
     {
         public Slider slider;

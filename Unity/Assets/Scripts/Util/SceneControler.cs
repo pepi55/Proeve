@@ -6,6 +6,10 @@ using System.Collections;
 
 namespace Util
 {
+    /// <summary>
+    /// Controles scence changes
+    /// this was write because Application.load has been marked as legacy
+    /// </summary>
     public static class SceneControler
     {
         /// <summary>
@@ -26,6 +30,10 @@ namespace Util
             SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
         }
 
+        /// <summary>
+        /// Unloades a scene
+        /// </summary>
+        /// <param name="SceneName">Name of scene that will be unloaded</param>
         public static void UnloadScene(string SceneName)
         {
             int scenecount = SceneManager.sceneCount;

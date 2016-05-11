@@ -4,6 +4,9 @@ namespace Events
 {
     public class IPause : IEvent
     {
+        /// <summary>
+        /// Pause state of the game
+        /// </summary>
         public bool State;
 
         /// <summary>

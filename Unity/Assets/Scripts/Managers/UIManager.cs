@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
+/// <summary>
+/// Controles the ingame UI
+/// </summary>
 public class UIManager : MonoBehaviour
 {
 
@@ -19,8 +22,6 @@ public class UIManager : MonoBehaviour
     {
         GameManager.OnScoreUpdate -= GameManager_OnScoreUpdate;
     }
-
-
 
     /// <summary>
     /// Called after the score number is changed.

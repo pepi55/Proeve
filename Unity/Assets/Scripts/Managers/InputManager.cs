@@ -3,7 +3,13 @@ using System.Collections;
 
 public class InputManager : MonoBehaviour
 {
+    /// <summary>
+    /// Called when a click is registered on the screen
+    /// </summary>
     public static event ClickDelegate onClick;
+    /// <summary>
+    /// Called when escape is pressed
+    /// </summary>
     public static event VoidDelegate onEscapePress;
 
     void Awake()
@@ -27,6 +33,10 @@ public class InputManager : MonoBehaviour
         CheckMouse();
     }
 
+    /// <summary>
+    /// Check if there where touches on the screen. 
+    /// wrote this so touches are also handeld
+    /// </summary>
     void CheckTouches()
     {
         int count = Input.touchCount;
@@ -38,6 +48,9 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check if the mouse button is down
+    /// </summary>
     void CheckMouse()
     {
         if (Input.GetMouseButtonDown(0))
@@ -46,12 +59,19 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// calls the onClick event
+    /// </summary>
+    /// <param name="Position">Position where the click happend</param>
     void OnClick(Vector2 Position)
     {
         if (onClick != null)
             onClick(Position);
     }
 
+    /// <summary>
+    /// Check the keyboard inputs
+    /// </summary>
     void KeyBoardChecks()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

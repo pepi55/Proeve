@@ -64,17 +64,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Controlers\BallControler.cs" />
-    <Compile Include="Assets\Scripts\Controlers\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Controlers\TargetControler.cs" />
     <Compile Include="Assets\Scripts\Events\Delegates.cs" />
     <Compile Include="Assets\Scripts\Events\IPause.cs" />
     <Compile Include="Assets\Scripts\Events\IPlayerHitBottom.cs" />
     <Compile Include="Assets\Scripts\Events\IResetGameState.cs" />
     <Compile Include="Assets\Scripts\Events\IScore.cs" />
-    <Compile Include="Assets\Scripts\ExampleEvents.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\InputManager.cs" />
-    <Compile Include="Assets\Scripts\Managers\PauseManager.cs" />
     <Compile Include="Assets\Scripts\Managers\SaveManager.cs" />
     <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
     <Compile Include="Assets\Scripts\SaveData.cs" />
@@ -83,9 +80,10 @@
     <Compile Include="Assets\Scripts\UI\HighScore\HighScoreDisplayObject.cs" />
     <Compile Include="Assets\Scripts\UI\HighScore\HighScoreMenu.cs" />
     <Compile Include="Assets\Scripts\UI\HighScore\HighScoreSubmitScreen.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\UI\ShopMenu\ShopMenu.cs" />
     <Compile Include="Assets\Scripts\UI\ShopMenu\ShopMenuData.cs" />
-    <Compile Include="Assets\Scripts\Util\Axis.cs" />
     <Compile Include="Assets\Scripts\Util\Common.cs" />
     <Compile Include="Assets\Scripts\Util\CustomGrid.cs" />
     <Compile Include="Assets\Scripts\Util\Events\EventDispatcher.cs" />
@@ -95,11 +93,11 @@
     <Compile Include="Assets\Scripts\Util\Events\LocalEvents.cs" />
     <Compile Include="Assets\Scripts\Util\GridLayoutHeightSetter.cs" />
     <Compile Include="Assets\Scripts\Util\GridlayoutWidthSetter.cs" />
-    <Compile Include="Assets\Scripts\Util\MoveBoxScaler.cs" />
-    <Compile Include="Assets\Scripts\Util\ResetCemeraFOV.cs" />
+    <Compile Include="Assets\Scripts\Util\ResetCameraFOV.cs" />
     <Compile Include="Assets\Scripts\Util\Saving\SerializableDictionary.cs" />
     <Compile Include="Assets\Scripts\Util\Saving\Serialization.cs" />
     <Compile Include="Assets\Scripts\Util\ScaleToCameraView.cs" />
+    <Compile Include="Assets\Scripts\Util\ScaleToScreenSize.cs" />
     <Compile Include="Assets\Scripts\Util\SceneControler.cs" />
     <Compile Include="Assets\Scripts\Util\SceneUtils.cs" />
     <Compile Include="Assets\Scripts\Util\SliderSetter.cs" />

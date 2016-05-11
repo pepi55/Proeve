@@ -1,33 +1,43 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HighScoreMenu : BaseMenu
+namespace Menus
 {
-    [SerializeField]
-    GameObject HighScoreObjectTemplate = null;
-    [SerializeField]
-    Transform scoreBoard = null;
-
-    void Start()
+    public class HighScoreMenu : BaseMenu
     {
-        GameObject g;
-        HighScoreDisplayObject obj;
-        bool dark = false;
-        for (int i = 0; i < SaveManager.savaData.highScores.Length; i++)
-        {
-            g = Instantiate(HighScoreObjectTemplate) as GameObject;
-            g.SetActive(true);
-            g.transform.SetParent(scoreBoard,false);
-            obj = g.GetComponent<HighScoreDisplayObject>();
+        [SerializeField]
+        GameObject HighScoreObjectTemplate = null;
+        [SerializeField]
+        Transform scoreBoard = null;
 
-            obj.SetValues(SaveManager.savaData.highScores[i].name, SaveManager.savaData.highScores[i].score.ToString(), dark ? Color.gray : Color.white);
-            obj.Name.color = dark ? (Color.grey + (Color.white / 4f)) : Color.black;
-            obj.Score.color = dark ? (Color.grey + (Color.white / 4f)) : Color.black;
-            dark = !dark;
+        void Start()
+        {
+            HighScoreObjectTemplate.SetActive(false);
+            MakeHighScoreList();
         }
 
-        HighScoreObjectTemplate.SetActive(false);
+        /// <summary>
+        /// Fills the HighScoreMenu. Requires a template
+        /// </summary>
+        void MakeHighScoreList()
+        {
+            GameObject g;
+            HighScoreDisplayObject obj;
+            bool dark = false;
+            for (int i = 0; i < SaveManager.savaData.highScores.Length; i++)
+            {
+                //create highscore object
+                g = Instantiate(HighScoreObjectTemplate) as GameObject;
+                g.SetActive(true);
+                g.transform.SetParent(scoreBoard, false);
+                obj = g.GetComponent<HighScoreDisplayObject>();
+
+                //the the values of the display object
+                obj.SetValues(SaveManager.savaData.highScores[i].name, SaveManager.savaData.highScores[i].score.ToString(), dark ? Color.gray : Color.white);
+                obj.Score.color = obj.Name.color = dark ? (Color.grey + (Color.white / 4f)) : Color.black;
+                dark = !dark;
+            }
+        }
+
     }
-
-
 }

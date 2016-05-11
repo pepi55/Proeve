@@ -4,9 +4,16 @@ using System.Linq;
 
 namespace Util
 {
+    /// <summary>
+    /// Common Utily libary. It contains fuctions that I used regulary or where very hard to figure out.
+    /// </summary>
     public static class Common
     {
-
+        /// <summary>
+        /// Coverts a Angle to a directional Vector2
+        /// </summary>
+        /// <param name="angle">Angle in Degrees</param>
+        /// <returns>Returns a vector to with values from -1 to 1 on each axis</returns>
         public static Vector2 AngleToVector(float angle)
         {
             Vector2 output;
@@ -16,11 +23,21 @@ namespace Util
             return output;
         }
 
+        /// <summary>
+        /// Coverts a Vector2 into a Angle
+        /// </summary>
+        /// <param name="v2">A Vector to of which you want to know the direction in Degrees</param>
+        /// <returns>Angle in degrees</returns>
         public static float VectorToAngle(Vector2 v2)
         {
             return Mathf.Atan2(v2.y, v2.x) * 180f / Mathf.PI;
         }
 
+        /// <summary>
+        /// Coverts bool into a int
+        /// </summary>
+        /// <param name="b">Bool that will be converted</param>
+        /// <returns>0 if false| 1 if true</returns>
         public static int toInt(this bool b)
         {
             if (b)
@@ -28,33 +45,49 @@ namespace Util
             return 0;
         }
 
-        public static float v(this Vector2 v2)
+        /// <summary>
+        /// Get the length of a vector
+        /// </summary>
+        /// <param name="obj">Vector of wich you want to know the length</param>
+        /// <returns>Length of the vector</returns>
+        public static float getLength(this Vector2 obj)
         {
-            return Mathf.Sqrt(Mathf.Pow(v2.x, 2) + Mathf.Pow(v2.y, 2));
+            return Mathf.Sqrt(Mathf.Pow(obj.x, 2) + Mathf.Pow(obj.y, 2));
         }
 
-        public static Bounds getChildBounds(this Transform t)
+        /// <summary>
+        /// Gets the bounds of a object including it's childeren
+        /// </summary>
+        /// <param name="obj">object's transform that contains the childeren</param>
+        /// <returns>Bounds including Parents childeren</returns>
+        public static Bounds getChildBounds(this Transform obj)
         {
             Bounds bounds;
             // First find a center for your bounds.
             Vector3 center = Vector3.zero;
-            foreach (Transform child in t.transform)
+            foreach (Transform child in obj.transform)
             {
                 center += child.gameObject.GetComponent<SpriteRenderer>().bounds.center;
             }
-            center /= t.transform.childCount; //center is average center of children
+            center /= obj.transform.childCount; //center is average center of children
 
             //Now you have a center, calculate the bounds by creating a zero sized 'Bounds', 
             bounds = new Bounds(center, Vector3.zero);
 
-            foreach (Transform child in t.transform)
+            foreach (Transform child in obj.transform)
             {
                 bounds.Encapsulate(child.gameObject.GetComponent<SpriteRenderer>().bounds);
             }
             return bounds;
         }
 
-        public static Bounds getChildBounds(this Transform t, string ignorNameTag)
+        /// <summary>
+        /// Gets the bounds of a object including it's childeren
+        /// </summary>
+        /// <param name="obj">object's transform that contains the childeren</param>
+        /// <param name="ignorNameTag">Object names to ignor usefull to create mask</param>
+        /// <returns>Bounds including Parents childeren</returns>
+        public static Bounds getChildBounds(this Transform obj, string ignorNameTag)
         {
             Bounds bounds;
 
@@ -63,16 +96,16 @@ namespace Util
             {
                 // First find a center for your bounds.
                 Vector3 center = Vector3.zero;
-                foreach (Transform child in t.transform)
+                foreach (Transform child in obj.transform)
                 {
                     center += child.gameObject.GetComponent<SpriteRenderer>().bounds.center;
                 }
-                center /= t.transform.childCount; //center is average center of children
+                center /= obj.transform.childCount; //center is average center of children
 
                 //Now you have a center, calculate the bounds by creating a zero sized 'Bounds', 
                 bounds = new Bounds(center, Vector3.zero);
 
-                foreach (Transform child in t.transform)
+                foreach (Transform child in obj.transform)
                 {
                     bounds.Encapsulate(child.gameObject.GetComponent<SpriteRenderer>().bounds);
                 }
@@ -84,7 +117,7 @@ namespace Util
                 // First find a center for your bounds.
                 Vector3 center = Vector3.zero;
                 int i = 0;
-                foreach (Transform child in t.transform)
+                foreach (Transform child in obj.transform)
                 {
                     if (!child.gameObject.name.ToLower().Contains(ignorNameTag))
                     {
@@ -98,7 +131,7 @@ namespace Util
                 //Now you have a center, calculate the bounds by creating a zero sized 'Bounds', 
                 bounds = new Bounds(center, Vector3.zero);
 
-                foreach (Transform child in t.transform)
+                foreach (Transform child in obj.transform)
                 {
                     if (!child.name.ToLower().Contains(ignorNameTag))
                         bounds.Encapsulate(child.gameObject.GetComponent<SpriteRenderer>().bounds);
@@ -107,10 +140,16 @@ namespace Util
             return bounds;
         }
 
-        public static Bounds getChildBounds(this Transform t, string[] IgnorNameTags)
+        /// <summary>
+        /// Gets the bounds of a object including it's childeren
+        /// </summary>
+        /// <param name="obj">object's transform that contains the childeren</param>
+        /// <param name="IgnorNameTags">A set of name part to ignor used to create more complex masks</param>
+        /// <returns>Bounds including Parents childeren</returns>
+        public static Bounds getChildBounds(this Transform obj, string[] IgnorNameTags)
         {
             if (IgnorNameTags.Length == 0)
-                return t.getChildBounds();
+                return obj.getChildBounds();
 
             Bounds bounds;
             Vector3 center = Vector3.zero;
@@ -124,7 +163,7 @@ namespace Util
             }
 
             // First find a center for your bounds.s
-            foreach (Transform child in t.transform)
+            foreach (Transform child in obj.transform)
             {
                 n = child.gameObject.name.ToLower();
                 if (IgnorNameTags.Any(str => n.Contains(str)))
@@ -139,7 +178,7 @@ namespace Util
             //Now you have a center, calculate the bounds by creating a zero sized 'Bounds', 
             bounds = new Bounds(center, Vector3.zero);
 
-            foreach (Transform child in t.transform)
+            foreach (Transform child in obj.transform)
             {
                 n = child.gameObject.name.ToLower();
                 if (IgnorNameTags.Any(str => n.Contains(str)))
@@ -149,6 +188,10 @@ namespace Util
             return bounds;
         }
 
+        /// <summary>
+        /// Draw the bounds of a object
+        /// </summary>
+        /// <param name="b">Bounds that will be drawn</param>
         public static void DrawBounds(Bounds b)
         {
             Debug.DrawLine(b.max, new Vector3(b.max.x, b.min.y));

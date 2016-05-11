@@ -34,14 +34,14 @@ public class BallControler : MonoBehaviour
 
     public void ChangeLooks()
     {
-        ShopMenuData data;
+        Menus.ShopMenuData data;
 
-        data = FindObjectOfType<ShopMenuData>();
+        data = FindObjectOfType<Menus.ShopMenuData>();
         if(!data)
         {
-            GameObject gameobj = Instantiate(Resources.Load(ShopMenuData.ResourceName)) as GameObject;
+            GameObject gameobj = Instantiate(Resources.Load(Menus.ShopMenuData.ResourceName)) as GameObject;
 
-            data = gameobj.GetComponent<ShopMenuData>();
+            data = gameobj.GetComponent<Menus.ShopMenuData>();
         }
 
         GetComponent<SpriteRenderer>().sprite = data.Characters[SaveManager.savaData.SelectedCharacter].LowRes;
@@ -78,6 +78,10 @@ public class BallControler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Resets the ball called when game is reset
+    /// </summary>
+    /// <param name="obj"></param>
     void ResetBall(Events.IResetGameState obj)
     {
         transform.position = Vector3.zero;
@@ -214,22 +218,22 @@ public class BallControler : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Used for Debuging and Trying out diffrent styles of ball movement and controle
-    /// </summary>
-    public void OnGUI()
-    {
-        if (GUI.Button(new Rect(new Vector2(0, 0), new Vector2(230, 30)), useLocalRelativePosition ? "Switch to static center point mode" : "Switch to relative to ball mode"))
-        {
-            useLocalRelativePosition = !useLocalRelativePosition;
-        }
+    ///// <summary>
+    ///// Used for Debuging and Trying out diffrent styles of ball movement and controle
+    ///// </summary>
+    //public void OnGUI()
+    //{
+    //    if (GUI.Button(new Rect(new Vector2(0, 0), new Vector2(230, 30)), useLocalRelativePosition ? "Switch to static center point mode" : "Switch to relative to ball mode"))
+    //    {
+    //        useLocalRelativePosition = !useLocalRelativePosition;
+    //    }
 
-        if (GUI.Button(new Rect(new Vector2(0, 35), new Vector2(230, 30)), UseXAxis ? "Don't Use X Axis" : "Use X Axis"))
-        {
-            UseXAxis = !UseXAxis;
+    //    if (GUI.Button(new Rect(new Vector2(0, 35), new Vector2(230, 30)), UseXAxis ? "Don't Use X Axis" : "Use X Axis"))
+    //    {
+    //        UseXAxis = !UseXAxis;
 
-            SetConstraints();
-        }
+    //        SetConstraints();
+    //    }
 
-    }
+    //}
 }
