@@ -45,6 +45,8 @@ public class BallControler : MonoBehaviour
         }
 
         GetComponent<SpriteRenderer>().sprite = data.Characters[SaveManager.savaData.SelectedCharacter].LowRes;
+
+        GetComponent<BallParticleControler>().ParticleMaterial = data.Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial;
     }
 
     public void OnDestroy()

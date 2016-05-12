@@ -62,6 +62,20 @@ namespace Menus
                     return Sprite.Create(new Texture2D(512, 512), new Rect(0, 0, 512, 512), Vector2.one / 2f);
                 }
             }
+
+            [SerializeField]
+            Material particleMaterial;
+            public Material ParticleMaterial
+            {
+                get
+                {
+                    if (particleMaterial)
+                    {
+                        return particleMaterial;
+                    }
+                    return (Material)Resources.Load("DefaultParticleMaterial");
+                }
+            }
         }
     }
 }

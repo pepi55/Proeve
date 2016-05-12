@@ -44,67 +44,83 @@ MonoBehaviour:
     Name: 
     highRes: {fileID: 21300000, guid: ab225cd553e4614448435f582555d1cc, type: 3}
     lowRes: {fileID: 21300000, guid: 1c51a81e19b13864c9775fbdd7d93a8e, type: 3}
+    particleMaterial: {fileID: 2100000, guid: 7aa0fff7ef484c24c862d7cb8638a38a, type: 2}
   - Cost: 10
     Name: 
     highRes: {fileID: 21300000, guid: 3b378c55a586a254984e0a00e81832a6, type: 3}
     lowRes: {fileID: 21300000, guid: 868b8ed53f5d9504e8cd7705fb9390b3, type: 3}
+    particleMaterial: {fileID: 0}
   - Cost: 15
     Name: 
     highRes: {fileID: 21300000, guid: 8ce673b3678eaa847b76d1a6d8dd6999, type: 3}
     lowRes: {fileID: 21300000, guid: e821dcb3d63b4d740972348c2b2da747, type: 3}
+    particleMaterial: {fileID: 0}
   - Cost: 25
     Name: 
     highRes: {fileID: 21300000, guid: e58b86fe04e28674a874883e5b050fda, type: 3}
     lowRes: {fileID: 21300000, guid: e58b86fe04e28674a874883e5b050fda, type: 3}
+    particleMaterial: {fileID: 0}
   - Cost: 50
     Name: 
     highRes: {fileID: 21300000, guid: b1bbd365990ee284e8f4a631e579dfd5, type: 3}
     lowRes: {fileID: 21300000, guid: b1bbd365990ee284e8f4a631e579dfd5, type: 3}
+    particleMaterial: {fileID: 0}
   - Cost: 75
     Name: 
     highRes: {fileID: 21300000, guid: 7c7b982609f3aa94886b504259cd95b1, type: 3}
     lowRes: {fileID: 21300000, guid: 7c7b982609f3aa94886b504259cd95b1, type: 3}
+    particleMaterial: {fileID: 0}
   - Cost: 75
     Name: 
     highRes: {fileID: 21300000, guid: 0c65c1e406b6b9f4482d300c0df09ab1, type: 3}
     lowRes: {fileID: 21300000, guid: 0c65c1e406b6b9f4482d300c0df09ab1, type: 3}
+    particleMaterial: {fileID: 0}
   - Cost: 75
     Name: 
     highRes: {fileID: 21300000, guid: b4e5c188bc362fa4892647d8ac76ea26, type: 3}
     lowRes: {fileID: 21300000, guid: cb44d15678208974c8c76429ca6d455c, type: 3}
+    particleMaterial: {fileID: 0}
   - Cost: 75
     Name: 
     highRes: {fileID: 21300000, guid: cb65fb1c39b6c2c44b3db462b804493e, type: 3}
     lowRes: {fileID: 21300000, guid: d70694cb193c7aa408feac272728aedd, type: 3}
+    particleMaterial: {fileID: 0}
   - Cost: 75
     Name: 
     highRes: {fileID: 21300000, guid: 50ceb08bd473d344c822c818ed69a3e7, type: 3}
     lowRes: {fileID: 21300000, guid: f2e4d8179c3a7ed46b8f1ac47b239b10, type: 3}
+    particleMaterial: {fileID: 0}
   - Cost: 75
     Name: 
     highRes: {fileID: 21300000, guid: 2f418b231d8f207458d549d725b71326, type: 3}
     lowRes: {fileID: 21300000, guid: 6b7efb5da529fc04f8f9a83470a6b5e0, type: 3}
+    particleMaterial: {fileID: 0}
   - Cost: 75
     Name: 
     highRes: {fileID: 21300000, guid: 7d08770840a10a242bc9078e6e2391a4, type: 3}
     lowRes: {fileID: 21300000, guid: 7eee292bb0730c9419cb5615cd5a9e64, type: 3}
+    particleMaterial: {fileID: 0}
   - Cost: 125
     Name: 
     highRes: {fileID: 21300000, guid: dfb77024a133f464092610b762761682, type: 3}
     lowRes: {fileID: 21300000, guid: 9953e7e2e3f1c3b42a6d37f75b150e61, type: 3}
+    particleMaterial: {fileID: 0}
   - Cost: 125
     Name: 
     highRes: {fileID: 21300000, guid: a3978dd12146ee14abe83ff261a4af2e, type: 3}
     lowRes: {fileID: 21300000, guid: f5bbd61ea99f3154db0feb0483d666b3, type: 3}
+    particleMaterial: {fileID: 0}
   - Cost: 125
     Name: 
     highRes: {fileID: 21300000, guid: 64e2d9cc8a85a0e44baf9dd5e8abaac1, type: 3}
     lowRes: {fileID: 21300000, guid: 2aac3b193600437479e93228237b1e28, type: 3}
+    particleMaterial: {fileID: 0}
   backgrounds:
   - Cost: 0
     Name: 
     highRes: {fileID: 21300000, guid: 5d8517758453bc44eb2b8cfb2111ade0, type: 3}
     lowRes: {fileID: 21300000, guid: 5d8517758453bc44eb2b8cfb2111ade0, type: 3}
+    particleMaterial: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
