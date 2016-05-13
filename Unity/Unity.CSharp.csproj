@@ -69,10 +69,12 @@
     <Compile Include="Assets\Scripts\Controlers\BallParticleControler.cs" />
     <Compile Include="Assets\Scripts\Controlers\TargetControler.cs" />
     <Compile Include="Assets\Scripts\Events\Delegates.cs" />
+    <Compile Include="Assets\Scripts\Events\IBallMove.cs" />
     <Compile Include="Assets\Scripts\Events\IPause.cs" />
     <Compile Include="Assets\Scripts\Events\IPlayerHitBottom.cs" />
     <Compile Include="Assets\Scripts\Events\IResetGameState.cs" />
     <Compile Include="Assets\Scripts\Events\IScore.cs" />
+    <Compile Include="Assets\Scripts\Managers\BackgroundManager.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\InputManager.cs" />
     <Compile Include="Assets\Scripts\Managers\SaveManager.cs" />

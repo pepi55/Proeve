@@ -4,6 +4,19 @@ namespace Menus
 {
     public class ShopMenuData : MonoBehaviour
     {
+        public static ShopMenuData GetShopMenu()
+        {
+            ShopMenuData data;
+            data = FindObjectOfType<Menus.ShopMenuData>();
+            if (!data)
+            {
+                GameObject gameobj = Instantiate(Resources.Load(Menus.ShopMenuData.ResourceName)) as GameObject;
+
+                data = gameobj.GetComponent<Menus.ShopMenuData>();
+            }
+
+            return data;
+        }
 
         public const string ResourceName = "ShopData";
 
