@@ -34,11 +34,7 @@ public class BallControler : MonoBehaviour
 
     public void ChangeLooks()
     {
-        Menus.ShopMenuData data = Menus.ShopMenuData.GetShopMenu();
-
-        GetComponent<SpriteRenderer>().sprite = data.Characters[SaveManager.savaData.SelectedCharacter].LowRes;
-
-        GetComponent<BallParticleControler>().ParticleMaterial = data.Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial;
+        GetComponent<SpriteRenderer>().sprite = Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].LowRes;
     }
 
     public void OnDestroy()

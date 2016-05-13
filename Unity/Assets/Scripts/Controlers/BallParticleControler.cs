@@ -24,6 +24,11 @@ public class BallParticleControler : MonoBehaviour
         Events.GlobalEvents.RemoveEventListener<Events.IBallMove>(OnBallMove);
     }
 
+    /// <summary>
+    /// Trigged when the user has clicked and the ball has done it's actions
+    /// This function create the particles that give feedback when the player clicks
+    /// </summary>
+    /// <param name="obj">Givven parameter that contains the ball direction and the current ball position</param>
     private void OnBallMove(Events.IBallMove obj)
     {
         InitializeIfNeeded();
@@ -66,7 +71,7 @@ public class BallParticleControler : MonoBehaviour
         if (m_System == null)
         {
             m_System = GetComponent<ParticleSystem>();
-            GetComponent<ParticleSystemRenderer>().material = ParticleMaterial;
+            GetComponent<ParticleSystemRenderer>().material = Menus.ShopMenuData.GetShopMenu().Backgrounds[SaveManager.savaData.SelectedCharacter].ParticleMaterial;
         }
 
         if (m_Particles == null || m_Particles.Length < m_System.maxParticles)
