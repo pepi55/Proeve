@@ -40,6 +40,19 @@ public class SnapToScreenPoint : MonoBehaviour
         StartSize /= 100f;
 
         DoMove();
+
+        if (GetComponent<SpriteRenderer>())
+        {
+            SpriteRenderer spr = GetComponent<SpriteRenderer>();
+            StartSize = spr.bounds.size;
+            StartSize.x += transform.localScale.x;
+            StartSize.y += transform.localScale.y;
+        }
+    }
+
+    void Update()
+    {
+        DoMove();
     }
 
     void DoMove()
