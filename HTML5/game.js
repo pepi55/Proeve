@@ -4,9 +4,10 @@ var points = 0;
 
 var hardMode = true;
 
+/** This is the state in which the game is played. */
 var gameState = {
   // Custom "variables".
-  tweenAPosition: 1800,
+  tweenAPosition: 1950,
   tweenBPosition: 70,
 
   textTween: null,
@@ -24,7 +25,10 @@ var gameState = {
   currentHighscoreUsers: new Array(),
   randomNames: new Array("Bob","Achmed","Ash","John","Seymore"),
 
-  // Native functions.
+ 	/** @method
+	* @name preload
+	* @description this is a preload function that is fired before the create function, this is where we create variables and images
+	*/
   preload: function() {
   	var str_names = JSON.parse(localStorage.getItem('users'));
 
@@ -43,7 +47,6 @@ var gameState = {
 			console.log("score ="+str_score);
 			this.currentHighscore = str_score;
 		}
-		this.currentHighscore.sort(function(a, b){return b-a});
 
 		var tapSound = localStorage.getItem('characterSound');
 
@@ -70,19 +73,22 @@ var gameState = {
 		game.load.image('ball', 'assets/balls/' + character);
 		game.load.image('goal', 'assets/goal/goal.0.png');
 
-		game.load.image('wall1', 'assets/image.png');
-		game.load.image('wall2', 'assets/image.png');
+		game.load.image('wall', 'assets/image.png');
 
 		game.load.audio('tapSound', 'assets/audio/soundeffect/' + tapSound);
 	},
 
+	/** @method
+	* @name create
+	* @description this is a create function that is fired after the preload function, this is where we set all the variables
+	*/
   create: function() {
 		// this has to be active for the fps to be counting.
 		game.time.advancedTiming = true;
 
 		game.stage.backgroundColor = '#C85A17';
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		game.physics.arcade.gravity.y = 1000;
+		game.physics.arcade.gravity.y = 1500;
 
 		game.world.bringToTop(this.backgrounds);
 		game.world.bringToTop(this.walls);
@@ -95,16 +101,21 @@ var gameState = {
 		this.ball = game.add.sprite(game.world.centerX, 20, 'ball');
 		this.goal = game.add.sprite(this.tweenAPosition, game.world.height - 50, 'goal');
 
-		this.wall1 = game.add.sprite(-64, game.world.height, 'wall1');
-		this.wall2 = game.add.sprite(game.world.width + 64, game.world.height, 'wall2');
+/*
+		this.wall1 = game.add.sprite(-70, game.world.height, 'wall1');
+		this.wall2 = game.add.sprite(game.world.width + 70, game.world.height, 'wall2');
+		this.ceiling = game.add.sprite()
+*/
+		this.walls.create(-70, game.world.height, 'wall');
+		this.walls.create(game.world.width + 70, game.world.height, 'wall');
+		this.walls.create(game.world.width / 2, game.world.height + (game.world.height / 2), 'wall');
 
-		this.background = game.add.tileSprite(0, 0, game.stage.width, game.stage.height, 'background');
+		this.background = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'background');
 
 		game.physics.arcade.enable([
 			this.ball,
       this.goal,
-      this.wall1,
-      this.wall2
+      this.walls
       ]);
 
     // Background setup
@@ -125,18 +136,15 @@ var gameState = {
 		this.gameobjects.add(this.goal);
 
 		// Walls setup
-		this.wall1.anchor.setTo(0.5, 1);
-		this.wall2.anchor.setTo(0.5, 1);
-		this.wall1.scale.setTo(0.5, 50);
-		this.wall2.scale.setTo(0.5, 50);
-
-		this.wall1.body.immovable = true;
-		this.wall2.body.immovable = true;
-		this.wall1.body.allowGravity = false;
-		this.wall2.body.allowGravity = false;
-
-		this.walls.add(this.wall1);
-		this.walls.add(this.wall2);
+		for (var i = 0; i < this.walls.children.length; i++) {
+			this.walls.children[i].anchor.setTo(0.5, 1);
+			this.walls.children[i].scale.setTo(0.5, game.world.height + (game.world.height / 2));
+			this.walls.children[i].body.immovable = true;
+			this.walls.children[i].body.allowGravity = false;
+		}
+		// Reset ceiling size
+		this.walls.children[2].anchor.setTo(0.5);
+		this.walls.children[2].scale.setTo(50, 0.5);
 
 		// Back button.
 		var escKey = game.input.keyboard.addKey(Phaser.Keyboard.Q);
@@ -158,13 +166,17 @@ var gameState = {
 		scoreText.fontWeight = 'bold';
 
 		//	Stroke color and thickness
-		scoreText.stroke = '#0020C2';
-		scoreText.strokeThickness = 5;
-		scoreText.fill = '#2B65EC';
+		scoreText.stroke = '#FFFF00';
+		scoreText.strokeThickness = 3;
+		scoreText.fill = '#FF2828';
 
 		textTween = game.add.tween(scoreText).to({ fontSize:100}, 100, Phaser.Easing.Linear.None, false, 0,0,true);
   },
 
+	/** @method
+	* @name update
+	* @description this is a update function that is fired after the create function,and updates every frame.
+	*/
   update: function() {
 		game.physics.arcade.collide(this.walls, this.ball, this.wallsCollisionHandler, null, this);
 		game.physics.arcade.collide(this.goal, this.ball, this.goalCollisionHandler, null, this);
@@ -180,19 +192,28 @@ var gameState = {
 		}
   },
 
-  // Used for rendering debug texts
+	/** @method
+	* @name render
+	* @description this is a render function that is used for rendering debug texts
+	*/
   render: function() {
-  	//game.debug.body(this.goal);
-
     // fps log
     game.debug.text(game.time.fps, 2, 14, "#00ff00");
   },
 
   // Custom functions
+  	/** @method
+	* @name wallsCollisionHandler
+	* @description this is a collision function that is fired when hitting a wall and is used for adding score for a skill shot
+	*/
   wallsCollisionHandler: function() {
     this.tempScore++;
   },
 
+ 	/** @method
+	* @name goalCollisionHandler
+	* @description this is a collision function that is fired when the ball hits the goal and is used for adding score for a skill shot
+	*/
   goalCollisionHandler: function() {
     //game.state.start('game');
     this.score += this.tempScore + 1;
@@ -201,26 +222,34 @@ var gameState = {
 
     this.setScoreText();
     this.ball.body.velocity.setTo(0, 0);
+    this.ball.body.angularVelocity = 0;
     this.ball.position.x = game.world.randomX;
     this.ball.position.y = 0;
   },
 
+	/** @method
+	* @name setScoreText
+	* @description this is a function that is fired when the ball hits the goal and is used for updateing the score text on the UI.
+	*/
   setScoreText: function() {
    scoreText.text = this.score;
    textTween.start();
   },
-
+	/** @method
+	* @name bounce
+	* @description this is a function that is fired when the player taps the screen and is used for adding force to the ball.
+	*/
   bounce: function() {
 		var yVelocity = 0;
 		this.tempScore = 0;
 		tapSound.play();
 
 		if (game.input.activePointer.y > this.ball.y) {
-		  yVelocity = -400;
+		  yVelocity = -800;
 		} else {
 			this.tempScore++;
 
-		  yVelocity = this.ball.body.velocity.y + 400;
+		  yVelocity = this.ball.body.velocity.y + 800;
 		}
 
 		if (hardMode == true) {
@@ -238,6 +267,8 @@ var gameState = {
 			}
 			*/
 
+			this.ball.body.angularVelocity = angVelocity = this.ball.x - game.input.activePointer.x;
+
 			if (game.input.activePointer.x > this.ball.x) {
 			  this.ball.body.velocity.setTo(this.ball.body.velocity.x + -xVelocity, yVelocity);
 			} else {
@@ -248,6 +279,10 @@ var gameState = {
 		}
   },
 
+	/** @method
+	* @name goToMain
+	* @description this is a function that returns the player to the main menu.
+	*/
   goToMain: function() {
 			if (this.score > this.currentHighscore[0] && this.score != 0 || this.score > 0 && this.currentHighscore[0] == null) {
 			this.currentHighscore.push("\n" + this.score);
