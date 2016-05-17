@@ -4,5 +4,6 @@
   left: 50%;
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
-
+  font-family: 'Passion One', cursive;
 }
+@font-face {	font-family: 'Passion One';	src: url('https://fonts.googleapis.com/css?family=Passion+One')}
