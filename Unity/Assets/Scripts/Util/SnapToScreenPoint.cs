@@ -24,12 +24,6 @@ public class SnapToScreenPoint : MonoBehaviour
     public Vector2 StartSize = Vector2.one;
 
     /// <summary>
-    /// Center of the sprite so one can set a custom pivot
-    /// </summary>
-    [Tooltip("this position will be seen as the center of the object. Should be between -1 and 1")]
-    public Vector2 CenterPosition = Vector2.one / 2f;
-
-    /// <summary>
     /// Should the object be moved in this direction
     /// </summary>
     [SerializeField, Tooltip("Should Object be moved in this direction?")]
@@ -54,12 +48,6 @@ public class SnapToScreenPoint : MonoBehaviour
         //    StartSize.x += transform.localScale.x;
         //    StartSize.y += transform.localScale.y;
         //}
-    }
-
-    void Update()
-    {
-
-        DoMove();
     }
 
     void DoMove()
