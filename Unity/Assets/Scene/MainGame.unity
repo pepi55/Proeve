@@ -367,6 +367,7 @@ MonoBehaviour:
   camera: {fileID: 0}
   screenPosition: {x: 0, y: -100, z: 0}
   StartSize: {x: 1, y: 1}
+  CenterPosition: {x: 0.5, y: 0.5}
   Vertical: 1
   Horizontal: 0
   UsePivot: 1
@@ -1171,6 +1172,7 @@ MonoBehaviour:
   camera: {fileID: 526051443}
   screenPosition: {x: 50, y: -150, z: 0}
   StartSize: {x: 1, y: 1}
+  CenterPosition: {x: 0.5, y: 0.5}
   Vertical: 1
   Horizontal: 0
   UsePivot: 0
@@ -1509,6 +1511,7 @@ MonoBehaviour:
   camera: {fileID: 0}
   screenPosition: {x: 0, y: -80, z: 0}
   StartSize: {x: 1, y: 1.88}
+  CenterPosition: {x: 0.5, y: 0.5}
   Vertical: 1
   Horizontal: 0
   UsePivot: 0
@@ -4046,6 +4049,7 @@ MonoBehaviour:
   camera: {fileID: 526051443}
   screenPosition: {x: 100, y: 0, z: 0}
   StartSize: {x: 1, y: 1}
+  CenterPosition: {x: 0.5, y: 0.5}
   Vertical: 0
   Horizontal: 1
   UsePivot: 0
@@ -4347,6 +4351,7 @@ MonoBehaviour:
   camera: {fileID: 526051443}
   screenPosition: {x: -100, y: 0, z: 0}
   StartSize: {x: 1, y: 1}
+  CenterPosition: {x: 0.5, y: 0.5}
   Vertical: 0
   Horizontal: 1
   UsePivot: 0

@@ -41,18 +41,13 @@ public class SnapToScreenPoint : MonoBehaviour
 
         DoMove();
 
-        if (GetComponent<SpriteRenderer>())
-        {
-            SpriteRenderer spr = GetComponent<SpriteRenderer>();
-            StartSize = spr.bounds.size;
-            StartSize.x += transform.localScale.x;
-            StartSize.y += transform.localScale.y;
-        }
-    }
-
-    void Update()
-    {
-        DoMove();
+        //if (GetComponent<SpriteRenderer>())
+        //{
+        //    SpriteRenderer spr = GetComponent<SpriteRenderer>();
+        //    StartSize = spr.bounds.size;
+        //    StartSize.x += transform.localScale.x;
+        //    StartSize.y += transform.localScale.y;
+        //}
     }
 
     void DoMove()
@@ -62,6 +57,9 @@ public class SnapToScreenPoint : MonoBehaviour
         p1.z = transform.position.z;
         p1.y *= screenPosition.y;
         p1.x *= screenPosition.x;
+
+        Debug.Log(p1 + gameObject.name);
+
         // p1 *= 2f;
         if (!Vertical)
             p1.y = transform.position.y;
