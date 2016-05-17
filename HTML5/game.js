@@ -7,7 +7,7 @@ var hardMode = true;
 /** This is the state in which the game is played. */
 var gameState = {
   // Custom "variables".
-  tweenAPosition: 1950,
+  tweenAPosition: 0,
   tweenBPosition: 70,
 
   textTween: null,
@@ -97,6 +97,8 @@ var gameState = {
 		// sounds
 		tapSound = game.add.audio('tapSound');
 
+		//set tween position
+		this.tweenAPosition = game.world.width - 100;
 		// Add gameobjects to game
 		this.ball = game.add.sprite(game.world.centerX, 20, 'ball');
 		this.goal = game.add.sprite(this.tweenAPosition, game.world.height - 50, 'goal');
@@ -289,6 +291,7 @@ var gameState = {
 			this.currentHighscoreUsers.push(this.randomNames[Math.floor(Math.random() * 5)]);
 			localStorage.setItem('users', JSON.stringify(this.currentHighscoreUsers));
 			localStorage.setItem('highScore', JSON.stringify(this.currentHighscore));
+			localStorage.setItem('highestScore', this.score);
 			}
 		localStorage.setItem('points', points);
 
