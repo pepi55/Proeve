@@ -21,7 +21,7 @@ var optionsState = {
 		}, this);
 		reso1366x768.anchor.setTo(0.5, 0.5);
 
-			var backButton;
+		var backButton;
 		backButton = game.add.button(50, 50, 'button', function() {
 		game.state.start('mainMenu');
 		}, this);
