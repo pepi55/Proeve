@@ -67,6 +67,8 @@
  * Art may not contain empty spaces (i.e. if the picture is 50x50 don't export it as 1024x1024).
  * Make the sizes as a power of 2 as much as possible.
 
+ * Ball images are 128x128 pixels.
+
  * Sounds must be mp3 format.
  * SFX goes into the Art/SFX folder and BGM goes into Art/BGM.
 
