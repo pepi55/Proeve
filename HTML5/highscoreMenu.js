@@ -3,6 +3,7 @@ var highscoreList = new Array();
 var highscoreNameList = new Array();
 var highscoreLadderList = new Array();
 
+/** This is the state in which the game is played. */
 var highscoreState = {
   // Custom "variables".
   style: null,
@@ -19,47 +20,38 @@ var highscoreState = {
     style = {};
 
     //	Font style
-		style.font = 'Arial Black';
-		style.fontSize = 50;
+		style.font = 'Passion One';
+		style.fontSize = 75;
 		style.fontWeight = 'bold';
 
 		//	Stroke color and thickness
-		style.stroke = '#0C090A';
-		style.strokeThickness = 7;
-		style.fill = '#52D017';
+		//style.stroke = '#0C090A';
+		//style.strokeThickness = 7;
+		//style.fill = '#52D017';
 
-   	titleStyle = game.add.text(game.world.centerX, 20, "Highscores");
+					//	Stroke color and thickness
+		style.stroke = '#FFFF00';
+		style.strokeThickness = 3;
+		style.fill = '#FF2828';
+
+   	titleStyle = game.add.text(game.world.centerX - 100, 20, "HIGHSCORES");
     //	Font style
-		titleStyle.font = 'Arial Black';
+		titleStyle.font = 'Passion One';
 		titleStyle.fontSize = 50;
 		titleStyle.fontWeight = 'bold';
-
+console.log(titleStyle.font);
 		//	Stroke color and thickness
 		titleStyle.stroke = '#0020C2';
 		titleStyle.strokeThickness = 5;
 		titleStyle.fill = '#2B65EC';
 
+
+
     var escKey = game.input.keyboard.addKey(Phaser.Keyboard.Q);
 		escKey.onDown.add(this.goToMain, this);
 
-		//input screen to set the name of the highscore user.
-	/*	  var input = new CanvasInput({
-      canvas: document.getElementById('canvas'),
-      fontSize: 18,
-      fontFamily: 'Arial',
-      fontColor: '#212121',
-      fontWeight: 'bold',
-      width: 300,
-      padding: 8,
-      borderWidth: 1,
-      borderColor: '#000',
-      borderRadius: 3,
-      boxShadow: '1px 1px 0px #fff',
-      innerShadow: '0px 0px 5px rgba(0, 0, 0, 0.5)',
-      placeHolder: 'Enter message here...'
-      });*/
 
-       //localStorage.clear();
+
   		var str_highscore = JSON.parse(localStorage.getItem('highScore'));
 
   		if (str_highscore == null || str_highscore == "null") {
@@ -69,7 +61,6 @@ var highscoreState = {
   			highscoreList = str_highscore;
   		}
 
-  		console.log(localStorage.getItem(('users')))
   		var str_users = localStorage.getItem('users');
 
   		if (str_users == null || str_users == "null") {
@@ -78,7 +69,11 @@ var highscoreState = {
   			highscoreNameList = str_users;
   			this.checkScoreValues();
   		}
-  		console.log(game.world.height);
+  		var backButton;
+		  backButton = game.add.button(100, 100, 'backButton', function() {
+		  game.state.start('mainMenu');
+		  }, this);
+		  backButton.anchor.setTo(0.5, 0.5);
   },
 
   update: function() {
@@ -89,6 +84,10 @@ var highscoreState = {
 		  checkScoreKey.onDown.add(this.checkScoreValues, this);
   },
 
+  	/** @method
+	* @name addScore
+	* @description this is a function that adds a score to the highscore list
+	*/
   addScore: function(scoreToAdd) {
     if(typeof scoreToAdd === 'number') {
       console.log(scoreToAdd);
@@ -100,31 +99,38 @@ var highscoreState = {
 
     }
   },
-
+  /** @method
+	* @name addRandomValues
+	* @description this is a function that sends a random number between 0-100 to addscore for developing purposes.
+	*/
   addRandomValues: function(){
     this.addScore(Math.floor((Math.random() * 100) + 1));
   },
+   /** @method
+	* @name checkScoreValues
+	* @description this is a function checks the scores and in the arrays and displays them on the screen.
+	*/
   checkScoreValues: function(){
     //highscoreList.sort(function(a, b){return b-a});
     //console.log(highscoreList.length);
-
+    highscoreLadderList = []
     var sortedList = highscoreList;
     sortedList.sort( function(a,b) { return b - a; } );
       for (var i = 0; i < sortedList.length; i++) {
-     //highscoreLadderList.push("" + i + ": \n");
+     highscoreLadderList.push("" + (i+1) + ".\n");
     }
 
-    var scoreText = game.add.text(game.world.centerX + 300, game.world.centerY, '', style);
+    var scoreText = game.add.text(game.world.centerX - 100 + 100, 200, '', style);
     scoreText.parseList(sortedList);
-    //var ladderText = game.add.text(game.world.centerX, game.world.centerX, '', style);
-    //ladderText.parseList(highscoreLadderList);
+    var ladderText = game.add.text(game.world.centerX - 100, 300, '', style);
+    ladderText.parseList(highscoreLadderList);
     console.log(highscoreNameList);
-    var usersText = game.add.text(game.world.centerX , game.world.centerY + 60 , '', style);
+    //var usersText = game.add.text(game.world.centerX , game.world.centerY + 60 , '', style);
     //usersText.parseList(highscoreNameList);
-    var result = highscoreNameList.replace(/[["]/g, "");
-    var second = result.replace(/[,]/g, ":\n");
+    //var result = highscoreNameList.replace(/[["]/g, "");
+    //var second = result.replace(/[,]/g, ":\n");
     //replace(/[^a-zA-Z ]/g, "")
-    usersText.text = second;
+    //usersText.text = second;
 
   },
     goToMain: function() {
