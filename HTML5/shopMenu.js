@@ -76,6 +76,20 @@ var shopState = {
 			&& parseInt(charactersJSON.characters[i].characterPrice, 10) > 0) {
 				var characterLock = game.add.sprite(100, 200 + 150 * i, 'lock');
 
+				var style = {
+					font: "32px Arial",
+					fill: "#ff0044",
+					wordWrap: true,
+					wordWrapWidth: characterLock.width,
+					align: "center",
+					backgroundColor: "#ffff00"
+				};
+
+				var priceText = game.add.text(characterLock.x, characterLock.y, charactersJSON.characters[i].characterPrice + 'pt$', style);
+				priceText.anchor.set(0.5);
+
+				characterLock.addChild(priceText);
+
 				characterLock.inputEnabled = true;
 				characterLock.scale.setTo(1.1);
 
