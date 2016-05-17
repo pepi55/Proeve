@@ -34,8 +34,7 @@ namespace Menus
 
         private void Awake()
         {
-            GameObject temp = Instantiate(Resources.Load("ShopData")) as GameObject;
-            data = temp.GetComponent<ShopMenuData>();
+            data = ShopMenuData.GetShopMenu();
 
             //check if unlock data exists
             if (SaveManager.savaData.UnlockedCharacters == null)

@@ -34,17 +34,7 @@ public class BallControler : MonoBehaviour
 
     public void ChangeLooks()
     {
-        Menus.ShopMenuData data;
-
-        data = FindObjectOfType<Menus.ShopMenuData>();
-        if(!data)
-        {
-            GameObject gameobj = Instantiate(Resources.Load(Menus.ShopMenuData.ResourceName)) as GameObject;
-
-            data = gameobj.GetComponent<Menus.ShopMenuData>();
-        }
-
-        GetComponent<SpriteRenderer>().sprite = data.Characters[SaveManager.savaData.SelectedCharacter].LowRes;
+        GetComponent<SpriteRenderer>().sprite = Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].LowRes;
     }
 
     public void OnDestroy()
@@ -114,11 +104,14 @@ public class BallControler : MonoBehaviour
                 {
                     dir = ((Vector2)Camera.main.WorldToViewportPoint(transform.position));
                     dir.Scale(new Vector2(Screen.width, Screen.height));
-                    dir = position - dir;
+                    dir = dir - position;
                     dir = Util.Common.AngleToVector(Util.Common.VectorToAngle(dir));
                 }
+
+                Events.GlobalEvents.Invoke(new Events.IBallMove(dir, transform.position));
+
                 //dir = new Vector2(-dir.x, dir.y * Physics2D.gravity.y);
-                dir = -dir * 350 * rigidbody2D.mass; //TODO tweak with force to make the ball more reactive
+                dir *= 350 * rigidbody2D.mass; //TODO tweak with force to make the ball more reactive
                 dir.y *= rigidbody2D.gravityScale;
 
                 rigidbody2D.AddTorque(dir.x/10);
@@ -127,7 +120,6 @@ public class BallControler : MonoBehaviour
                 if (rigidbody2D.angularVelocity < -10)
                     rigidbody2D.angularVelocity = -10;
                 rigidbody2D.AddForce(dir);
-
             }
         }
     }

@@ -4,6 +4,19 @@ namespace Menus
 {
     public class ShopMenuData : MonoBehaviour
     {
+        public static ShopMenuData GetShopMenu()
+        {
+            ShopMenuData data;
+            data = FindObjectOfType<Menus.ShopMenuData>();
+            if (!data)
+            {
+                GameObject gameobj = Instantiate(Resources.Load(Menus.ShopMenuData.ResourceName)) as GameObject;
+
+                data = gameobj.GetComponent<Menus.ShopMenuData>();
+            }
+
+            return data;
+        }
 
         public const string ResourceName = "ShopData";
 
@@ -60,6 +73,20 @@ namespace Menus
                         return lowRes;
                     }
                     return Sprite.Create(new Texture2D(512, 512), new Rect(0, 0, 512, 512), Vector2.one / 2f);
+                }
+            }
+
+            [SerializeField]
+            Material particleMaterial;
+            public Material ParticleMaterial
+            {
+                get
+                {
+                    if (particleMaterial)
+                    {
+                        return particleMaterial;
+                    }
+                    return (Material)Resources.Load("DefaultParticleMaterial");
                 }
             }
         }
