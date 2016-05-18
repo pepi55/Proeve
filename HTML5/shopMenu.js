@@ -61,9 +61,17 @@ var shopState = {
 		pointsText = game.add.text(game.world.centerX, 20, "Points: " + points);
 
 		var charactersJSON = game.cache.getJSON('characters');
+		var xPos = 200;
 
 		for (var i = 0; i < charactersJSON.characters.length; i++) {
-			var characterButton = game.add.button(100, 200 + 150 * i, 'character' + i, function() {
+			if (i % 5 == 0) {
+				xPos += 250;
+				yPos = 0;
+			}
+
+			yPos += 250;
+
+			var characterButton = game.add.button(xPos, yPos, 'character' + i, function() {
 				localStorage.setItem('characterImage', this.charImg);
 				localStorage.setItem('characterSound', this.charSnd);
 			}, { charSnd: charactersJSON.characters[i].sound, charImg: charactersJSON.characters[i].image });
@@ -74,7 +82,7 @@ var shopState = {
 
 			if (localStorage.getItem('pricePaid' + i) != charactersJSON.characters[i].characterPrice
 			&& parseInt(charactersJSON.characters[i].characterPrice, 10) > 0) {
-				var characterLock = game.add.sprite(100, 200 + 150 * i, 'lock');
+				var characterLock = game.add.sprite(xPos, yPos, 'lock');
 
 				var style = {
 					font: "32px Arial",
@@ -88,7 +96,7 @@ var shopState = {
 				var priceText = game.add.text(characterLock.x, characterLock.y, charactersJSON.characters[i].characterPrice + 'pt$', style);
 				priceText.anchor.set(0.5);
 
-				characterLock.addChild(priceText);
+				//characterLock.addChild(priceText);
 
 				characterLock.inputEnabled = true;
 				characterLock.scale.setTo(1.1);
