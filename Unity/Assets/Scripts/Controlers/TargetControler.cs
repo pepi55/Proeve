@@ -63,14 +63,14 @@ public class TargetControler : MonoBehaviour
 
         if (dir > 0)
         {
-            if (Vector3.Distance(EndRight, transform.position) < 1f)
+            if (transform.position.x > EndRight.x)
             {
                 dir = -1;
             }
         }
         else if (dir < 0) 
         {
-            if (Vector3.Distance(EndLeft, transform.position) < 1f)
+            if (transform.position.x < EndLeft.x) 
             {
                 dir = 1;
             }
