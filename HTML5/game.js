@@ -72,7 +72,6 @@ var gameState = {
 		game.load.image('background', 'assets/background/background.0.png');
 		game.load.image('ball', 'assets/balls/' + character);
 		game.load.image('goal', 'assets/goal/goal.0.png');
-
 		game.load.image('wall', 'assets/image.png');
 
 		game.load.audio('tapSound', 'assets/audio/soundeffect/' + tapSound);
@@ -86,7 +85,7 @@ var gameState = {
 		// this has to be active for the fps to be counting.
 		game.time.advancedTiming = true;
 
-		game.stage.backgroundColor = '#C85A17';
+
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.physics.arcade.gravity.y = 1500;
 
@@ -220,7 +219,6 @@ var gameState = {
     //game.state.start('game');
     this.score += this.tempScore + 1;
     this.tempScore = 0;
-    points += this.score;
 
     this.setScoreText();
     this.ball.body.velocity.setTo(0, 0);
@@ -285,17 +283,20 @@ var gameState = {
 	* @name goToMain
 	* @description this is a function that returns the player to the main menu.
 	*/
-  goToMain: function() {
-			if (this.score > this.currentHighscore[0] && this.score != 0 || this.score > 0 && this.currentHighscore[0] == null) {
+	goToMain: function() {
+		if (this.score > this.currentHighscore[0] && this.score != 0 || this.score > 0 && this.currentHighscore[0] == null) {
 			this.currentHighscore.push("\n" + this.score);
 			this.currentHighscoreUsers.push(this.randomNames[Math.floor(Math.random() * 5)]);
 			localStorage.setItem('users', JSON.stringify(this.currentHighscoreUsers));
 			localStorage.setItem('highScore', JSON.stringify(this.currentHighscore));
 			localStorage.setItem('highestScore', this.score);
-			}
-		localStorage.setItem('points', points);
+		}
 
+		deathState.setScreenValues(this.score,this.currentHighscore[0]);
+		localStorage.setItem('points', points);
+		points += this.score;
 		this.score = 0;
-		game.state.start('mainMenu');
-  },
+
+		game.state.start('deathScreen');
+	},
 };
