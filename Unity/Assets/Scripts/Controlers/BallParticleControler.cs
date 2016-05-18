@@ -71,7 +71,7 @@ public class BallParticleControler : MonoBehaviour
         if (m_System == null)
         {
             m_System = GetComponent<ParticleSystem>();
-            GetComponent<ParticleSystemRenderer>().material = Menus.ShopMenuData.GetShopMenu().Backgrounds[SaveManager.savaData.SelectedCharacter].ParticleMaterial;
+            GetComponent<ParticleSystemRenderer>().material = Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial;
         }
 
         if (m_Particles == null || m_Particles.Length < m_System.maxParticles)

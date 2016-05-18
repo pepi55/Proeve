@@ -3967,8 +3967,8 @@ GameObject:
   - 61: {fileID: 1902307365}
   - 114: {fileID: 1902307369}
   m_Layer: 8
-  m_Name: right
-  m_TagString: Untagged
+  m_Name: 
+  m_TagString: Side
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -4268,8 +4268,8 @@ GameObject:
   - 61: {fileID: 2111408522}
   - 114: {fileID: 2111408526}
   m_Layer: 8
-  m_Name: left
-  m_TagString: Untagged
+  m_Name: 
+  m_TagString: Side
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
