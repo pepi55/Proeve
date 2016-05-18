@@ -293,8 +293,9 @@ var gameState = {
 		}
 
 		deathState.setScreenValues(this.score,this.currentHighscore[0]);
-		localStorage.setItem('points', points);
 		points += this.score;
+
+		localStorage.setItem('points', points);
 		this.score = 0;
 
 		game.state.start('deathScreen');
