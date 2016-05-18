@@ -367,7 +367,6 @@ MonoBehaviour:
   camera: {fileID: 0}
   screenPosition: {x: 0, y: -100, z: 0}
   StartSize: {x: 1, y: 1}
-  CenterPosition: {x: 0.5, y: 0.5}
   Vertical: 1
   Horizontal: 0
   UsePivot: 1
@@ -1172,7 +1171,6 @@ MonoBehaviour:
   camera: {fileID: 526051443}
   screenPosition: {x: 50, y: -150, z: 0}
   StartSize: {x: 1, y: 1}
-  CenterPosition: {x: 0.5, y: 0.5}
   Vertical: 1
   Horizontal: 0
   UsePivot: 0
@@ -1435,8 +1433,8 @@ MonoBehaviour:
   LeftWall: {fileID: 2111408525}
   RightWall: {fileID: 1902307368}
   speed: 0
-  MaxSpeed: 8
-  scoreCurvMax: 20
+  MaxSpeed: 16
+  scoreCurvMax: 100
 --- !u!23 &1181793034
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1511,7 +1509,6 @@ MonoBehaviour:
   camera: {fileID: 0}
   screenPosition: {x: 0, y: -80, z: 0}
   StartSize: {x: 1, y: 1.88}
-  CenterPosition: {x: 0.5, y: 0.5}
   Vertical: 1
   Horizontal: 0
   UsePivot: 0
@@ -4049,7 +4046,6 @@ MonoBehaviour:
   camera: {fileID: 526051443}
   screenPosition: {x: 100, y: 0, z: 0}
   StartSize: {x: 1, y: 1}
-  CenterPosition: {x: 0.5, y: 0.5}
   Vertical: 0
   Horizontal: 1
   UsePivot: 0
@@ -4351,7 +4347,6 @@ MonoBehaviour:
   camera: {fileID: 526051443}
   screenPosition: {x: -100, y: 0, z: 0}
   StartSize: {x: 1, y: 1}
-  CenterPosition: {x: 0.5, y: 0.5}
   Vertical: 0
   Horizontal: 1
   UsePivot: 0
