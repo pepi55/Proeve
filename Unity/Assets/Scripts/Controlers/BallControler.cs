@@ -13,9 +13,6 @@ public class BallControler : MonoBehaviour
     //tempvalue for when game is paused
     Vector2 savedSpeed;
 
-    bool useLocalRelativePosition = true;
-    bool UseXAxis = true;
-
     /// <summary>
     /// ball is frozen into place
     /// </summary>
@@ -35,6 +32,10 @@ public class BallControler : MonoBehaviour
         ChangeLooks();
     }
 
+    /// <summary>
+    /// Swaps sprite of the object currently
+    /// Also swaps animation controler of the ball
+    /// </summary>
     public void ChangeLooks()
     {
         GetComponent<SpriteRenderer>().sprite = Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].LowRes;
@@ -203,33 +204,7 @@ public class BallControler : MonoBehaviour
             return;
         }
 
-        if (UseXAxis)
-        {
-            rigidbody2D.constraints = RigidbodyConstraints2D.None;
-        }
-        else
-        {
             transform.position = new Vector3(0, transform.position.y, transform.position.z);
             rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX;
-        }
     }
-
-    ///// <summary>
-    ///// Used for Debuging and Trying out diffrent styles of ball movement and controle
-    ///// </summary>
-    //public void OnGUI()
-    //{
-    //    if (GUI.Button(new Rect(new Vector2(0, 0), new Vector2(230, 30)), useLocalRelativePosition ? "Switch to static center point mode" : "Switch to relative to ball mode"))
-    //    {
-    //        useLocalRelativePosition = !useLocalRelativePosition;
-    //    }
-
-    //    if (GUI.Button(new Rect(new Vector2(0, 35), new Vector2(230, 30)), UseXAxis ? "Don't Use X Axis" : "Use X Axis"))
-    //    {
-    //        UseXAxis = !UseXAxis;
-
-    //        SetConstraints();
-    //    }
-
-    //}
 }
