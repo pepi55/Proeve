@@ -569,7 +569,7 @@ TextureImporter:
         - {x: 64, y: 56}
         - {x: 50, y: 64}
     outline: []
-  spritePackingTag: 
+  spritePackingTag: Animations
   userData: 
   assetBundleName: 
   assetBundleVariant: 
