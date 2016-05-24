@@ -12,18 +12,20 @@ var deathState = {
 
   	this.background = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'background');
   	this.screenSprite = game.add.sprite(game.world.centerX , game.world.centerY, 'deathscreenBackground');
-  	this.screenSprite.anchor.setTo(0.35, 0.6);
+  	this.screenSprite.anchor.setTo(0.5, 0.5);
+  	this.screenSprite.scale.setTo(1.5,1.5);
 		var backButton;
-		backButton = game.add.button(game.world.centerX, game.world.centerY + 60, 'backButton', function() {
+		backButton = game.add.button(100, 100, 'backButton', function() {
 		game.state.start('mainMenu');
 		}, this);
 		backButton.anchor.setTo(0.5, 0.5);
 
 		var replayButton;
-		replayButton = game.add.button(game.world.centerX + 200, game.world.centerY, 'playButton', function() {
+		replayButton = game.add.button(game.world.centerX - 90, game.world.centerY + 90, 'playButton', function() {
 		game.state.start('game');
 		}, this);
-		backButton.anchor.setTo(0.5, 0.5);
+		//replayButton.anchor.setTo(0.5, 0.5);
+		replayButton.scale.setTo(0.75,0.75);
 
 
 		style = {};
@@ -43,9 +45,12 @@ var deathState = {
 		style.fill = '#FF2828';
 
 
-		var	highscoreText = game.add.text(game.world.centerX - 50, game.world.centerY - 200, "Highest = " + deathHighestScoreValue,style);
-		var	scoreText = game.add.text(game.world.centerX - 50, game.world.centerY - 100, "Score     = "  + deathScoreValue,style);
-		var	loseText = game.add.text(game.world.centerX, game.world.centerY - 300, "Replay?",style);
+		var	highscoreText = game.add.text(game.world.centerX, game.world.centerY - 100, "Highest = " + deathHighestScoreValue,style);
+		var	scoreText = game.add.text(game.world.centerX, game.world.centerY, "Score   = "  + deathScoreValue,style);
+		var	loseText = game.add.text(game.world.centerX, game.world.centerY - 200, "Replay?",style);
+		highscoreText.anchor.setTo(0.5);
+		scoreText.anchor.setTo(0.5);
+		loseText.anchor.setTo(0.5);
 
 
   },
