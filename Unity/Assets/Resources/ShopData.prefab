@@ -139,6 +139,12 @@ MonoBehaviour:
     lowRes: {fileID: 21300000, guid: 5d8517758453bc44eb2b8cfb2111ade0, type: 3}
     particleMaterial: {fileID: 0}
     animationControler: {fileID: 0}
+  - Cost: 30
+    Name: 
+    highRes: {fileID: 21300000, guid: 3cda24d225edc2a47a666e2ae3d3648d, type: 3}
+    lowRes: {fileID: 21300000, guid: 3cda24d225edc2a47a666e2ae3d3648d, type: 3}
+    particleMaterial: {fileID: 0}
+    animationControler: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
