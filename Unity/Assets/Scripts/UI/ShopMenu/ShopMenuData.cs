@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 namespace Menus
 {
     public class ShopMenuData : MonoBehaviour
@@ -41,6 +43,16 @@ namespace Menus
             {
                 return backgrounds;
             }
+        }
+
+        [ContextMenu("removeItem")]
+        public void RemoveObj()
+        {
+            List<StoreObject> Newcharacters = characters.ToList();
+
+            Newcharacters.RemoveAt(7);
+
+            characters = Newcharacters.ToArray();
         }
 
         [System.Serializable]
