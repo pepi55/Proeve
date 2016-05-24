@@ -2,26 +2,55 @@
 using System.Collections;
 
 [RequireComponent(typeof(ParticleSystem))]
-public class BallParticleControler : MonoBehaviour
+public class BallAnimationController : MonoBehaviour
 {
 
     ParticleSystem m_System;
     ParticleSystem.Particle[] m_Particles;
 
+    Animator animator;
 
     public Material ParticleMaterial { get; set; }
 
     [SerializeField]
     float radius = 0.5f;
 
+    bool AnimatorActive;
+    bool ParticleActive;
+
     void Start()
     {
-        Events.GlobalEvents.AddEventListener<Events.IBallMove>(OnBallMove);
+        if (Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].AnimationControler)
+        {
+            animator = GetComponent<Animator>();
+            animator.runtimeAnimatorController = Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].AnimationControler;
+            Events.GlobalEvents.AddEventListener<Events.IBallMove>(OnBallMoveAnimator);
+            AnimatorActive = true;
+        }
+        else
+        {
+            GetComponent<Animator>().enabled = false;
+        }
+
+        if (Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial)
+        {
+            InitializeIfNeeded();
+            Events.GlobalEvents.AddEventListener<Events.IBallMove>(OnBallMoveParticle);
+            ParticleActive = true;
+        }
     }
 
     public void OnDestroy()
     {
-        Events.GlobalEvents.RemoveEventListener<Events.IBallMove>(OnBallMove);
+        if (ParticleActive)
+        {
+            Events.GlobalEvents.RemoveEventListener<Events.IBallMove>(OnBallMoveParticle);
+        }
+
+        if (AnimatorActive)
+        {
+            Events.GlobalEvents.RemoveEventListener<Events.IBallMove>(OnBallMoveAnimator);
+        }
     }
 
     /// <summary>
@@ -29,7 +58,7 @@ public class BallParticleControler : MonoBehaviour
     /// This function create the particles that give feedback when the player clicks
     /// </summary>
     /// <param name="obj">Givven parameter that contains the ball direction and the current ball position</param>
-    private void OnBallMove(Events.IBallMove obj)
+    private void OnBallMoveParticle(Events.IBallMove obj)
     {
         InitializeIfNeeded();
 
@@ -76,7 +105,11 @@ public class BallParticleControler : MonoBehaviour
 
         if (m_Particles == null || m_Particles.Length < m_System.maxParticles)
             m_Particles = new ParticleSystem.Particle[m_System.maxParticles];
-
-
     }
+
+    private void OnBallMoveAnimator(Events.IBallMove obj)
+    {
+        animator.SetTrigger("click");
+    }
+
 }

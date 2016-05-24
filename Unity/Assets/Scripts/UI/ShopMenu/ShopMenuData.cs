@@ -86,9 +86,25 @@ namespace Menus
                     {
                         return particleMaterial;
                     }
-                    return (Material)Resources.Load("DefaultParticleMaterial");
+                    // return (Material)Resources.Load("DefaultParticleMaterial");
+                    return null;
                 }
             }
+
+            [SerializeField]
+            RuntimeAnimatorController animationControler;
+            public RuntimeAnimatorController AnimationControler
+            {
+                get
+                {
+                    if (animationControler)
+                    {
+                        return animationControler;
+                    }
+                    return null;
+                }
+            }
+
         }
     }
 }

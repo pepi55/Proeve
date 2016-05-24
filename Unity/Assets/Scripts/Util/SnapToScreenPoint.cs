@@ -58,8 +58,6 @@ public class SnapToScreenPoint : MonoBehaviour
         p1.y *= screenPosition.y;
         p1.x *= screenPosition.x;
 
-        Debug.Log(p1 + gameObject.name);
-
         // p1 *= 2f;
         if (!Vertical)
             p1.y = transform.position.y;

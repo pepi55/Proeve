@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class BallControler : MonoBehaviour
+public class BallController : MonoBehaviour
 {
 
     new Rigidbody2D rigidbody2D;
@@ -17,6 +17,8 @@ public class BallControler : MonoBehaviour
     /// ball is frozen into place
     /// </summary>
     bool frozen; //TODO Change frozen to is kinametic from ridgidbody2d
+
+    bool useAnimator; //Enables use of the Animator if asigned
 
     // Use this for initialization
     void Start()
@@ -204,7 +206,7 @@ public class BallControler : MonoBehaviour
             return;
         }
 
-            transform.position = new Vector3(0, transform.position.y, transform.position.z);
-            rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX;
+            //transform.position = new Vector3(0, transform.position.y, transform.position.z);
+            rigidbody2D.constraints = RigidbodyConstraints2D.None;
     }
 }
