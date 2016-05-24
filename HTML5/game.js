@@ -284,7 +284,7 @@ var gameState = {
 	* @description this is a function that returns the player to the main menu.
 	*/
 	goToMain: function() {
-		if (this.score > this.currentHighscore[0] && this.score != 0 || this.score > 0 && this.currentHighscore[0] == null) {
+		if (this.score > localStorage.getItem('highestScore') && this.score != 0 || this.score > 0 && this.currentHighscore[0] == null) {
 			this.currentHighscore.push("\n" + this.score);
 			this.currentHighscoreUsers.push(this.randomNames[Math.floor(Math.random() * 5)]);
 			localStorage.setItem('users', JSON.stringify(this.currentHighscoreUsers));
@@ -292,7 +292,7 @@ var gameState = {
 			localStorage.setItem('highestScore', this.score);
 		}
 
-		deathState.setScreenValues(this.score,this.currentHighscore[0]);
+		deathState.setScreenValues(this.score, localStorage.getItem('highestScore'));
 		points += this.score;
 
 		localStorage.setItem('points', points);

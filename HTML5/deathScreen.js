@@ -5,21 +5,21 @@ var deathState = {
   deathScoreValue: 0,
   deathHighestScoreValue: 0,
   preload: function(){
-  			game.load.image('deathscreenBackground', 'assets/deathScreen.png');
+  			game.load.image('deathscreenBackground', 'assets/UI/deathScreen.png');
   },
   create: function() {
 
 
-  		this.background = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'background');
-  			this.screenSprite = game.add.sprite(game.world.centerX , game.world.centerY, 'deathscreenBackground');
-  				this.screenSprite.anchor.setTo(0.35, 0.6);
-			var backButton;
+  	this.background = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'background');
+  	this.screenSprite = game.add.sprite(game.world.centerX , game.world.centerY, 'deathscreenBackground');
+  	this.screenSprite.anchor.setTo(0.35, 0.6);
+		var backButton;
 		backButton = game.add.button(game.world.centerX, game.world.centerY + 60, 'backButton', function() {
 		game.state.start('mainMenu');
 		}, this);
 		backButton.anchor.setTo(0.5, 0.5);
 
-			var replayButton;
+		var replayButton;
 		replayButton = game.add.button(game.world.centerX + 200, game.world.centerY, 'playButton', function() {
 		game.state.start('game');
 		}, this);
@@ -52,6 +52,13 @@ var deathState = {
   setScreenValues: function(score,highestscore) {
 	deathScoreValue = score;
 	deathHighestScoreValue = highestscore;
-	deathHighestScoreValue = deathHighestScoreValue.replace(/\D/g,'');
+	if(highestscore == null)
+	{
+		deathHighestScoreValue = 0;
+	}
+	else
+	{
+	deathHighestScoreValue = deathHighestScoreValue;
+	}
   }
 };
