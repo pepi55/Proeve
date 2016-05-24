@@ -7,11 +7,11 @@ public class BallControler : MonoBehaviour
 
     new Rigidbody2D rigidbody2D;
 
+    Vector2 lastClickDir;
+    int wallBoucnes = 0;
+
     //tempvalue for when game is paused
     Vector2 savedSpeed;
-
-    bool useLocalRelativePosition = true;
-    bool UseXAxis = true;
 
     /// <summary>
     /// ball is frozen into place
@@ -32,6 +32,10 @@ public class BallControler : MonoBehaviour
         ChangeLooks();
     }
 
+    /// <summary>
+    /// Swaps sprite of the object currently
+    /// Also swaps animation controler of the ball
+    /// </summary>
     public void ChangeLooks()
     {
         GetComponent<SpriteRenderer>().sprite = Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].LowRes;
@@ -81,10 +85,10 @@ public class BallControler : MonoBehaviour
         //StartCoroutine(ballFreeze(0.5f, 0.0f));
     }
 
-/// <summary>
-/// Call in inputManager handles force adding for the ball
-/// </summary>
-/// <param name="position"></param>
+    /// <summary>
+    /// Call in inputManager handles force adding for the ball
+    /// </summary>
+    /// <param name="position"></param>
     private void InputManager_onClick(Vector2 position)
     {
         if (isActiveAndEnabled)
@@ -95,30 +99,27 @@ public class BallControler : MonoBehaviour
             if (transform.position.y < 12f)
             {
                 Vector2 dir;
-                if (!useLocalRelativePosition)
-                {
-                    dir = position - new Vector2(Screen.width / 2f, Screen.height / 2f);
-                    dir = Util.Common.AngleToVector(Util.Common.VectorToAngle(dir));
-                }
-                else
-                {
-                    dir = ((Vector2)Camera.main.WorldToViewportPoint(transform.position));
-                    dir.Scale(new Vector2(Screen.width, Screen.height));
-                    dir = dir - position;
-                    dir = Util.Common.AngleToVector(Util.Common.VectorToAngle(dir));
-                }
+                dir = ((Vector2)Camera.main.WorldToViewportPoint(transform.position));
+                dir.Scale(new Vector2(Screen.width, Screen.height));
+                dir = dir - position;               
+                dir = Util.Common.AngleToVector(Util.Common.VectorToAngle(dir));
+
+                lastClickDir = dir;
 
                 Events.GlobalEvents.Invoke(new Events.IBallMove(dir, transform.position));
+
+                wallBoucnes = 0;
 
                 //dir = new Vector2(-dir.x, dir.y * Physics2D.gravity.y);
                 dir *= 350 * rigidbody2D.mass; //TODO tweak with force to make the ball more reactive
                 dir.y *= rigidbody2D.gravityScale;
 
-                rigidbody2D.AddTorque(dir.x/10);
+                rigidbody2D.AddTorque(dir.x / 10);
                 if (rigidbody2D.angularVelocity > 10)
                     rigidbody2D.angularVelocity = 10;
                 if (rigidbody2D.angularVelocity < -10)
                     rigidbody2D.angularVelocity = -10;
+
                 rigidbody2D.AddForce(dir);
             }
         }
@@ -132,7 +133,7 @@ public class BallControler : MonoBehaviour
     {
         if (collision.transform.tag == "ScoreTarget")
         {
-            Events.GlobalEvents.Invoke(new Events.IScore());
+            Events.GlobalEvents.Invoke(new Events.IScore(wallBoucnes, lastClickDir));
             StartCoroutine(ballResetDelay(0.2f));
             StartCoroutine(ballFreeze(0.5f, 0.2f));
             rigidbody2D.velocity = Vector2.zero;
@@ -147,6 +148,10 @@ public class BallControler : MonoBehaviour
            // StartCoroutine(ballResetDelay(0.2f));
            // StartCoroutine(ballFreeze(0.5f, 0.2f));
             Events.GlobalEvents.Invoke(new Events.IPlayerHitBottom());
+        }
+        else if(collision.transform.tag == "Side")
+        {
+            wallBoucnes++;
         }
     }
 
@@ -199,33 +204,7 @@ public class BallControler : MonoBehaviour
             return;
         }
 
-        if (UseXAxis)
-        {
-            rigidbody2D.constraints = RigidbodyConstraints2D.None;
-        }
-        else
-        {
             transform.position = new Vector3(0, transform.position.y, transform.position.z);
             rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX;
-        }
     }
-
-    ///// <summary>
-    ///// Used for Debuging and Trying out diffrent styles of ball movement and controle
-    ///// </summary>
-    //public void OnGUI()
-    //{
-    //    if (GUI.Button(new Rect(new Vector2(0, 0), new Vector2(230, 30)), useLocalRelativePosition ? "Switch to static center point mode" : "Switch to relative to ball mode"))
-    //    {
-    //        useLocalRelativePosition = !useLocalRelativePosition;
-    //    }
-
-    //    if (GUI.Button(new Rect(new Vector2(0, 35), new Vector2(230, 30)), UseXAxis ? "Don't Use X Axis" : "Use X Axis"))
-    //    {
-    //        UseXAxis = !UseXAxis;
-
-    //        SetConstraints();
-    //    }
-
-    //}
 }

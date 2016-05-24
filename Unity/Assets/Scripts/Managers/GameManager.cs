@@ -66,7 +66,13 @@ public class GameManager : MonoBehaviour
     /// <param name="obj">object argement is not releivant for this event as it does not contain anything</param>
     private void AddPoint(Events.IScore obj)
     {
-        score++;
+        int addScore = obj.bounces + 1;
+        if (obj.lastDir.y < -0.3)
+        {
+            addScore++;
+        }
+
+        score += addScore;
 
         if (OnScoreUpdate != null)
             OnScoreUpdate();
