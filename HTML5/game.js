@@ -70,7 +70,7 @@ var gameState = {
 		this.walls = game.add.group();
 
 		game.load.image('background', 'assets/background/background.0.png');
-		game.load.image('ball', 'assets/balls/' + character);
+		game.load.spritesheet('ball', 'assets/balls/' + character, 128, 128);
 		game.load.image('goal', 'assets/goal/goal.0.png');
 		game.load.image('wall', 'assets/image.png');
 
@@ -84,7 +84,6 @@ var gameState = {
   create: function() {
 		// this has to be active for the fps to be counting.
 		game.time.advancedTiming = true;
-
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.physics.arcade.gravity.y = 1500;
@@ -101,6 +100,10 @@ var gameState = {
 		// Add gameobjects to game
 		this.ball = game.add.sprite(game.world.centerX, 20, 'ball');
 		this.goal = game.add.sprite(this.tweenAPosition, game.world.height - 50, 'goal');
+
+		this.ball.animations.add('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 10, false);
+		this.ball.animations.add('tapnimation', [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], 24, false);
+		this.ball.animations.play('idle');
 
 /*
 		this.wall1 = game.add.sprite(-70, game.world.height, 'wall1');
@@ -186,10 +189,14 @@ var gameState = {
 			this.goToMain();
 		}
 
-		if(this.goal.world.x == this.tweenAPosition) {
+		if (this.goal.world.x == this.tweenAPosition) {
 			tweenB.start();
 		} else if(this.goal.world.x == this.tweenBPosition) {
 			tweenA.start();
+		}
+
+		if (this.ball.animations.currentAnim.isFinished) {
+			this.ball.animations.play('idle');
 		}
   },
 
@@ -243,6 +250,7 @@ var gameState = {
 		var yVelocity = 0;
 		this.tempScore = 0;
 		tapSound.play();
+		this.ball.animations.play('tapnimation');
 
 		if (game.input.activePointer.y > this.ball.y) {
 		  yVelocity = -800;

@@ -17,7 +17,7 @@ var shopState = {
 			if (charactersJSON != null) {
 				if (charactersJSON.characters != null) {
 					for (var i = 0; i < charactersJSON.characters.length; i++) {
-						game.load.image('character' + i, 'assets/balls/' + charactersJSON.characters[i].image);
+						game.load.spritesheet('character' + i, 'assets/balls/' + charactersJSON.characters[i].image, 128, 128);
 					}
 				}
 			}
