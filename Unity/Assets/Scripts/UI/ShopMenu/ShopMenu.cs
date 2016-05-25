@@ -156,6 +156,8 @@ namespace Menus
             GameObject gameObj;
             MenuItem MI;
 
+            BackgroundContent.sizeDelta = new Vector2(BackgroundContent.sizeDelta.x * l, BackgroundContent.sizeDelta.y);
+
             for (int i = 0; i < l; i++)
             {
                 //setting up template Object
@@ -272,6 +274,7 @@ namespace Menus
             StorePointsIndicator.text = "You have " + SaveManager.savaData.StorePoints + " left to spent";
         }
 
+        [System.Serializable]
         class MenuItem
         {
             public Button SelectButton;
