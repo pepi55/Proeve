@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: 5d8517758453bc44eb2b8cfb2111ade0
-timeCreated: 1464166011
+guid: 0761070ae4bbb324689ca422a1900edc
+timeCreated: 1464169624
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: background.0_0
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,7 +29,7 @@ TextureImporter:
   textureFormat: -1
   maxTextureSize: 2048
   textureSettings:
-    filterMode: 1
+    filterMode: -1
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -39,33 +38,18 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 7
-  spritePivot: {x: 0.5, y: 0}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites:
-    - name: background.0_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 256
-        width: 2048
-        height: 1536
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -1024, y: 768}
-        - {x: -1024, y: -768}
-        - {x: 1024, y: -768}
-        - {x: 1024, y: 768}
+    sprites: []
     outline: []
   spritePackingTag: Main
   userData: 
