@@ -101,9 +101,12 @@ var gameState = {
 		this.ball = game.add.sprite(game.world.centerX, 20, 'ball');
 		this.goal = game.add.sprite(this.tweenAPosition, game.world.height - 50, 'goal');
 
-		this.ball.animations.add('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 10, false);
-		this.ball.animations.add('tapnimation', [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], 24, false);
-		this.ball.animations.play('idle');
+		this.ballIsAnimated = this.ball.animations.validateFrames([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+		if (this.ballIsAnimated) {
+			this.ball.animations.add('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 10, false);
+			this.ball.animations.add('tapnimation', [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], 24, false);
+			this.ball.animations.play('idle');
+		}
 
 /*
 		this.wall1 = game.add.sprite(-70, game.world.height, 'wall1');
@@ -195,7 +198,7 @@ var gameState = {
 			tweenA.start();
 		}
 
-		if (this.ball.animations.currentAnim.isFinished) {
+		if (this.ballIsAnimated && this.ball.animations.currentAnim.isFinished) {
 			this.ball.animations.play('idle');
 		}
   },
@@ -230,7 +233,7 @@ var gameState = {
     this.setScoreText();
     this.ball.body.velocity.setTo(0, 0);
     this.ball.body.angularVelocity = 0;
-    this.ball.position.x = game.world.randomX;
+    this.ball.position.x = game.rnd.randomInRange(tweenA, tweenB);
     this.ball.position.y = 0;
   },
 
@@ -250,7 +253,10 @@ var gameState = {
 		var yVelocity = 0;
 		this.tempScore = 0;
 		tapSound.play();
-		this.ball.animations.play('tapnimation');
+
+		if (this.ballIsAnimated) {
+			this.ball.animations.play('tapnimation');
+		}
 
 		if (game.input.activePointer.y > this.ball.y) {
 		  yVelocity = -800;
