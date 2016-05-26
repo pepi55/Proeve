@@ -1,9 +1,10 @@
 fileFormatVersion: 2
-guid: 63afd19c4cb5a1e4083745af6b5d85b9
-timeCreated: 1464169631
+guid: 6282a7da161a39e4aaccda8db0d974d3
+timeCreated: 1464245008
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: shopback_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -38,7 +39,7 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -49,7 +50,22 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: shopback_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 255
+        width: 2048
+        height: 1538
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -1024, y: 769}
+        - {x: -1024, y: -769}
+        - {x: 1024, y: -769}
+        - {x: 1024, y: 769}
     outline: []
   spritePackingTag: Main
   userData: 
