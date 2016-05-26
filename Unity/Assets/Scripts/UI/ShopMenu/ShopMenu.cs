@@ -271,7 +271,7 @@ namespace Menus
         /// </summary>
         void UpdateStorePointText()
         {
-            StorePointsIndicator.text = "You have " + SaveManager.savaData.StorePoints + " left to spent";
+            StorePointsIndicator.text = "You have " + SaveManager.savaData.StorePoints + " peso left to spent";
         }
 
         [System.Serializable]
@@ -321,7 +321,7 @@ namespace Menus
                     switch (tex.name)
                     {
                         case "cost":
-                            tex.text = "Requires " + data[indexPosition].Cost + " points to buy";
+                            tex.text = data[indexPosition].Cost + " peso";
                             break;
 
                         case "name":
