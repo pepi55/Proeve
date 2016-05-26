@@ -8,7 +8,7 @@ var hardMode = true;
 var gameState = {
   // Custom "variables".
   tweenAPosition: 0,
-  tweenBPosition: 70,
+  tweenBPosition: 300,
 
   textTween: null,
   text: null,
@@ -96,7 +96,7 @@ var gameState = {
 		tapSound = game.add.audio('tapSound');
 
 		//set tween position
-		this.tweenAPosition = game.world.width - 100;
+		this.tweenAPosition = game.world.width - 300;
 		// Add gameobjects to game
 		this.ball = game.add.sprite(game.world.centerX, 20, 'ball');
 		this.goal = game.add.sprite(this.tweenAPosition, game.world.height - 50, 'goal');
@@ -233,7 +233,7 @@ var gameState = {
     this.setScoreText();
     this.ball.body.velocity.setTo(0, 0);
     this.ball.body.angularVelocity = 0;
-    this.ball.position.x = game.rnd.randomInRange(tweenA, tweenB);
+    this.ball.position.x = game.rnd.integerInRange(this.tweenAPosition,this.tweenBPosition);
     this.ball.position.y = 0;
   },
 

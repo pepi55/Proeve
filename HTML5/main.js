@@ -9,5 +9,4 @@ game.state.add('highscore', this.highscoreState);
 game.state.add('deathScreen', this.deathState);
 game.state.add('game', this.gameState);
 
-
 game.state.start('mainMenu');

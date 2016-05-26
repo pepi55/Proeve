@@ -6,8 +6,14 @@ var shopState = {
 
 	// Phaser functions.
 	preload: function() {
-		characterGroup = game.add.group();
-		backgroundGroup = game.add.group();
+		this.characterGroup = game.add.group();
+		this.backgroundGroup = game.add.group();
+
+		game.world.bringToTop(this.backgroundGroup);
+		game.world.bringToTop(this.characterGroup);
+
+		game.load.image('lock', 'assets/shop/lock.png');
+		game.load.image('background', 'assets/shop/shopback.png');
 
 		game.load.json('characters', 'json/characters.json');
 
@@ -22,8 +28,6 @@ var shopState = {
 				}
 			}
 		}, game);
-
-		game.load.image('lock', 'assets/shop/lock.png');
 
 		/*
 		for (var i = 0; i < this.amountOfCharacters; i++) {
@@ -52,11 +56,15 @@ var shopState = {
 			characters.add(characterButton);
 		}
 		*/
+
+		this.background = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'background');
+		this.backgroundGroup.add(this.background);
+
 		var backButton;
-		  backButton = game.add.button(100, 100, 'backButton', function() {
-		  game.state.start('mainMenu');
-		  }, this);
-		  backButton.anchor.setTo(0.5, 0.5);
+		backButton = game.add.button(100, 100, 'backButton', function() {
+		game.state.start('mainMenu');
+		}, this);
+		backButton.anchor.setTo(0.5, 0.5);
 
 		pointsText = game.add.text(game.world.centerX, 20, "Points: " + points);
 
@@ -131,7 +139,7 @@ var shopState = {
 			*/
 
 			characterButton.input.priorityID = 0;
-			characterGroup.add(characterButton);
+			this.characterGroup.add(characterButton);
 		}
 
 		var escKey = game.input.keyboard.addKey(Phaser.Keyboard.Q);

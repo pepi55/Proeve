@@ -45,9 +45,9 @@ var deathState = {
 		style.fill = '#FF2828';
 
 
-		var	highscoreText = game.add.text(game.world.centerX, game.world.centerY - 100, "Highest = " + deathHighestScoreValue,style);
-		var	scoreText = game.add.text(game.world.centerX, game.world.centerY, "Score   = "  + deathScoreValue,style);
-		var	loseText = game.add.text(game.world.centerX, game.world.centerY - 200, "Replay?",style);
+		var	highscoreText = game.add.text(game.world.centerX, game.world.centerY - 100, "HIGHEST = " + deathHighestScoreValue,style);
+		var	scoreText = game.add.text(game.world.centerX, game.world.centerY, "SCORE   = "  + deathScoreValue,style);
+		var	loseText = game.add.text(game.world.centerX, game.world.centerY - 200, "REPLAY?",style);
 		highscoreText.anchor.setTo(0.5);
 		scoreText.anchor.setTo(0.5);
 		loseText.anchor.setTo(0.5);
