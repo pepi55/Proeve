@@ -103,6 +103,12 @@ public class BallController : MonoBehaviour
                 Vector2 dir;
                 dir = ((Vector2)Camera.main.WorldToViewportPoint(transform.position));
                 dir.Scale(new Vector2(Screen.width, Screen.height));
+
+                if (Vector2.Distance(dir, position) > 100)
+                {
+                    return;
+                }
+
                 dir = dir - position;               
                 dir = Util.Common.AngleToVector(Util.Common.VectorToAngle(dir));
 
@@ -114,7 +120,7 @@ public class BallController : MonoBehaviour
 
                 //dir = new Vector2(-dir.x, dir.y * Physics2D.gravity.y);
                 dir *= 350 * rigidbody2D.mass; //TODO tweak with force to make the ball more reactive
-                dir.y *= rigidbody2D.gravityScale;
+                dir.y *= rigidbody2D.gravityScale *1.3f;
 
                 rigidbody2D.AddTorque(dir.x / 10);
                 if (rigidbody2D.angularVelocity > 10)
