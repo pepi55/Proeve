@@ -103,7 +103,7 @@ public class AudioManager : MonoBehaviour
 
     IEnumerator playGameOver()
     {
-        float vol = 1f;
+        float vol =0.75f;
         while (vol > 0.1f)
         {
             vol -= Time.deltaTime * 4f;
@@ -116,7 +116,7 @@ public class AudioManager : MonoBehaviour
         BGM.clip = BGM_End;
         BGM.loop = false;
         BGM.Play();
-        BGM.volume = 1f;
+        BGM.volume = 0.75f;
 
 
     }
