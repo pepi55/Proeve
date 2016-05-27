@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 namespace Menus
 {
     public class ShopMenuData : MonoBehaviour
@@ -15,6 +17,14 @@ namespace Menus
             }
 
             return data;
+        }
+
+        [ContextMenu("RemoveItem")]
+        public void RemoveAt()
+        {
+            List<BallStoreObject> balls = characters.ToList();
+            balls.RemoveAt(8);
+            characters = balls.ToArray();
         }
 
         public const string ResourceName = "ShopData";
@@ -76,6 +86,7 @@ namespace Menus
             }
         }
 
+        [System.Serializable]
         public class BallStoreObject : StoreObject
         {
             [SerializeField]
