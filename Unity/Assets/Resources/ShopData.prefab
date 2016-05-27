@@ -183,6 +183,22 @@ MonoBehaviour:
     Name: 
     highRes: {fileID: 21300000, guid: 3cda24d225edc2a47a666e2ae3d3648d, type: 3}
     lowRes: {fileID: 21300000, guid: 3cda24d225edc2a47a666e2ae3d3648d, type: 3}
+  - Cost: 50
+    Name: 
+    highRes: {fileID: 21300000, guid: 4082b043a1d97924baeef05f0c3aea7c, type: 3}
+    lowRes: {fileID: 21300000, guid: 4082b043a1d97924baeef05f0c3aea7c, type: 3}
+  - Cost: 80
+    Name: 
+    highRes: {fileID: 21300000, guid: a95075bf58cb88a42871272dc8736de7, type: 3}
+    lowRes: {fileID: 21300000, guid: a95075bf58cb88a42871272dc8736de7, type: 3}
+  - Cost: 90
+    Name: 
+    highRes: {fileID: 21300000, guid: 08a20954ae6e72444bb68af605eee2af, type: 3}
+    lowRes: {fileID: 21300000, guid: 08a20954ae6e72444bb68af605eee2af, type: 3}
+  - Cost: 90
+    Name: 
+    highRes: {fileID: 21300000, guid: 92d11b1b558aa1248b04e2033b7e34d5, type: 3}
+    lowRes: {fileID: 21300000, guid: 92d11b1b558aa1248b04e2033b7e34d5, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
