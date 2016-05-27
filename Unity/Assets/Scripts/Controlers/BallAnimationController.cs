@@ -63,13 +63,11 @@ public class BallAnimationController : MonoBehaviour
 
             for (int j = 0; j < noOfActiveParticleSystems; j++)
             {
-
-
                 ParticleSystemStruct selected = Systems[j];
 
                 selected.setup();
 
-                selected.System.Emit(Random.Range(2, 5));
+                selected.System.Emit(Random.Range(1, 3));
 
                 ParticleSystem.Particle p;
                 int pmcount = selected.System.GetParticles(selected.Particles);
@@ -90,6 +88,7 @@ public class BallAnimationController : MonoBehaviour
                         p.startSize = 0.5f;
                         p.startLifetime = 0.5f;
                         p.velocity = dir * Random.Range(0.3f, 2f);
+                        p.rotation = Random.Range(0, 360f);
                         selected.Particles[i] = p;
                     }
                 }

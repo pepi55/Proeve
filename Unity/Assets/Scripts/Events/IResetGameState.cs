@@ -10,5 +10,11 @@ namespace Events
     /// </summary>
     class IResetGameState : IEvent
     {
+        public bool lastScoreWasHighScore = false;
+
+        public IResetGameState (bool lastScoreWasHighScore)
+        {
+            this.lastScoreWasHighScore = lastScoreWasHighScore;
+        }
     }
 }

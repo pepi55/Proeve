@@ -29,7 +29,7 @@ public class BallController : MonoBehaviour
         Events.GlobalEvents.AddEventListener<Events.IResetGameState>(ResetBall);
         rigidbody2D = GetComponent<Rigidbody2D>();
 
-        ResetBall(new Events.IResetGameState());
+        ResetBall(new Events.IResetGameState(false));
 
         ChangeLooks();
     }
@@ -155,7 +155,7 @@ public class BallController : MonoBehaviour
             rigidbody2D.velocity = Vector2.zero;
            // StartCoroutine(ballResetDelay(0.2f));
            // StartCoroutine(ballFreeze(0.5f, 0.2f));
-            Events.GlobalEvents.Invoke(new Events.IPlayerHitBottom());
+            Events.GlobalEvents.Invoke(new Events.IBallHitBottom());
         }
         else if(collision.transform.tag == "Side")
         {

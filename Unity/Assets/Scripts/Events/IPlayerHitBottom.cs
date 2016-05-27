@@ -5,7 +5,7 @@ namespace Events
     /// <summary>
     /// Empty event class that is called when the player hits the ground
     /// </summary>
-    public class IPlayerHitBottom : IEvent
+    public class IBallHitBottom : IEvent
     {
     }
 }
