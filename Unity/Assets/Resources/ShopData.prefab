@@ -138,7 +138,8 @@ MonoBehaviour:
     - {fileID: 2100000, guid: 6e6ef81aea43dce4fb53809d63aaf3f8, type: 2}
     - {fileID: 2100000, guid: c4c842c615191864d89d8296953a41e1, type: 2}
     - {fileID: 2100000, guid: 248d6bdac9a5fc9488cbf2130e4b732d, type: 2}
-    animationControler: {fileID: 0}
+    animationControler: {fileID: 22100000, guid: a2ae64d1d34876242a9233a235fcc67c,
+      type: 2}
     hitSound: {fileID: 8300000, guid: 485d751cee387ab41a5673e82ce5dbb1, type: 3}
     scoreSound: {fileID: 8300000, guid: 1582855b8896d4444bcd8f5dc0ced42f, type: 3}
   - Cost: 150
@@ -149,7 +150,8 @@ MonoBehaviour:
     - {fileID: 2100000, guid: 6e6ef81aea43dce4fb53809d63aaf3f8, type: 2}
     - {fileID: 2100000, guid: c4c842c615191864d89d8296953a41e1, type: 2}
     - {fileID: 2100000, guid: 248d6bdac9a5fc9488cbf2130e4b732d, type: 2}
-    animationControler: {fileID: 0}
+    animationControler: {fileID: 22100000, guid: ee0928b269b55ce40b7346abbd602b7f,
+      type: 2}
     hitSound: {fileID: 8300000, guid: 93d010b3f8737ca47ac8fdcbdda1d235, type: 3}
     scoreSound: {fileID: 8300000, guid: 9346dbc06cd4e5f489cd2a7a9747983f, type: 3}
   - Cost: 150
@@ -171,7 +173,8 @@ MonoBehaviour:
     - {fileID: 2100000, guid: 6e6ef81aea43dce4fb53809d63aaf3f8, type: 2}
     - {fileID: 2100000, guid: c4c842c615191864d89d8296953a41e1, type: 2}
     - {fileID: 2100000, guid: 248d6bdac9a5fc9488cbf2130e4b732d, type: 2}
-    animationControler: {fileID: 0}
+    animationControler: {fileID: 22100000, guid: a2be658aa0a143c4596abefe17a1d307,
+      type: 2}
     hitSound: {fileID: 8300000, guid: ac7cc56d50f68644eb8a435c979b4c26, type: 3}
     scoreSound: {fileID: 8300000, guid: 6667e7d367b211047b4e43f673884e64, type: 3}
   backgrounds:
