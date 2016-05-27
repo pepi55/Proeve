@@ -1,16 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(ParticleSystem))]
 public class BallAnimationController : MonoBehaviour
 {
-
-    ParticleSystem m_System;
-    ParticleSystem.Particle[] m_Particles;
+    [SerializeField]
+    ParticleSystemStruct[] Systems;
 
     Animator animator;
-
-    public Material ParticleMaterial { get; set; }
 
     [SerializeField]
     float radius = 0.5f;
@@ -32,9 +28,9 @@ public class BallAnimationController : MonoBehaviour
             GetComponent<Animator>().enabled = false;
         }
 
-        if (Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial)
+        if (Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial != null)
         {
-            InitializeIfNeeded();
+            setupParticleSystems();
             Events.GlobalEvents.AddEventListener<Events.IBallMove>(OnBallMoveParticle);
             ParticleActive = true;
         }
@@ -60,16 +56,16 @@ public class BallAnimationController : MonoBehaviour
     /// <param name="obj">Givven parameter that contains the ball direction and the current ball position</param>
     private void OnBallMoveParticle(Events.IBallMove obj)
     {
-        InitializeIfNeeded();
-
         if (Input.GetMouseButtonDown(0))
         {
-            m_System.Emit(5);
+            ParticleSystemStruct selected = Systems[Random.Range(0, Systems.Length)];
 
-            InitializeIfNeeded();
+            selected.setup();
+
+            selected.System.Emit(5);
 
             ParticleSystem.Particle p;
-            int pmcount = m_System.GetParticles(m_Particles);
+            int pmcount = selected.System.GetParticles(selected.Particles);
 
             Vector2 dir;
             dir = obj.direction;
@@ -79,7 +75,7 @@ public class BallAnimationController : MonoBehaviour
 
             for (int i = 0; i < pmcount; i++)
             {
-                p = m_Particles[i];
+                p = selected. Particles[i];
                 if (p.velocity == Vector3.zero)
                 {
                     dir = Util.Common.AngleToVector(angle + Random.Range(-5, 5));
@@ -87,24 +83,24 @@ public class BallAnimationController : MonoBehaviour
                     p.startSize = 0.5f;
                     p.startLifetime = 0.5f;
                     p.velocity = dir * Random.Range(0, 2f);
-                    m_Particles[i] = p;
+                    selected.Particles[i] = p;
                 }
             }
 
-            m_System.SetParticles(m_Particles, pmcount);
+            selected.System.SetParticles(selected.Particles, pmcount);
         }
     }
 
-    void InitializeIfNeeded()
+    public void setupParticleSystems()
     {
-        if (m_System == null)
-        {
-            m_System = GetComponent<ParticleSystem>();
-            GetComponent<ParticleSystemRenderer>().material = Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial;
-        }
+        int length = Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial.Length < Systems.Length ? Systems.Length : Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial.Length;
+        Material[] materials = Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial;
 
-        if (m_Particles == null || m_Particles.Length < m_System.maxParticles)
-            m_Particles = new ParticleSystem.Particle[m_System.maxParticles];
+        for (int i = 0; i < length; i++)
+        {
+            Systems[i].System.GetComponent<ParticleSystemRenderer>().material = materials[i];
+            Systems[i].setup();
+        }
     }
 
     private void OnBallMoveAnimator(Events.IBallMove obj)
@@ -112,4 +108,17 @@ public class BallAnimationController : MonoBehaviour
         animator.SetTrigger("click");
     }
 
+    [System.Serializable]
+    public struct ParticleSystemStruct
+    {
+        public bool enabled;
+        public ParticleSystem System;
+        public ParticleSystem.Particle[] Particles;
+
+        public void setup()
+        {
+            if (Particles == null || Particles.Length < System.maxParticles)
+                Particles = new ParticleSystem.Particle[System.maxParticles];
+        }
+    }
 }
