@@ -10,13 +10,13 @@ var highscoreState = {
   titleStyle: null,
   // Phaser functions.
   preload: function() {
-
+    //game.load.bitmapFont('aldoTheApache', 'assets/fonts/aldoTheApache_0.png', 'assets/fonts/aldoTheApache.fnt');
   },
 
   create: function() {
-
-
-
+   var highscoreBackground = game.add.sprite(0, 0,'highscoreBackground');
+   // var bitmapStyle = { font: "50px aldoTheApache", fill: "#ff0044", align: "center" };
+   // var gameOverlayText = game.add.bitmapText( game.world.centerX, game.world.centerY, "test", bitmapStyle );
     style = {};
 
     //	Font style
@@ -29,17 +29,16 @@ var highscoreState = {
 		//style.strokeThickness = 7;
 		//style.fill = '#52D017';
 
-					//	Stroke color and thickness
+		//	Stroke color and thickness
 		style.stroke = '#FFFF00';
 		style.strokeThickness = 3;
 		style.fill = '#FF2828';
 
-   	titleStyle = game.add.text(game.world.centerX - 100, 20, "HIGHSCORES");
+   	titleStyle = game.add.text(game.world.centerX - 150, 70, "HIGHSCORES");
     //	Font style
 		titleStyle.font = 'Passion One';
 		titleStyle.fontSize = 50;
 		titleStyle.fontWeight = 'bold';
-console.log(titleStyle.font);
 		//	Stroke color and thickness
 		titleStyle.stroke = '#0020C2';
 		titleStyle.strokeThickness = 5;

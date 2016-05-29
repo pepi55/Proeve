@@ -4,24 +4,27 @@
 var deathState = {
   deathScoreValue: 0,
   deathHighestScoreValue: 0,
+  deathScreenBGMusic: null,
   preload: function(){
-  			game.load.image('deathscreenBackground', 'assets/UI/deathScreen.png');
+  	this.deathScreenBGMusic = game.add.audio('gameOverSound');
   },
+
   create: function() {
-
-
-  	this.background = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'background');
+  	//this.deathScreenBGMusic.play();
+  	this.background = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'backgroundGame');
   	this.screenSprite = game.add.sprite(game.world.centerX , game.world.centerY, 'deathscreenBackground');
   	this.screenSprite.anchor.setTo(0.5, 0.5);
   	this.screenSprite.scale.setTo(1.5,1.5);
 		var backButton;
 		backButton = game.add.button(100, 100, 'backButton', function() {
+			this.deathScreenBGMusic.stop();
 		game.state.start('mainMenu');
 		}, this);
 		backButton.anchor.setTo(0.5, 0.5);
 
 		var replayButton;
 		replayButton = game.add.button(game.world.centerX - 90, game.world.centerY + 90, 'playButton', function() {
+			this.deathScreenBGMusic.stop();
 		game.state.start('game');
 		}, this);
 		//replayButton.anchor.setTo(0.5, 0.5);
