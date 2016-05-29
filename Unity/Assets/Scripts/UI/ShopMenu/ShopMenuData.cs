@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 namespace Menus
 {
     public class ShopMenuData : MonoBehaviour
@@ -17,16 +19,24 @@ namespace Menus
             return data;
         }
 
+        [ContextMenu("RemoveItem")]
+        public void RemoveAt()
+        {
+            List<BallStoreObject> balls = characters.ToList();
+            balls.RemoveAt(8);
+            characters = balls.ToArray();
+        }
+
         public const string ResourceName = "ShopData";
 
         [SerializeField]
-        StoreObject[] characters;
+        BallStoreObject[] characters;
 
         [SerializeField]
         StoreObject[] backgrounds;
 
 
-        public StoreObject[] Characters
+        public BallStoreObject[] Characters
         {
             get
             {
@@ -43,7 +53,7 @@ namespace Menus
         }
 
         [System.Serializable]
-        public struct StoreObject
+        public class StoreObject
         {
             public int Cost;
             public string Name;
@@ -74,14 +84,18 @@ namespace Menus
                     return Sprite.Create(new Texture2D(512, 512), new Rect(0, 0, 512, 512), Vector2.one / 2f);
                 }
             }
+        }
 
+        [System.Serializable]
+        public class BallStoreObject : StoreObject
+        {
             [SerializeField]
-            Material particleMaterial;
-            public Material ParticleMaterial
+            Material[] particleMaterial;
+            public Material[] ParticleMaterial
             {
                 get
                 {
-                    if (particleMaterial)
+                    if (particleMaterial != null)
                     {
                         return particleMaterial;
                     }
@@ -104,6 +118,33 @@ namespace Menus
                 }
             }
 
+            [SerializeField]
+            AudioClip hitSound;
+            public AudioClip HitSound
+            {
+                get
+                {
+                    if (hitSound)
+                    {
+                        return hitSound;
+                    }
+                    return null;
+                }
+            }
+
+            [SerializeField]
+            AudioClip scoreSound;
+            public AudioClip ScoreSound
+            {
+                get
+                {
+                    if (scoreSound)
+                    {
+                        return scoreSound;
+                    }
+                    return null;
+                }
+            }
         }
     }
 }

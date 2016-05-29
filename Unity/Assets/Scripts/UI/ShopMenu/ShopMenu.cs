@@ -280,6 +280,7 @@ namespace Menus
             public Button SelectButton;
             public Image SelectorImage;
             public GameObject LockObj;
+            public GameObject unlockText;
 
             public int indexPosition;
 
@@ -327,10 +328,15 @@ namespace Menus
                         case "name":
                             //TODO implement name into the game object
                             break;
+
+                        case "unlocked":
+                            unlockText = tex.gameObject;
+                            break;
                     }
                 }
 
                 this.SelectButton = gameObj.GetComponentInChildren<Button>();
+                unlockText.SetActive(false);
             }
 
             /// <summary>
@@ -365,6 +371,7 @@ namespace Menus
             public void HasBeenUnlocked()
             {
                 LockObj.gameObject.SetActive(false);
+                unlockText.SetActive(true);
             }
         }
     }

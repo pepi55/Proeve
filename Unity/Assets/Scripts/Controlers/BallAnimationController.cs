@@ -1,22 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(ParticleSystem))]
 public class BallAnimationController : MonoBehaviour
 {
-
-    ParticleSystem m_System;
-    ParticleSystem.Particle[] m_Particles;
+    [SerializeField]
+    ParticleSystemStruct[] Systems;
 
     Animator animator;
-
-    public Material ParticleMaterial { get; set; }
 
     [SerializeField]
     float radius = 0.5f;
 
     bool AnimatorActive;
     bool ParticleActive;
+
+    int noOfActiveParticleSystems = 0;
 
     void Start()
     {
@@ -32,9 +30,9 @@ public class BallAnimationController : MonoBehaviour
             GetComponent<Animator>().enabled = false;
         }
 
-        if (Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial)
+        if (Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial != null)
         {
-            InitializeIfNeeded();
+            setupParticleSystems();
             Events.GlobalEvents.AddEventListener<Events.IBallMove>(OnBallMoveParticle);
             ParticleActive = true;
         }
@@ -60,51 +58,60 @@ public class BallAnimationController : MonoBehaviour
     /// <param name="obj">Givven parameter that contains the ball direction and the current ball position</param>
     private void OnBallMoveParticle(Events.IBallMove obj)
     {
-        InitializeIfNeeded();
-
         if (Input.GetMouseButtonDown(0))
         {
-            m_System.Emit(5);
 
-            InitializeIfNeeded();
-
-            ParticleSystem.Particle p;
-            int pmcount = m_System.GetParticles(m_Particles);
-
-            Vector2 dir;
-            dir = obj.direction;
-
-            float angle = Util.Common.VectorToAngle(dir);
-            angle -= 180;
-
-            for (int i = 0; i < pmcount; i++)
+            for (int j = 0; j < noOfActiveParticleSystems; j++)
             {
-                p = m_Particles[i];
-                if (p.velocity == Vector3.zero)
-                {
-                    dir = Util.Common.AngleToVector(angle + Random.Range(-5, 5));
-                    p.position = (dir * radius) + obj.position;
-                    p.startSize = 0.5f;
-                    p.startLifetime = 0.5f;
-                    p.velocity = dir * Random.Range(0, 2f);
-                    m_Particles[i] = p;
-                }
-            }
+                ParticleSystemStruct selected = Systems[j];
 
-            m_System.SetParticles(m_Particles, pmcount);
+                selected.setup();
+
+                selected.System.Emit(Random.Range(1, 3));
+
+                ParticleSystem.Particle p;
+                int pmcount = selected.System.GetParticles(selected.Particles);
+
+                Vector2 dir;
+                dir = obj.direction;
+
+                float angle = Util.Common.VectorToAngle(dir);
+                angle -= 180;
+
+                for (int i = 0; i < pmcount; i++)
+                {
+                    p = selected.Particles[i];
+                    if (p.velocity == Vector3.zero)
+                    {
+                        dir = Util.Common.AngleToVector(angle + Random.Range(-10f, 10f));
+                        p.position = (dir * radius) + obj.position;
+                        p.startSize = 0.5f;
+                        p.startLifetime = 0.5f;
+                        p.velocity = dir * Random.Range(0.3f, 2f);
+                        p.rotation = Random.Range(0, 360f);
+                        selected.Particles[i] = p;
+                    }
+                }
+
+                selected.System.SetParticles(selected.Particles, pmcount);
+            }
         }
     }
 
-    void InitializeIfNeeded()
+    /// <summary>
+    /// Init for ParticleSystems
+    /// This way it does not enable more than there are particle systems
+    /// </summary>
+    public void setupParticleSystems()
     {
-        if (m_System == null)
-        {
-            m_System = GetComponent<ParticleSystem>();
-            GetComponent<ParticleSystemRenderer>().material = Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial;
-        }
+        noOfActiveParticleSystems = Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial.Length > Systems.Length ? Systems.Length : Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial.Length;
+        Material[] materials = Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial;
 
-        if (m_Particles == null || m_Particles.Length < m_System.maxParticles)
-            m_Particles = new ParticleSystem.Particle[m_System.maxParticles];
+        for (int i = 0; i < noOfActiveParticleSystems; i++)
+        {
+            Systems[i].System.GetComponent<ParticleSystemRenderer>().material = materials[i];
+            Systems[i].setup();
+        }
     }
 
     private void OnBallMoveAnimator(Events.IBallMove obj)
@@ -112,4 +119,20 @@ public class BallAnimationController : MonoBehaviour
         animator.SetTrigger("click");
     }
 
+    /// <summary>
+    /// Struct for particle sytems so i don't have to repeat much code
+    /// </summary>
+    [System.Serializable]
+    public struct ParticleSystemStruct
+    {
+        public bool enabled;
+        public ParticleSystem System;
+        public ParticleSystem.Particle[] Particles;
+
+        public void setup()
+        {
+            if (Particles == null || Particles.Length < System.maxParticles)
+                Particles = new ParticleSystem.Particle[System.maxParticles];
+        }
+    }
 }

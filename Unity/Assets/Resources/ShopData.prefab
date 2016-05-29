@@ -44,95 +44,164 @@ MonoBehaviour:
     Name: 
     highRes: {fileID: 21300000, guid: ab225cd553e4614448435f582555d1cc, type: 3}
     lowRes: {fileID: 21300000, guid: 1c51a81e19b13864c9775fbdd7d93a8e, type: 3}
-    particleMaterial: {fileID: 2100000, guid: 7aa0fff7ef484c24c862d7cb8638a38a, type: 2}
+    particleMaterial:
+    - {fileID: 2100000, guid: 6e6ef81aea43dce4fb53809d63aaf3f8, type: 2}
+    - {fileID: 2100000, guid: c4c842c615191864d89d8296953a41e1, type: 2}
+    - {fileID: 2100000, guid: 248d6bdac9a5fc9488cbf2130e4b732d, type: 2}
     animationControler: {fileID: 0}
-  - Cost: 10
+    hitSound: {fileID: 8300000, guid: 06608c346b9155841b382155f42033f8, type: 3}
+    scoreSound: {fileID: 8300000, guid: 84251d7e5e2ea4c4ea61e6b1f0684c39, type: 3}
+  - Cost: 25
     Name: 
     highRes: {fileID: 21300000, guid: 3b378c55a586a254984e0a00e81832a6, type: 3}
     lowRes: {fileID: 21300000, guid: 868b8ed53f5d9504e8cd7705fb9390b3, type: 3}
-    particleMaterial: {fileID: 0}
+    particleMaterial:
+    - {fileID: 2100000, guid: 71dfd605fda26634796b1ba2da16c63d, type: 2}
+    - {fileID: 2100000, guid: c3075a1ae61e6d04d9d7483d6a14b164, type: 2}
+    - {fileID: 2100000, guid: 48f3496d3dcefd44a8df67d111ab51fd, type: 2}
     animationControler: {fileID: 0}
-  - Cost: 15
+    hitSound: {fileID: 8300000, guid: 177efd18c7b86224e830138ff33c4754, type: 3}
+    scoreSound: {fileID: 8300000, guid: 98b04a7f9cc205c47a8b090baa4f9763, type: 3}
+  - Cost: 50
     Name: 
     highRes: {fileID: 21300000, guid: 8ce673b3678eaa847b76d1a6d8dd6999, type: 3}
     lowRes: {fileID: 21300000, guid: e821dcb3d63b4d740972348c2b2da747, type: 3}
-    particleMaterial: {fileID: 0}
+    particleMaterial:
+    - {fileID: 2100000, guid: 6e6ef81aea43dce4fb53809d63aaf3f8, type: 2}
+    - {fileID: 2100000, guid: c4c842c615191864d89d8296953a41e1, type: 2}
+    - {fileID: 2100000, guid: 248d6bdac9a5fc9488cbf2130e4b732d, type: 2}
     animationControler: {fileID: 0}
-  - Cost: 25
+    hitSound: {fileID: 8300000, guid: 6475522254bb7c144bfc05fecdb92cf9, type: 3}
+    scoreSound: {fileID: 8300000, guid: c3672e146ce1c574f82dad1bbc0777b7, type: 3}
+  - Cost: 75
     Name: 
-    highRes: {fileID: 21300000, guid: e58b86fe04e28674a874883e5b050fda, type: 3}
+    highRes: {fileID: 0}
     lowRes: {fileID: 21300000, guid: e58b86fe04e28674a874883e5b050fda, type: 3}
-    particleMaterial: {fileID: 0}
+    particleMaterial:
+    - {fileID: 2100000, guid: 6e6ef81aea43dce4fb53809d63aaf3f8, type: 2}
+    - {fileID: 2100000, guid: c4c842c615191864d89d8296953a41e1, type: 2}
+    - {fileID: 2100000, guid: 248d6bdac9a5fc9488cbf2130e4b732d, type: 2}
     animationControler: {fileID: 22100000, guid: eed6d1cc27488c941a0218e94f3a2bdc,
       type: 2}
+    hitSound: {fileID: 8300000, guid: 5f2587471ba03a846a2cb64406878551, type: 3}
+    scoreSound: {fileID: 8300000, guid: ee9a9f6332396a74e9cdea1abb364e9e, type: 3}
   - Cost: 75
     Name: 
-    highRes: {fileID: 21300000, guid: 7c7b982609f3aa94886b504259cd95b1, type: 3}
+    highRes: {fileID: 0}
     lowRes: {fileID: 21300000, guid: 7c7b982609f3aa94886b504259cd95b1, type: 3}
-    particleMaterial: {fileID: 0}
+    particleMaterial:
+    - {fileID: 2100000, guid: 6e6ef81aea43dce4fb53809d63aaf3f8, type: 2}
+    - {fileID: 2100000, guid: c4c842c615191864d89d8296953a41e1, type: 2}
+    - {fileID: 2100000, guid: 248d6bdac9a5fc9488cbf2130e4b732d, type: 2}
     animationControler: {fileID: 22100000, guid: 80fa3374276fe2b4e8bee5192848146a,
       type: 2}
-  - Cost: 75
+    hitSound: {fileID: 8300000, guid: 287c7a285ce714041803ad3922717fbc, type: 3}
+    scoreSound: {fileID: 0}
+  - Cost: 100
     Name: 
-    highRes: {fileID: 21300000, guid: 0c65c1e406b6b9f4482d300c0df09ab1, type: 3}
+    highRes: {fileID: 0}
     lowRes: {fileID: 21300000, guid: 0c65c1e406b6b9f4482d300c0df09ab1, type: 3}
-    particleMaterial: {fileID: 0}
+    particleMaterial:
+    - {fileID: 2100000, guid: 439ce60cd2021814ebf16ab409aa46ce, type: 2}
+    - {fileID: 2100000, guid: f0f7cb31d66a2954e8e40782d823fe8a, type: 2}
+    - {fileID: 2100000, guid: ed9c75aafb9e25d41ae8e471b1a7d925, type: 2}
     animationControler: {fileID: 0}
-  - Cost: 75
+    hitSound: {fileID: 8300000, guid: a855a02d29b222448be2f988693fa9e7, type: 3}
+    scoreSound: {fileID: 0}
+  - Cost: 100
     Name: 
     highRes: {fileID: 21300000, guid: b4e5c188bc362fa4892647d8ac76ea26, type: 3}
     lowRes: {fileID: 21300000, guid: cb44d15678208974c8c76429ca6d455c, type: 3}
-    particleMaterial: {fileID: 0}
+    particleMaterial:
+    - {fileID: 2100000, guid: dc5cb498835f44747ae98a335bc14379, type: 2}
+    - {fileID: 2100000, guid: d0d3abd9e49010344a0937b329926c9d, type: 2}
+    - {fileID: 2100000, guid: a59352146b2729746b7b5abe7c221212, type: 2}
     animationControler: {fileID: 0}
-  - Cost: 75
+    hitSound: {fileID: 8300000, guid: befec3b6817f3f74b84d5788b250fa93, type: 3}
+    scoreSound: {fileID: 8300000, guid: 057f3d57151544342b2aa92489c68f94, type: 3}
+  - Cost: 125
     Name: 
     highRes: {fileID: 21300000, guid: 50ceb08bd473d344c822c818ed69a3e7, type: 3}
     lowRes: {fileID: 21300000, guid: f2e4d8179c3a7ed46b8f1ac47b239b10, type: 3}
-    particleMaterial: {fileID: 0}
+    particleMaterial:
+    - {fileID: 2100000, guid: bce98645a00cf2044a3e9798aa1e6f86, type: 2}
+    - {fileID: 2100000, guid: c9573d58b9183f540b6342ba6d1f2f31, type: 2}
+    - {fileID: 2100000, guid: e1f0988ed2a5719489b1377936d8e2d9, type: 2}
     animationControler: {fileID: 0}
-  - Cost: 75
-    Name: 
-    highRes: {fileID: 21300000, guid: 2f418b231d8f207458d549d725b71326, type: 3}
-    lowRes: {fileID: 21300000, guid: 6b7efb5da529fc04f8f9a83470a6b5e0, type: 3}
-    particleMaterial: {fileID: 0}
-    animationControler: {fileID: 0}
-  - Cost: 75
+    hitSound: {fileID: 8300000, guid: a0e3eddb2a7cc23479c1656c44727b7c, type: 3}
+    scoreSound: {fileID: 0}
+  - Cost: 125
     Name: 
     highRes: {fileID: 21300000, guid: 7d08770840a10a242bc9078e6e2391a4, type: 3}
     lowRes: {fileID: 21300000, guid: 7eee292bb0730c9419cb5615cd5a9e64, type: 3}
-    particleMaterial: {fileID: 0}
-    animationControler: {fileID: 0}
-  - Cost: 125
+    particleMaterial:
+    - {fileID: 2100000, guid: 6e6ef81aea43dce4fb53809d63aaf3f8, type: 2}
+    - {fileID: 2100000, guid: c4c842c615191864d89d8296953a41e1, type: 2}
+    - {fileID: 2100000, guid: 248d6bdac9a5fc9488cbf2130e4b732d, type: 2}
+    animationControler: {fileID: 22100000, guid: a2ae64d1d34876242a9233a235fcc67c,
+      type: 2}
+    hitSound: {fileID: 8300000, guid: 485d751cee387ab41a5673e82ce5dbb1, type: 3}
+    scoreSound: {fileID: 8300000, guid: 1582855b8896d4444bcd8f5dc0ced42f, type: 3}
+  - Cost: 150
     Name: 
     highRes: {fileID: 21300000, guid: dfb77024a133f464092610b762761682, type: 3}
     lowRes: {fileID: 21300000, guid: 9953e7e2e3f1c3b42a6d37f75b150e61, type: 3}
-    particleMaterial: {fileID: 0}
-    animationControler: {fileID: 0}
-  - Cost: 125
+    particleMaterial:
+    - {fileID: 2100000, guid: 6e6ef81aea43dce4fb53809d63aaf3f8, type: 2}
+    - {fileID: 2100000, guid: c4c842c615191864d89d8296953a41e1, type: 2}
+    - {fileID: 2100000, guid: 248d6bdac9a5fc9488cbf2130e4b732d, type: 2}
+    animationControler: {fileID: 22100000, guid: ee0928b269b55ce40b7346abbd602b7f,
+      type: 2}
+    hitSound: {fileID: 8300000, guid: 93d010b3f8737ca47ac8fdcbdda1d235, type: 3}
+    scoreSound: {fileID: 8300000, guid: 9346dbc06cd4e5f489cd2a7a9747983f, type: 3}
+  - Cost: 150
     Name: 
     highRes: {fileID: 21300000, guid: a3978dd12146ee14abe83ff261a4af2e, type: 3}
     lowRes: {fileID: 21300000, guid: f5bbd61ea99f3154db0feb0483d666b3, type: 3}
-    particleMaterial: {fileID: 0}
+    particleMaterial:
+    - {fileID: 2100000, guid: b3f324b86bc886a4fa4071abdf3c85db, type: 2}
+    - {fileID: 2100000, guid: f032c9e8cac93b04c9be77fd51247053, type: 2}
+    - {fileID: 2100000, guid: 080844398ba12134086876e825850763, type: 2}
     animationControler: {fileID: 0}
-  - Cost: 125
+    hitSound: {fileID: 8300000, guid: b1fa648c40e6fc84caa72246afcdd039, type: 3}
+    scoreSound: {fileID: 0}
+  - Cost: 150
     Name: 
     highRes: {fileID: 21300000, guid: 64e2d9cc8a85a0e44baf9dd5e8abaac1, type: 3}
     lowRes: {fileID: 21300000, guid: 2aac3b193600437479e93228237b1e28, type: 3}
-    particleMaterial: {fileID: 0}
-    animationControler: {fileID: 0}
+    particleMaterial:
+    - {fileID: 2100000, guid: 6e6ef81aea43dce4fb53809d63aaf3f8, type: 2}
+    - {fileID: 2100000, guid: c4c842c615191864d89d8296953a41e1, type: 2}
+    - {fileID: 2100000, guid: 248d6bdac9a5fc9488cbf2130e4b732d, type: 2}
+    animationControler: {fileID: 22100000, guid: a2be658aa0a143c4596abefe17a1d307,
+      type: 2}
+    hitSound: {fileID: 8300000, guid: ac7cc56d50f68644eb8a435c979b4c26, type: 3}
+    scoreSound: {fileID: 8300000, guid: 6667e7d367b211047b4e43f673884e64, type: 3}
   backgrounds:
   - Cost: 0
     Name: 
     highRes: {fileID: 21300000, guid: 5d8517758453bc44eb2b8cfb2111ade0, type: 3}
     lowRes: {fileID: 21300000, guid: 5d8517758453bc44eb2b8cfb2111ade0, type: 3}
-    particleMaterial: {fileID: 0}
-    animationControler: {fileID: 0}
   - Cost: 30
     Name: 
     highRes: {fileID: 21300000, guid: 3cda24d225edc2a47a666e2ae3d3648d, type: 3}
     lowRes: {fileID: 21300000, guid: 3cda24d225edc2a47a666e2ae3d3648d, type: 3}
-    particleMaterial: {fileID: 0}
-    animationControler: {fileID: 0}
+  - Cost: 50
+    Name: 
+    highRes: {fileID: 21300000, guid: 4082b043a1d97924baeef05f0c3aea7c, type: 3}
+    lowRes: {fileID: 21300000, guid: 4082b043a1d97924baeef05f0c3aea7c, type: 3}
+  - Cost: 80
+    Name: 
+    highRes: {fileID: 21300000, guid: a95075bf58cb88a42871272dc8736de7, type: 3}
+    lowRes: {fileID: 21300000, guid: a95075bf58cb88a42871272dc8736de7, type: 3}
+  - Cost: 90
+    Name: 
+    highRes: {fileID: 21300000, guid: 08a20954ae6e72444bb68af605eee2af, type: 3}
+    lowRes: {fileID: 21300000, guid: 08a20954ae6e72444bb68af605eee2af, type: 3}
+  - Cost: 90
+    Name: 
+    highRes: {fileID: 21300000, guid: 92d11b1b558aa1248b04e2033b7e34d5, type: 3}
+    lowRes: {fileID: 21300000, guid: 92d11b1b558aa1248b04e2033b7e34d5, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

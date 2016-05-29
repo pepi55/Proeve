@@ -40,18 +40,20 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private bool waitForSubmit;
 
+    bool lastScoreWasHighScore;
+
     void Awake()
     {
         score = 0;
         instance = this;
         Events.GlobalEvents.AddEventListener<Events.IScore>(AddPoint);
-        Events.GlobalEvents.AddEventListener<Events.IPlayerHitBottom>(BallHitGround);
+        Events.GlobalEvents.AddEventListener<Events.IBallHitBottom>(BallHitGround);
     }
 
     public void OnDestroy()
     {
         Events.GlobalEvents.RemoveEventListener<Events.IScore>(AddPoint);
-        Events.GlobalEvents.RemoveEventListener<Events.IPlayerHitBottom>(BallHitGround);        
+        Events.GlobalEvents.RemoveEventListener<Events.IBallHitBottom>(BallHitGround);        
     }
 
     void Start()
@@ -82,17 +84,27 @@ public class GameManager : MonoBehaviour
     /// Event Handler for IPlayerHitBottom
     /// </summary>
     /// <param name="obj">Object Argument does not contain anyvalue only used as identifier</param>
-    private void BallHitGround(Events.IPlayerHitBottom obj)
+    private void BallHitGround(Events.IBallHitBottom obj)
     {
         SaveManager.savaData.StorePoints += score;
         SaveManager.Save();
 
-        if (SaveManager.CheckNewScore(score) && score != 0)
+        if (score != 0)
         {
-            OpenScoreSubmitScreen();
+            if (SaveManager.CheckNewScore(score))
+            {
+                OpenScoreSubmitScreen();
 
-            gamePaused = true;
-            waitForSubmit = true;
+                lastScoreWasHighScore = true;
+                gamePaused = true;
+                waitForSubmit = true;
+            }
+            else
+            {
+                lastScoreWasHighScore = false;
+                ResetGame();
+                gamePaused = false;
+            }
         }
         else
         {
@@ -127,7 +139,7 @@ public class GameManager : MonoBehaviour
         if (OnScoreUpdate != null)
             OnScoreUpdate();
 
-        Events.GlobalEvents.Invoke<Events.IResetGameState>(new Events.IResetGameState());
+        Events.GlobalEvents.Invoke<Events.IResetGameState>(new Events.IResetGameState(lastScoreWasHighScore));
     }
 
     /// <summary>
