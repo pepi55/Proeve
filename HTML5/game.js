@@ -7,16 +7,21 @@ var hardMode = true;
 /** This is the state in which the game is played. */
 var gameState = {
   // Custom "variables".
+	ingameEmitter: null,
   tweenAPosition: 0,
   tweenBPosition: 300,
 
   textTween: null,
   text: null,
 	tapSound: null,
+	startSound: null,
+	inGameBGMusic: null,
 
 	gameobjects: null,
 	backgrounds: null,
   walls: null,
+
+  charNr: 0,
 
   score: 0,
 	tempScore: 0,
@@ -35,46 +40,24 @@ var gameState = {
 		if (str_names == null || str_names == "null") {
 
 		} else {
-			console.log("names ="+str_names);
+			console.log("names = " + str_names);
 			this.currentHighscoreUsers = str_names;
 		}
 
-		var str_score = JSON.parse(localStorage.getItem('highScore'));
-
-		if (str_score == null || str_score == "null") {
-
-		} else {
-			console.log("score ="+str_score);
-			this.currentHighscore = str_score;
-		}
-
+		// Load tapsound.
 		var tapSound = localStorage.getItem('characterSound');
-
 		if (tapSound == null || tapSound == "null") {
 			tapSound = 'click2.wav';
 		}
 
-		var character = localStorage.getItem('characterImage');
-
-		if (character == null || character == "null") {
-			character = 'image.0.png';
-		}
-		/*
-		else {
-			character = parseInt(str_character);
-		}
-		*/
-
+		game.load.audio('tapSound', 'assets/audio/soundeffect/' + tapSound);
+		startSound = game.add.audio('startSound');
+		startSound.volume = 0.2;
+		inGameBGMusic = game.add.audio('inGameBG');
+		startSound.onStop.add(this.startBG,this);
 		this.gameobjects = game.add.group();
 		this.backgrounds = game.add.group();
 		this.walls = game.add.group();
-
-		game.load.image('background', 'assets/background/background.0.png');
-		game.load.spritesheet('ball', 'assets/balls/' + character, 128, 128);
-		game.load.image('goal', 'assets/goal/goal.0.png');
-		game.load.image('wall', 'assets/image.png');
-
-		game.load.audio('tapSound', 'assets/audio/soundeffect/' + tapSound);
 	},
 
 	/** @method
@@ -82,6 +65,26 @@ var gameState = {
 	* @description this is a create function that is fired after the preload function, this is where we set all the variables
 	*/
   create: function() {
+  	// Load relevant localstorage items.
+		startSound.play();
+  	// Load character number.
+		var characterInt = 0;
+		var str_character = parseInt(localStorage.getItem('characterImageNr'), 10);
+		if (str_character == null || str_character == "null" || isNaN(str_character)) {
+			characterInt = 0;
+		} else {
+			characterInt = str_character;
+		}
+
+		// Load highscore.
+		var str_score = JSON.parse(localStorage.getItem('highScore'));
+		if (str_score == null || str_score == "null") {
+
+		} else {
+			console.log("score = " + str_score);
+			this.currentHighscore = str_score;
+		}
+
 		// this has to be active for the fps to be counting.
 		game.time.advancedTiming = true;
 
@@ -97,8 +100,9 @@ var gameState = {
 
 		//set tween position
 		this.tweenAPosition = game.world.width - 300;
+
 		// Add gameobjects to game
-		this.ball = game.add.sprite(game.world.centerX, 20, 'ball');
+		this.ball = game.add.sprite(game.world.centerX, 20, 'character' + characterInt);
 		this.goal = game.add.sprite(this.tweenAPosition, game.world.height - 50, 'goal');
 
 		this.ballIsAnimated = this.ball.animations.validateFrames([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
@@ -108,16 +112,11 @@ var gameState = {
 			this.ball.animations.play('idle');
 		}
 
-/*
-		this.wall1 = game.add.sprite(-70, game.world.height, 'wall1');
-		this.wall2 = game.add.sprite(game.world.width + 70, game.world.height, 'wall2');
-		this.ceiling = game.add.sprite()
-*/
 		this.walls.create(-70, game.world.height, 'wall');
 		this.walls.create(game.world.width + 70, game.world.height, 'wall');
 		this.walls.create(game.world.width / 2, game.world.height + (game.world.height / 2), 'wall');
 
-		this.background = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'background');
+		this.background = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'backgroundGame');
 
 		game.physics.arcade.enable([
 			this.ball,
@@ -130,7 +129,7 @@ var gameState = {
 
 		// Ball setup
 		this.ball.anchor.setTo(0.5, 0.5);
-		this.ball.body.bounce.setTo(0.9, 0.9);
+		this.ball.body.bounce.setTo(0.5, 0.5);
 
 		this.gameobjects.add(this.ball);
 
@@ -163,6 +162,12 @@ var gameState = {
 		//set the goals tweens.
 		tweenA = game.add.tween(this.goal).to({ x: this.tweenAPosition }, 5000, 'Linear', true, 0);
 		tweenB = game.add.tween(this.goal).to({ x: this.tweenBPosition }, 5000, 'Linear', true, 0);
+
+		ingameEmitter = game.add.emitter(0, 0, 100);
+
+    ingameEmitter.makeParticles(['cloud_particle1','cloud_particle2','cloud_particle3']);
+    ingameEmitter.setScale(0.5, 0, 0.5, 0, 6000);
+    game.input.onDown.add(this.particleBurst, this);
 
 		//set score text
 		scoreText = game.add.text(game.world.centerX, 20, "0");
@@ -211,7 +216,17 @@ var gameState = {
     // fps log
     game.debug.text(game.time.fps, 2, 14, "#00ff00");
   },
+		particleBurst: function() {
+    //  Position the emitter where the mouse/touch event was
+    ingameEmitter.x = this.ball.world.x;
+    ingameEmitter.y = this.ball.world.y;
 
+    //  The first parameter sets the effect to "explode" which means all particles are emitted at once
+    //  The second gives each particle a 2000ms lifespan
+    //  The third is ignored when using burst/explode mode
+    //  The final parameter (10) is how many particles will be emitted in this single burst
+    ingameEmitter.start(true, 2000, null, 10);
+	},
   // Custom functions
   	/** @method
 	* @name wallsCollisionHandler
@@ -219,6 +234,11 @@ var gameState = {
 	*/
   wallsCollisionHandler: function() {
     this.tempScore++;
+  },
+   startBG: function() {
+   	inGameBGMusic.volume = 0.2;
+    inGameBGMusic.play();
+    inGameBGMusic.loop = true;
   },
 
  	/** @method
@@ -298,6 +318,9 @@ var gameState = {
 	* @description this is a function that returns the player to the main menu.
 	*/
 	goToMain: function() {
+		inGameBGMusic.stop();
+		startSound.onStop.remove(this.startBG,this);
+		startSound.stop();
 		if (this.score > localStorage.getItem('highestScore') && this.score != 0 || this.score > 0 && this.currentHighscore[0] == null) {
 			this.currentHighscore.push("\n" + this.score);
 			this.currentHighscoreUsers.push(this.randomNames[Math.floor(Math.random() * 5)]);

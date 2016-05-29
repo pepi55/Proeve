@@ -12,23 +12,6 @@ var shopState = {
 		game.world.bringToTop(this.backgroundGroup);
 		game.world.bringToTop(this.characterGroup);
 
-		game.load.image('lock', 'assets/shop/lock.png');
-		game.load.image('background', 'assets/shop/shopback.png');
-
-		game.load.json('characters', 'json/characters.json');
-
-		game.load.onFileComplete.add(function() {
-			var charactersJSON = game.cache.getJSON('characters');
-
-			if (charactersJSON != null) {
-				if (charactersJSON.characters != null) {
-					for (var i = 0; i < charactersJSON.characters.length; i++) {
-						game.load.spritesheet('character' + i, 'assets/balls/' + charactersJSON.characters[i].image, 128, 128);
-					}
-				}
-			}
-		}, game);
-
 		/*
 		for (var i = 0; i < this.amountOfCharacters; i++) {
 			game.load.image('character' + i, 'assets/balls/image.' + i + '.png');
@@ -47,17 +30,7 @@ var shopState = {
 	},
 
   create: function() {
-  	/*
-		for (var i = 0; i < this.amountOfCharacters; i++) {
-			var characterButton = game.add.button(100, 200 + 150 * i, 'character' + i, function() {
-				localStorage.setItem('character', this.num);
-			}, { num: i, });
-
-			characters.add(characterButton);
-		}
-		*/
-
-		this.background = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'background');
+		this.background = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'backgroundShop');
 		this.backgroundGroup.add(this.background);
 
 		var backButton;
@@ -69,20 +42,21 @@ var shopState = {
 		pointsText = game.add.text(game.world.centerX, 20, "Points: " + points);
 
 		var charactersJSON = game.cache.getJSON('characters');
-		var xPos = 200;
+		var xPos = 100;
 
 		for (var i = 0; i < charactersJSON.characters.length; i++) {
-			if (i % 5 == 0) {
-				xPos += 250;
+			if (i % 3 == 0) {
+				xPos += 280;
 				yPos = 0;
 			}
 
-			yPos += 250;
+			yPos += 360;
 
 			var characterButton = game.add.button(xPos, yPos, 'character' + i, function() {
 				localStorage.setItem('characterImage', this.charImg);
+				localStorage.setItem('characterImageNr', this.charNr);
 				localStorage.setItem('characterSound', this.charSnd);
-			}, { charSnd: charactersJSON.characters[i].sound, charImg: charactersJSON.characters[i].image });
+			}, { charNr: i, charSnd: charactersJSON.characters[i].sound, charImg: charactersJSON.characters[i].image });
 
 			//console.log(charactersJSON.characters[i].characterPrice);
 			//console.log(localStorage.getItem('pricePaid' + i) + ' ' + i);
@@ -123,20 +97,6 @@ var shopState = {
 					}
 				}, { charIndex: i, ptsTxt: pointsText, charPrice: charactersJSON.characters[i].characterPrice, button: characterLock });
 			}
-
-			/*
-			if (parseInt(charactersJSON.characters[i].characterPrice, 10) > 0) {
-				var characterLockButton = game.add.button(100, 200 + 150 * i, 'lock', function() {
-					if (this.currency - this.charPrice > 0) {
-						console.log('unglock, destroy and minus points');
-					} else {
-						console.log('not nuff doekes');
-					}
-				}, { btn: this, charPrice: charactersJSON.characters[i].characterPrice, currency: points });
-
-				characterLockButton.input.priorityID = 1;
-			}
-			*/
 
 			characterButton.input.priorityID = 0;
 			this.characterGroup.add(characterButton);
