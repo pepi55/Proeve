@@ -38,8 +38,7 @@ namespace Menus
                 obj = g.GetComponent<HighScoreDisplayObject>();
 
                 //the the values of the display object
-                obj.SetValues(SaveManager.savaData.highScores[i].name, SaveManager.savaData.highScores[i].score.ToString(), dark ? Color.gray : Color.white);
-                obj.Score.color = obj.Name.color = dark ? HighScoreBackgroundColor1 : HighScoreBackgroundColor2;
+                obj.SetValues(SaveManager.savaData.highScores[i].name, SaveManager.savaData.highScores[i].score.ToString(), dark ? HighScoreBackgroundColor1 : HighScoreBackgroundColor2);
                 dark = !dark;
             }
         }

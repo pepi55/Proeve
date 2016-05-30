@@ -778,7 +778,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.00000071525574, y: 15.5000305}
+  m_AnchoredPosition: {x: 11.3, y: 15.5000305}
   m_SizeDelta: {x: 81.9, y: 31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &595409028
@@ -1823,7 +1823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.062}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3406,6 +3406,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HighScoreObjectTemplate: {fileID: 1026905191}
   scoreBoard: {fileID: 194971919}
+  HighScoreBackgroundColor1: {r: 1, g: 1, b: 1, a: 0.016}
+  HighScoreBackgroundColor2: {r: 1, g: 1, b: 1, a: 0}
 --- !u!114 &1773856077
 MonoBehaviour:
   m_ObjectHideFlags: 0
