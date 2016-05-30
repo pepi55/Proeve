@@ -9,6 +9,7 @@ namespace Menus
 
         /// <summary>
         /// Open menu
+        /// 
         /// by default it just enables and disables the game object
         /// </summary>
         public virtual void Open()

@@ -16,11 +16,17 @@ namespace Menus
             HighScoreScreen.Close();
         }
 
+        /// <summary>
+        /// Loads the main game scene
+        /// </summary>
         public void StartGame()
         {
             Util.SceneControler.Load("MainGame");
         }
 
+        /// <summary>
+        /// Opens the highscore screen and closes all other open menus
+        /// </summary>
         public void OpenHighScore()
         {
             HighScoreScreen.Open();
@@ -29,6 +35,9 @@ namespace Menus
             Close();
         }
 
+        /// <summary>
+        /// Opens menu for Store
+        /// </summary>
         public void OpenStore()
         {
             ShopMenuScreen.Open();
@@ -38,6 +47,9 @@ namespace Menus
             ShopMenuScreen.onClose += Open;
         }
 
+        /// <summary>
+        /// Opens the menu and closes the others
+        /// </summary>
         public void Open()
         {
             gameObject.SetActive(true);

@@ -35,13 +35,13 @@ namespace Menus
         /// Array that contains all the data needed for the characters/balls/bounceobjects
         /// </summary>
         [SerializeField]
-        BallStoreObject[] characters;
+        private BallStoreObject[] characters;
 
         /// <summary>
         /// Array that contains all the data need for the backgrounds
         /// </summary>
         [SerializeField]
-        StoreObject[] backgrounds;
+        private StoreObject[] backgrounds;
 
 
         public BallStoreObject[] Characters
@@ -60,14 +60,18 @@ namespace Menus
             }
         }
 
+        /// <summary>
+        /// Base store object contains a name and a cost of the object
+        /// </summary>
         [System.Serializable]
         public class StoreObject
         {
             public int Cost;
             public string Name;
 
+            //TODO should change highRes, lowRes to inGame and Shop
             [SerializeField]
-            Sprite highRes;
+            private Sprite highRes;
             public Sprite HighRes
             {
                 get
@@ -80,7 +84,7 @@ namespace Menus
                 }
             }
             [SerializeField]
-            Sprite lowRes;
+            private Sprite lowRes;
             public Sprite LowRes
             {
                 get
@@ -94,11 +98,15 @@ namespace Menus
             }
         }
 
+        /// <summary>
+        /// A exstention of storeObject with the added data needed for a ball object
+        /// This was added so it would look quite a bit cleaner
+        /// </summary>
         [System.Serializable]
         public class BallStoreObject : StoreObject
         {
             [SerializeField]
-            Material[] particleMaterial;
+            private Material[] particleMaterial;
             public Material[] ParticleMaterial
             {
                 get
@@ -113,7 +121,7 @@ namespace Menus
             }
 
             [SerializeField]
-            RuntimeAnimatorController animationControler;
+            private RuntimeAnimatorController animationControler;
             public RuntimeAnimatorController AnimationControler
             {
                 get
@@ -127,7 +135,7 @@ namespace Menus
             }
 
             [SerializeField]
-            AudioClip hitSound;
+            private AudioClip hitSound;
             public AudioClip HitSound
             {
                 get
@@ -141,7 +149,7 @@ namespace Menus
             }
 
             [SerializeField]
-            AudioClip scoreSound;
+            private AudioClip scoreSound;
             public AudioClip ScoreSound
             {
                 get

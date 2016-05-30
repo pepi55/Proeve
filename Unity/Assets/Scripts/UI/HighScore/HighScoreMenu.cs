@@ -6,11 +6,16 @@ namespace Menus
     public class HighScoreMenu : BaseMenu
     {
         [SerializeField]
-        GameObject HighScoreObjectTemplate = null;
+        private GameObject HighScoreObjectTemplate = null;
         [SerializeField]
-        Transform scoreBoard = null;
+        private Transform scoreBoard = null;
 
-        void Start()
+        [SerializeField]
+        private Color HighScoreBackgroundColor1;
+        [SerializeField]
+        private Color HighScoreBackgroundColor2;
+
+        private void Start()
         {
             HighScoreObjectTemplate.SetActive(false);
             MakeHighScoreList();
@@ -19,7 +24,7 @@ namespace Menus
         /// <summary>
         /// Fills the HighScoreMenu. Requires a template
         /// </summary>
-        void MakeHighScoreList()
+        private void MakeHighScoreList()
         {
             GameObject g;
             HighScoreDisplayObject obj;
@@ -34,7 +39,7 @@ namespace Menus
 
                 //the the values of the display object
                 obj.SetValues(SaveManager.savaData.highScores[i].name, SaveManager.savaData.highScores[i].score.ToString(), dark ? Color.gray : Color.white);
-                obj.Score.color = obj.Name.color = dark ? (Color.grey + (Color.white / 4f)) : Color.black;
+                obj.Score.color = obj.Name.color = dark ? HighScoreBackgroundColor1 : HighScoreBackgroundColor2;
                 dark = !dark;
             }
         }
