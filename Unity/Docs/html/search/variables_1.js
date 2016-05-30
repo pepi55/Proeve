@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['continuesupdates',['continuesUpdates',['../class_custom_grid.html#a9bddd45525d796a4db2edcbe8f669773',1,'CustomGrid']]],
-  ['currentspacing',['CurrentSpacing',['../class_custom_grid.html#ab9594c84442d7bd9f8cad31cd2d75c84',1,'CustomGrid']]]
+  ['bounces',['bounces',['../class_events_1_1_i_score.html#a15ecb3ea31e60c28e8be9bbe8f183409',1,'Events::IScore']]]
 ];

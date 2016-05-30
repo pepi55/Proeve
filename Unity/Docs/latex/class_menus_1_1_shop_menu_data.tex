@@ -1,5 +1,10 @@
 \hypertarget{class_menus_1_1_shop_menu_data}{}\section{Menus.\+Shop\+Menu\+Data Class Reference}
 \label{class_menus_1_1_shop_menu_data}\index{Menus.\+Shop\+Menu\+Data@{Menus.\+Shop\+Menu\+Data}}
+
+
+Data class that contains all the data of the ball and backgrounds so it\textquotesingle{}s easily accesable  
+
+
 Inheritance diagram for Menus.\+Shop\+Menu\+Data\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,23 +14,61 @@ Inheritance diagram for Menus.\+Shop\+Menu\+Data\+:\begin{figure}[H]
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \hyperlink{struct_menus_1_1_shop_menu_data_1_1_store_object}{Store\+Object}
-\end{DoxyCompactItemize}
+class \hyperlink{class_menus_1_1_shop_menu_data_1_1_ball_store_object}{Ball\+Store\+Object}
+\begin{DoxyCompactList}\small\item\em A exstention of store\+Object with the added data needed for a ball object This was added so it would look quite a bit cleaner \end{DoxyCompactList}\item 
+class \hyperlink{class_menus_1_1_shop_menu_data_1_1_store_object}{Store\+Object}
+\begin{DoxyCompactList}\small\item\em Base store object contains a name and a cost of the object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_menus_1_1_shop_menu_data}{Shop\+Menu\+Data} \hyperlink{class_menus_1_1_shop_menu_data_ab8dbcd741f9b3cc655e57d5ef2a3495b}{Get\+Shop\+Menu} ()
+\begin{DoxyCompactList}\small\item\em Gets the \hyperlink{class_menus_1_1_shop_menu_data}{Shop\+Menu\+Data} and loads it from disk if needed \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const string {\bfseries Resource\+Name} = \char`\"{}Shop\+Data\char`\"{}\hypertarget{class_menus_1_1_shop_menu_data_a0f1c9a23c1e5da1011eacc742121334a}{}\label{class_menus_1_1_shop_menu_data_a0f1c9a23c1e5da1011eacc742121334a}
-
-\end{DoxyCompactItemize}
+const string \hyperlink{class_menus_1_1_shop_menu_data_a0f1c9a23c1e5da1011eacc742121334a}{Resource\+Name} = \char`\"{}Shop\+Data\char`\"{}
+\begin{DoxyCompactList}\small\item\em name of the the shopmenu in the resource folder \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{struct_menus_1_1_shop_menu_data_1_1_store_object}{Store\+Object}\mbox{[}$\,$\mbox{]} {\bfseries Characters}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{class_menus_1_1_shop_menu_data_abbc6902ebe3cb79170943783e5a25415}{}\label{class_menus_1_1_shop_menu_data_abbc6902ebe3cb79170943783e5a25415}
+\hyperlink{class_menus_1_1_shop_menu_data_1_1_ball_store_object}{Ball\+Store\+Object}\mbox{[}$\,$\mbox{]} {\bfseries Characters}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{class_menus_1_1_shop_menu_data_a77f05492a6e757df9f184c076c3c2a8f}{}\label{class_menus_1_1_shop_menu_data_a77f05492a6e757df9f184c076c3c2a8f}
 
 \item 
-\hyperlink{struct_menus_1_1_shop_menu_data_1_1_store_object}{Store\+Object}\mbox{[}$\,$\mbox{]} {\bfseries Backgrounds}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{class_menus_1_1_shop_menu_data_a7736493b49a50ab592f5772933fa0ce9}{}\label{class_menus_1_1_shop_menu_data_a7736493b49a50ab592f5772933fa0ce9}
+\hyperlink{class_menus_1_1_shop_menu_data_1_1_store_object}{Store\+Object}\mbox{[}$\,$\mbox{]} {\bfseries Backgrounds}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{class_menus_1_1_shop_menu_data_a7736493b49a50ab592f5772933fa0ce9}{}\label{class_menus_1_1_shop_menu_data_a7736493b49a50ab592f5772933fa0ce9}
 
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Data class that contains all the data of the ball and backgrounds so it\textquotesingle{}s easily accesable 
+
+
+
+\subsection{Member Function Documentation}
+\index{Menus\+::\+Shop\+Menu\+Data@{Menus\+::\+Shop\+Menu\+Data}!Get\+Shop\+Menu@{Get\+Shop\+Menu}}
+\index{Get\+Shop\+Menu@{Get\+Shop\+Menu}!Menus\+::\+Shop\+Menu\+Data@{Menus\+::\+Shop\+Menu\+Data}}
+\subsubsection[{\texorpdfstring{Get\+Shop\+Menu()}{GetShopMenu()}}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Shop\+Menu\+Data} Menus.\+Shop\+Menu\+Data.\+Get\+Shop\+Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{class_menus_1_1_shop_menu_data_ab8dbcd741f9b3cc655e57d5ef2a3495b}{}\label{class_menus_1_1_shop_menu_data_ab8dbcd741f9b3cc655e57d5ef2a3495b}
+
+
+Gets the \hyperlink{class_menus_1_1_shop_menu_data}{Shop\+Menu\+Data} and loads it from disk if needed 
+
+\begin{DoxyReturn}{Returns}
+an instance of the \hyperlink{class_menus_1_1_shop_menu_data}{Shop\+Menu\+Data}
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{Menus\+::\+Shop\+Menu\+Data@{Menus\+::\+Shop\+Menu\+Data}!Resource\+Name@{Resource\+Name}}
+\index{Resource\+Name@{Resource\+Name}!Menus\+::\+Shop\+Menu\+Data@{Menus\+::\+Shop\+Menu\+Data}}
+\subsubsection[{\texorpdfstring{Resource\+Name}{ResourceName}}]{\setlength{\rightskip}{0pt plus 5cm}const string Menus.\+Shop\+Menu\+Data.\+Resource\+Name = \char`\"{}Shop\+Data\char`\"{}}\hypertarget{class_menus_1_1_shop_menu_data_a0f1c9a23c1e5da1011eacc742121334a}{}\label{class_menus_1_1_shop_menu_data_a0f1c9a23c1e5da1011eacc742121334a}
+
+
+name of the the shopmenu in the resource folder 
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

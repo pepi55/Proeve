@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mainmenu',['MainMenu',['../class_menus_1_1_main_menu.html',1,'Menus']]]
+  ['localevents',['LocalEvents',['../class_events_1_1_local_events.html',1,'Events']]]
 ];

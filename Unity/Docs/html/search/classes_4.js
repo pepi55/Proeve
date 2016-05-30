@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['highscoredisplayobject',['HighScoreDisplayObject',['../class_menus_1_1_high_score_display_object.html',1,'Menus']]],
-  ['highscoremenu',['HighScoreMenu',['../class_menus_1_1_high_score_menu.html',1,'Menus']]],
-  ['highscoresubmitscreen',['HighScoreSubmitScreen',['../class_menus_1_1_high_score_submit_screen.html',1,'Menus']]]
+  ['gamemanager',['GameManager',['../class_game_manager.html',1,'']]],
+  ['gridlayoutheightsetter',['GridLayoutHeightSetter',['../class_util_1_1_grid_layout_height_setter.html',1,'Util']]],
+  ['gridlayoutwidthsetter',['GridlayoutWidthSetter',['../class_util_1_1_gridlayout_width_setter.html',1,'Util']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['uimanager',['UIManager',['../class_u_i_manager.html',1,'']]]
+  ['targetcontroller',['TargetController',['../class_target_controller.html',1,'']]]
 ];

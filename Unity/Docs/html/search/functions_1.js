@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['changelooks',['ChangeLooks',['../class_ball_controller.html#acb6de308cee7675f3732a48a82c6e39d',1,'BallController']]],
   ['clickbackground',['ClickBackground',['../class_menus_1_1_shop_menu.html#a8aa4cb8db5ba4c53087af77e39232cf6',1,'Menus::ShopMenu']]],
   ['clickcharacter',['ClickCharacter',['../class_menus_1_1_shop_menu.html#a403a38bf336dacd0d5f412ba0aaf4520',1,'Menus::ShopMenu']]],
   ['close',['Close',['../class_menus_1_1_base_menu.html#a9d4fb5bab4fd1c5288774cc4e1e341af',1,'Menus.BaseMenu.Close()'],['../class_pause_menu.html#a42be18ab0dceeb064b89799cc808b559',1,'PauseMenu.Close()']]],

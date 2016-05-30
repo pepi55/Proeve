@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['mainmenu',['MainMenu',['../class_menus_1_1_main_menu.html',1,'Menus']]],
-  ['maxrows',['maxRows',['../class_custom_grid.html#a74432277987a0e6cc02d0db891ec77ba',1,'CustomGrid']]],
-  ['maxspacing',['maxSpacing',['../class_custom_grid.html#a068ef9a666cd31142751320e2a653025',1,'CustomGrid']]],
-  ['menus',['Menus',['../namespace_menus.html',1,'']]],
-  ['minneededforfirstrow',['minNeededForFirstRow',['../class_custom_grid.html#a985fc1fc02418d3286ffbd41c98417a5',1,'CustomGrid']]]
+  ['lastdir',['lastDir',['../class_events_1_1_i_score.html#a2ea657fdd7f72f26c59e92ee71d275d9',1,'Events::IScore']]],
+  ['lastscorewashighscore',['lastScoreWasHighScore',['../class_events_1_1_i_reset_game_state.html#a8661bddf2fd9a259303c946252fb8658',1,'Events::IResetGameState']]],
+  ['localevents',['LocalEvents',['../class_events_1_1_local_events.html',1,'Events']]]
 ];

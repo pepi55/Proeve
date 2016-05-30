@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['savedata',['SaveData',['../class_save_data.html#a2da03a58cf0deb69ccd73c938780df3d',1,'SaveData']]],
-  ['scoreblock',['ScoreBlock',['../struct_save_data_1_1_score_block.html#a3ca084139639f3dce178c7d187315acf',1,'SaveData::ScoreBlock']]],
-  ['setvalues',['SetValues',['../class_menus_1_1_high_score_display_object.html#a4826d2032c3e4745c7f775335574fabd',1,'Menus::HighScoreDisplayObject']]]
+  ['removealllisteners',['RemoveAllListeners',['../class_events_1_1_event_dispatcher.html#add2667245c85f8d781eed8d908450518',1,'Events::EventDispatcher']]],
+  ['removeeventlistener',['RemoveEventListener',['../class_events_1_1_event_dispatcher.html#a9644ebc4fb5655cda345b586e5749ea0',1,'Events.EventDispatcher.RemoveEventListener()'],['../interface_events_1_1_i_event_dispatcher.html#ae3209681ebdbcf8289905ff6ccdbd188',1,'Events.IEventDispatcher.RemoveEventListener()'],['../class_events_1_1_local_events.html#acff4973a06ab3ce4bd0a2c8adbe54e2b',1,'Events.LocalEvents.RemoveEventListener()']]],
+  ['removeeventlistener_3c_20t_20_3e',['RemoveEventListener&lt; T &gt;',['../class_events_1_1_event_dispatcher.html#a88f24cbfab1022517830b3fc42155c15',1,'Events.EventDispatcher.RemoveEventListener&lt; T &gt;()'],['../interface_events_1_1_i_event_dispatcher.html#a86e3438c779746108c3f01dff0c43d23',1,'Events.IEventDispatcher.RemoveEventListener&lt; T &gt;()'],['../class_events_1_1_local_events.html#ac8647cb9efdd5e6b86362908a8019cad',1,'Events.LocalEvents.RemoveEventListener&lt; T &gt;()']]]
 ];
