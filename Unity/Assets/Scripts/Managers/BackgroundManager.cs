@@ -1,8 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Util;
+
+/// <summary>
+/// Manages the ingame background and gets the correct background
+/// </summary>
 public class BackgroundManager : MonoBehaviour {
 
+    /// <summary>
+    /// The sprite render that contains the background
+    /// </summary>
     [SerializeField]
     SpriteRenderer BackgroundObj;
 

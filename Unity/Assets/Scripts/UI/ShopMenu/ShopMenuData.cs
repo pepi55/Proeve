@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 namespace Menus
 {
+    /// <summary>
+    /// Data class that contains all the data of the ball and backgrounds so it's easily accesable
+    /// </summary>
     public class ShopMenuData : MonoBehaviour
     {
+        /// <summary>
+        /// Gets the ShopMenuData and loads it from disk if needed
+        /// </summary>
+        /// <returns>an instance of the ShopMenuData</returns>
         public static ShopMenuData GetShopMenu()
         {
             ShopMenuData data;
             data = FindObjectOfType<Menus.ShopMenuData>();
             if (!data)
             {
-                GameObject gameobj = Instantiate(Resources.Load(Menus.ShopMenuData.ResourceName)) as GameObject;
+                GameObject gameobj = Instantiate(Resources.Load(ResourceName)) as GameObject;
 
                 data = gameobj.GetComponent<Menus.ShopMenuData>();
             }
@@ -19,19 +26,20 @@ namespace Menus
             return data;
         }
 
-        [ContextMenu("RemoveItem")]
-        public void RemoveAt()
-        {
-            List<BallStoreObject> balls = characters.ToList();
-            balls.RemoveAt(8);
-            characters = balls.ToArray();
-        }
-
+        /// <summary>
+        /// name of the the shopmenu in the resource folder
+        /// </summary>
         public const string ResourceName = "ShopData";
 
+        /// <summary>
+        /// Array that contains all the data needed for the characters/balls/bounceobjects
+        /// </summary>
         [SerializeField]
         BallStoreObject[] characters;
 
+        /// <summary>
+        /// Array that contains all the data need for the backgrounds
+        /// </summary>
         [SerializeField]
         StoreObject[] backgrounds;
 

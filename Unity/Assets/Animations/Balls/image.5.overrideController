@@ -5,6 +5,6 @@ AnimatorOverrideController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: image.13
+  m_Name: image.5
   m_Controller: {fileID: 9100000, guid: f309daf734865c1448703af42973c8f4, type: 2}
   m_Clips: []

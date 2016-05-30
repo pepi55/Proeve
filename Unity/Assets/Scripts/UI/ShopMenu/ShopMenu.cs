@@ -325,10 +325,6 @@ namespace Menus
                             tex.text = data[indexPosition].Cost + " peso";
                             break;
 
-                        case "name":
-                            //TODO implement name into the game object
-                            break;
-
                         case "unlocked":
                             unlockText = tex.gameObject;
                             break;

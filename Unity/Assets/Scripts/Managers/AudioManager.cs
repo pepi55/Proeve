@@ -1,27 +1,56 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Manages the ingame sounds
+/// </summary>
 public class AudioManager : MonoBehaviour
 {
 
-
+    /// <summary>
+    /// AudioSource for the background music
+    /// </summary>
     [SerializeField]
     AudioSource BGM = null;
+    /// <summary>
+    /// AudioSource for the Click sound effect
+    /// </summary>
     [SerializeField]
     AudioSource SFX_Click = null;
+    /// <summary>
+    /// AudioSource for ball score sound effect
+    /// </summary>
     [SerializeField]
     AudioSource SFX_BallScore = null;
 
+    /// <summary>
+    /// Audio clip for background music start
+    /// </summary>
     [SerializeField]
     AudioClip BGM_Start = null;
+    /// <summary>
+    /// Audio clip for background music loop
+    /// </summary>
     [SerializeField]
     AudioClip BGM_Loop = null;
+    /// <summary>
+    /// Audio clip for end of background music clip
+    /// </summary>
     [SerializeField]
     AudioClip BGM_End = null;
 
+    /// <summary>
+    /// Audio clip for when the ball is clicked
+    /// </summary>
     AudioClip SFX_ClickClip = null;
+    /// <summary>
+    /// Audio clip for when there is scored
+    /// </summary>
     AudioClip SFX_BallScoreClip = null;
 
+    /// <summary>
+    /// All events are asinged here and audio clips for Click and ballscore are grabed from the shopmenuData
+    /// </summary>
     void Start()
     {
         SFX_BallScoreClip = Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ScoreSound;
@@ -86,6 +115,9 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handels transition between STart clip and loop clip of the background music
+    /// </summary>
     IEnumerator startBGM()
     {
         BGM.clip = BGM_Start;
@@ -101,6 +133,9 @@ public class AudioManager : MonoBehaviour
         BGM.Play();
     }
 
+    /// <summary>
+    /// lowers the loop quickly then plays the game over sound
+    /// </summary>
     IEnumerator playGameOver()
     {
         float vol =0.75f;

@@ -53,6 +53,7 @@ public class TargetController : MonoBehaviour
         Events.GlobalEvents.RemoveEventListener<Events.IPause>(OnPause);
         Events.GlobalEvents.RemoveEventListener<Events.IResetGameState>(OnBallReset);
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -87,6 +88,7 @@ public class TargetController : MonoBehaviour
             speed = 0.5f;
         //1 - 2·exp(-x / 400)
     }
+
 
     void OnPause(Events.IPause obj)
     {

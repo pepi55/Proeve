@@ -114,6 +114,10 @@ public class BallAnimationController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Actives click animation when the ball was clicked succesfull
+    /// </summary>
+    /// <param name="obj">Contains data about the balls current movement</param>
     private void OnBallMoveAnimator(Events.IBallMove obj)
     {
         animator.SetTrigger("click");
