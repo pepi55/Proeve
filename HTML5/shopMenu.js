@@ -1,22 +1,35 @@
-// Shop state.
+/**
+ * @Class
+ * @name shopState
+ * @desc state in which the game is played.
+ * @property {object:array}	characterGroup			 -	Characters in the shop.
+ * @property {object:array}	backgroundGroup			 -	Backgrounds in the shop.
+ * @property {sprite}				background					 -	Shop background.
+ * @property {object}				backButton					 -	Button for going back to the main menu.
+ * @property {object}				characterButton			 -	Buyable character button.
+ * @property {text}					priceText						 -	Text above each character with the price.
+ * @property {Json}					charactersJSON			 -	JSON file with all the information on the characters.
+ * @property {text}					pointsText					 -	text for points.
+ * @property {sprite}				characterLock				 -	lock sprite.
+ *
+ */
 var shopState = {
   // Custom "variables".
   characterGroup: null,
   backgroundGroup: null,
 
 	// Phaser functions.
+	/** @method
+	 * @name preload
+	 * @memberof shopState
+	 * @description Used to set all the relevant variables in the state.
+	 */
 	preload: function() {
 		this.characterGroup = game.add.group();
 		this.backgroundGroup = game.add.group();
 
 		game.world.bringToTop(this.backgroundGroup);
 		game.world.bringToTop(this.characterGroup);
-
-		/*
-		for (var i = 0; i < this.amountOfCharacters; i++) {
-			game.load.image('character' + i, 'assets/balls/image.' + i + '.png');
-		}
-		*/
 
 		var str_points = localStorage.getItem('points');
 
@@ -25,10 +38,13 @@ var shopState = {
 		} else {
 			points = parseInt(str_points, 10);
 		}
-
-		//localStorage.clear();
 	},
 
+	/** @method
+	 * @name create
+	 * @memberof shopState
+	 * @description Used to setup the scene for this gamestate.
+	 */
   create: function() {
 		this.background = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'backgroundShop');
 		this.backgroundGroup.add(this.background);
@@ -58,10 +74,6 @@ var shopState = {
 				localStorage.setItem('characterSound', this.charSnd);
 			}, { charNr: i, charSnd: charactersJSON.characters[i].sound, charImg: charactersJSON.characters[i].image });
 
-			//console.log(charactersJSON.characters[i].characterPrice);
-			//console.log(localStorage.getItem('pricePaid' + i) + ' ' + i);
-			//console.log(localStorage.getItem('pricePaid' + i) == charactersJSON.characters[i].characterPrice);
-
 			if (localStorage.getItem('pricePaid' + i) != charactersJSON.characters[i].characterPrice
 			&& parseInt(charactersJSON.characters[i].characterPrice, 10) > 0) {
 				var characterLock = game.add.sprite(xPos, yPos, 'lock');
@@ -78,22 +90,17 @@ var shopState = {
 				var priceText = game.add.text(characterLock.x, characterLock.y, charactersJSON.characters[i].characterPrice + 'pt$', style);
 				priceText.anchor.set(0.5);
 
-				//characterLock.addChild(priceText);
-
 				characterLock.inputEnabled = true;
 				characterLock.scale.setTo(1.1);
 
 				characterLock.events.onInputDown.add(function() {
 					if (points - this.charPrice >= 0) {
-						console.log('unglock, dextroi \'n --pts');
 
 						points -= this.charPrice;
 						this.ptsTxt.text = 'points: ' + points;
 						localStorage.setItem('pricePaid' + this.charIndex, this.charPrice);
 
 						this.button.destroy();
-					} else {
-						console.log('not nuff chaching');
 					}
 				}, { charIndex: i, ptsTxt: pointsText, charPrice: charactersJSON.characters[i].characterPrice, button: characterLock });
 			}
@@ -118,10 +125,12 @@ var shopState = {
 		pointsText.fill = '#2B65EC';
   },
 
-	update: function() {
-	},
-
 	// Custom functions.
+	/** @method
+	 * @name goToMain
+	 * @memberof shopState
+	 * @description this is a function that returns the player to the main menu.
+	 */
 	goToMain: function() {
 		localStorage.setItem('points', points);
 		game.state.start('mainMenu');

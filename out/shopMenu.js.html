@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>VivaMacho Source: shopMenu.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.slate.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">VivaMacho</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="deathState.html">deathState</a></li><li><a href="gameState.html">gameState</a></li><li><a href="highscoreState.html">highscoreState</a></li><li><a href="loadState.html">loadState</a></li><li><a href="mainMenuState.html">mainMenuState</a></li><li><a href="shopState.html">shopState</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+		<div class="col-sm-3 col-md-3">
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: shopMenu.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/**
+ * @Class
+ * @name shopState
+ * @desc state in which the game is played.
+ * @property {object:array}	characterGroup			 -	Characters in the shop.
+ * @property {object:array}	backgroundGroup			 -	Backgrounds in the shop.
+ * @property {sprite}				background					 -	Shop background.
+ * @property {object}				backButton					 -	Button for going back to the main menu.
+ * @property {object}				characterButton			 -	Buyable character button.
+ * @property {text}					priceText						 -	Text above each character with the price.
+ * @property {Json}					charactersJSON			 -	JSON file with all the information on the characters.
+ * @property {text}					pointsText					 -	text for points.
+ * @property {sprite}				characterLock				 -	lock sprite.
+ *
+ */
+var shopState = {
+  // Custom "variables".
+  characterGroup: null,
+  backgroundGroup: null,
+
+	// Phaser functions.
+	/** @method
+	 * @name preload
+	 * @memberof shopState
+	 * @description Used to set all the relevant variables in the state.
+	 */
+	preload: function() {
+		this.characterGroup = game.add.group();
+		this.backgroundGroup = game.add.group();
+
+		game.world.bringToTop(this.backgroundGroup);
+		game.world.bringToTop(this.characterGroup);
+
+		var str_points = localStorage.getItem('points');
+
+		if (str_points == null || str_points == 'null') {
+			points = 0;
+		} else {
+			points = parseInt(str_points, 10);
+		}
+	},
+
+	/** @method
+	 * @name create
+	 * @memberof shopState
+	 * @description Used to setup the scene for this gamestate.
+	 */
+  create: function() {
+		this.background = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'backgroundShop');
+		this.backgroundGroup.add(this.background);
+
+		var backButton;
+		backButton = game.add.button(100, 100, 'backButton', function() {
+		game.state.start('mainMenu');
+		}, this);
+		backButton.anchor.setTo(0.5, 0.5);
+
+		pointsText = game.add.text(game.world.centerX, 20, "Points: " + points);
+
+		var charactersJSON = game.cache.getJSON('characters');
+		var xPos = 100;
+
+		for (var i = 0; i &lt; charactersJSON.characters.length; i++) {
+			if (i % 3 == 0) {
+				xPos += 280;
+				yPos = 0;
+			}
+
+			yPos += 360;
+
+			var characterButton = game.add.button(xPos, yPos, 'character' + i, function() {
+				localStorage.setItem('characterImage', this.charImg);
+				localStorage.setItem('characterImageNr', this.charNr);
+				localStorage.setItem('characterSound', this.charSnd);
+			}, { charNr: i, charSnd: charactersJSON.characters[i].sound, charImg: charactersJSON.characters[i].image });
+
+			if (localStorage.getItem('pricePaid' + i) != charactersJSON.characters[i].characterPrice
+			&amp;&amp; parseInt(charactersJSON.characters[i].characterPrice, 10) > 0) {
+				var characterLock = game.add.sprite(xPos, yPos, 'lock');
+
+				var style = {
+					font: "32px Arial",
+					fill: "#ff0044",
+					wordWrap: true,
+					wordWrapWidth: characterLock.width,
+					align: "center",
+					backgroundColor: "#ffff00"
+				};
+
+				var priceText = game.add.text(characterLock.x, characterLock.y, charactersJSON.characters[i].characterPrice + 'pt$', style);
+				priceText.anchor.set(0.5);
+
+				characterLock.inputEnabled = true;
+				characterLock.scale.setTo(1.1);
+
+				characterLock.events.onInputDown.add(function() {
+					if (points - this.charPrice >= 0) {
+
+						points -= this.charPrice;
+						this.ptsTxt.text = 'points: ' + points;
+						localStorage.setItem('pricePaid' + this.charIndex, this.charPrice);
+
+						this.button.destroy();
+					}
+				}, { charIndex: i, ptsTxt: pointsText, charPrice: charactersJSON.characters[i].characterPrice, button: characterLock });
+			}
+
+			characterButton.input.priorityID = 0;
+			this.characterGroup.add(characterButton);
+		}
+
+		var escKey = game.input.keyboard.addKey(Phaser.Keyboard.Q);
+		escKey.onDown.add(this.goToMain, this);
+
+		pointsText.anchor.x = 0.5;
+
+		// Font style
+		pointsText.font = 'Arial Black';
+		pointsText.fontSize = 50;
+		pointsText.fontWeight = 'bold';
+
+		// Stroke color and thickness
+		pointsText.stroke = '#0020C2';
+		pointsText.strokeThickness = 5;
+		pointsText.fill = '#2B65EC';
+  },
+
+	// Custom functions.
+	/** @method
+	 * @name goToMain
+	 * @memberof shopState
+	 * @description this is a function that returns the player to the main menu.
+	 */
+	goToMain: function() {
+		localStorage.setItem('points', points);
+		game.state.start('mainMenu');
+	}
+};</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+<div class="modal fade" id="searchResults">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Search results</h4>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+<footer>
+
+
+	<span class="copyright">
+	Code documentation made for VivaMacho by team Spicy juice
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a>
+	
+		on Tue May 31st 2016
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+<script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			var id = $( heading ).attr( "id" );
+			return id && id.replace(/\~/g, '-inner-').replace(/\./g, '-static-') || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		SearcherDisplay.init();
+	});
+</script>
+
+</body>
+</html>

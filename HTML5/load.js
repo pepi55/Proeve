@@ -1,5 +1,15 @@
-// Loading state for loading all images in cache.
+/**
+ * @Class
+ * @name loadState
+ * @type Phaser.State
+ * @desc Loading state for loading all images in the cache.
+ */
 var loadState = {
+ 	/** @method
+	* @name preload
+	* @memberof loadState
+	* @description this is a preload function that is fired before the create function, this is where we create variables and images
+	*/
 	preload: function() {
 		// Loading image.
 		var loadingImage = game.add.sprite(game.world.centerX, game.world.centerY, 'loadingScreenSheet');
@@ -14,16 +24,20 @@ var loadState = {
 		game.load.audio('startSound','assets/audio/backgroundmusic/inGame/start.wav');
 
 		// Image loading.
-		game.load.image('backgroundGame', 'assets/background/background.0.png');
+		game.load.image('backgroundGame0', 'assets/background/background.0.png');
+		game.load.image('backgroundGame1', 'assets/background/background.1.png');
+		game.load.image('backgroundGame2', 'assets/background/background.2.png');
+		game.load.image('backgroundGame3', 'assets/background/background.3.png');
+		game.load.image('backgroundGame4', 'assets/background/background.4.png');
 		game.load.image('goal', 'assets/goal/goal.0.png');
 		game.load.image('wall', 'assets/image.png');
 
 		game.load.image('deathscreenBackground', 'assets/UI/deathScreen.png');
 
-	  game.load.image('playButton', 'assets/buttons/playButton.png');
-	  game.load.image('highscoreButton', 'assets/buttons/highscoreButton.png');
-	  game.load.image('shopButton', 'assets/buttons/shopButton.png');
-	  game.load.image('backButton', 'assets/buttons/exitButton.png');
+		game.load.image('playButton', 'assets/buttons/playButton.png');
+  	game.load.image('highscoreButton', 'assets/buttons/highscoreButton.png');
+  	game.load.image('shopButton', 'assets/buttons/shopButton.png');
+		game.load.image('backButton', 'assets/buttons/exitButton.png');
 		game.load.image('invisibleButton', 'assets/invisibleButton.png');
 
 		game.load.image('muteButton', 'assets/buttons/muteButton.png');
@@ -55,6 +69,11 @@ var loadState = {
 		}
 	},
 
+	/** @method
+	* @name create
+	* @memberof loadState
+	* @description this is a create function that only starts the mainMenu state.
+	*/
 	create: function() {
 		game.state.start('mainMenu');
 	}

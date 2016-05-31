@@ -1,9 +1,22 @@
-// Main menu state.
-	/** This is a description of the update. */
+/**
+ * @Class
+ * @name mainMenuState
+ * @desc this is the main menu state in which you can navigate to most places in the game.
+ * @property {Particle}	emitter											-	Particle emmiter on mouse click for confetti.
+ * @property {sound}	menuBGMusic										-	Background music for the main menu.
+ * @property {sprite}	startBackground								-	Background image for the main menu.
+ * @property {sprite}	logo												  -	Logo image for the main menu.
+ * @property {object}	startButton										-	Button that starts the game.
+ * @property {object}	shopButton										-	Button that goes to the shop.
+ * @property {object}	highscoreButton								-	Button that goes to the highscore.
+ * @property {object}	soundButton										-	Button that enables sound.
+ * @property {object}	muteButton										-	Button that mutes sound.
+ * @property {object}	resetLocalStorageButton			  -	Button that removes your saved data.
+ * @property {object}	modeButton									  -	Button that changes the play mode.
+ */
 var mainMenuState = {
 	emitter: null,
 	menuBGMusic: null,
-	currentHighscore: new Array(),
 	preload: function() {
 			menuBGMusic = game.add.audio('mainMenuBG');
 			menuBGMusic.volume = 0.4;
@@ -12,14 +25,12 @@ var mainMenuState = {
 	create: function() {
 		menuBGMusic.loop = true;
 		menuBGMusic.play();
+
 		game.stage.backgroundColor = '#BBBBBB';
 		var startBackground = game.add.sprite(0, 0,'startBackground');
 		var logo = game.add.sprite(0, -200, 'logo');
 
-		/**
-		* Represents a book.
-		* @param {string} startButton - this is a button to start the game.
-		*/
+
 		var startButton;
 		startButton = game.add.button(game.world.centerX - 400, game.world.centerY - 200, 'playButton', function() {
 				menuBGMusic.stop();
@@ -78,6 +89,7 @@ var mainMenuState = {
 
 	/** @method
 	* @name update
+	* @memberof mainMenuState
 	* @description this is a update function
 	*/
 	update: function() {
