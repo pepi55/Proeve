@@ -87,14 +87,6 @@ var mainMenuState = {
 
 	},
 
-	/** @method
-	* @name update
-	* @memberof mainMenuState
-	* @description this is a update function
-	*/
-	update: function() {
-	},
-
 	particleBurst: function() {
     //  Position the emitter where the mouse/touch event was
     emitter.x = game.input.activePointer.x;

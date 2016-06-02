@@ -2,10 +2,10 @@
  * @Class
  * @name deathState
  * @desc state that starts when the player loses in the game state.
- * @property {number}			deathScoreValue			   		 -	current score that is shown in the death screen.
+ * @property {number}			deathScoreValue			 -	current score that is shown in the death screen.
  * @property {number}			deathHighestScoreValue		 -	highest score the player had that is shown in the death screen.
- * @property {sound}			deathScreenBGMusic				 -	sound that is played on lose.
- * @property {fontStyle}	style				 							 -	style of the font in the screen.
+ * @property {sound}			deathScreenBGMusic		 -	sound that is played on lose.
+ * @property {fontStyle}		style				 -	style of the font in the screen.
  */
 var deathState = {
   deathScoreValue: 0,
@@ -15,11 +15,11 @@ var deathState = {
   	this.deathScreenBGMusic = game.add.audio('gameOverSound');
   	this.deathScreenBGMusic.volume = 0.2;
   },
-	 	/** @method
-	* @name create
-	* @memberof deathState
-	* @description this is a create function that is fired after the preload function, this is where we create variables and images
-	*/
+  /** @method
+   * @name create
+   * @memberof deathState
+   * @description this is a create function that is fired after the preload function, this is where we create variables and images
+   */
   create: function() {
   	this.deathScreenBGMusic.play();
   	this.background = game.add.tileSprite(0, 0, game.world.width, game.world.height, setName);
@@ -38,22 +38,16 @@ var deathState = {
 			this.deathScreenBGMusic.stop();
 		game.state.start('game');
 		}, this);
-		//replayButton.anchor.setTo(0.5, 0.5);
 		replayButton.scale.setTo(0.75,0.75);
 
 
 		style = {};
-		 //	Font style
+		// Font style
 		style.font = 'Passion One';
 		style.fontSize = 75;
 		style.fontWeight = 'bold';
 
-		//	Stroke color and thickness
-		//style.stroke = '#0C090A';
-		//style.strokeThickness = 7;
-		//style.fill = '#52D017';
-
-					//	Stroke color and thickness
+		// Stroke color and thickness
 		style.stroke = '#FFFF00';
 		style.strokeThickness = 3;
 		style.fill = '#FF2828';
@@ -77,7 +71,7 @@ var deathState = {
 	}
 	else
 	{
-	deathHighestScoreValue = deathHighestScoreValue;
+		deathHighestScoreValue = deathHighestScoreValue;
 	}
   }
 };
