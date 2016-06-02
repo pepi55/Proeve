@@ -26,14 +26,14 @@ var hardMode = true;
  * @property {string}	setName 							 -	Name for selecting a random background.
  */
 var gameState = {
-  // Custom "variables".
+	// Custom "variables".
 	ingameEmitter: null,
-  tweenAPosition: 0,
-  tweenBPosition: 300,
+	tweenAPosition: 0,
+	tweenBPosition: 300,
 
 	tween: null,
-  textTween: null,
-  text: null,
+	textTween: null,
+	text: null,
 	tapSound: null,
 	startSound: null,
 	inGameBGMusic: null,
@@ -41,21 +41,21 @@ var gameState = {
 	setName: null,
 	gameobjects: null,
 	backgrounds: null,
-  walls: null,
+	walls: null,
 
-  charNr: 0,
+	charNr: 0,
 
-  score: 0,
+	score: 0,
 	tempScore: 0,
 
-  currentHighscore: new Array(),
+	currentHighscore: new Array(),
 
- 	/** @method
-	* @name preload
-	* @memberof gameState
-	* @description this is a preload function that is fired before the create function, this is where we create variables and images
-	*/
-  preload: function() {
+	/** @method
+	 * @name preload
+	 * @memberof gameState
+	 * @description this is a preload function that is fired before the create function, this is where we create variables and images
+	 */
+	preload: function() {
 		// Load tapsound.
 		menuBGMusic.stop();
 		var tapSound = localStorage.getItem('characterSound');
@@ -63,30 +63,33 @@ var gameState = {
 			tapSound = 'click2.wav';
 		}
 		game.load.audio('tapSound', 'assets/audio/soundeffect/' + tapSound);
+
 		// setting game relevant sounds.
 		startSound = game.add.audio('startSound');
 		inGameBGMusic = game.add.audio('inGameBG');
 		startSound.onStop.add(this.startBG,this);
+
 		//making object groups.
 		this.gameobjects = game.add.group();
 		this.backgrounds = game.add.group();
 		this.walls = game.add.group();
 
-		var randomValue = Math.floor(Math.random() * 4) + 0;
+		var randomValue = Math.floor(Math.random() * 5) + 0;
 		setName = "backgroundGame" + randomValue;
 	},
 
-	/** @method
-	* @name create
-	* @memberof gameState
-	* @description this is a create function that is fired after the preload function, this is where we set all the variables
-	*/
-  create: function() {
-  	//set tween movement speed.
-  	tweenValue = 5000;
-  	startSound.volume = 0.2;
+	 /** @method
+		* @name create
+		* @memberof gameState
+		* @description this is a create function that is fired after the preload function, this is where we set all the variables
+		*/
+	create: function() {
+		//set tween movement speed.
+		tweenValue = 5000;
+		startSound.volume = 0.2;
 		startSound.play();
-  	// Load character number.
+
+		// Load character number.
 		var characterInt = 0;
 		var str_character = parseInt(localStorage.getItem('characterImageNr'), 10);
 		if (str_character == null || str_character == "null" || isNaN(str_character)) {
@@ -139,12 +142,12 @@ var gameState = {
 
 		game.physics.arcade.enable([
 			this.ball,
-      this.goal,
-      this.walls
-      ]);
+			this.goal,
+			this.walls
+		]);
 
-    // Background setup
-    this.backgrounds.add(this.background);
+		// Background setup
+		this.backgrounds.add(this.background);
 
 		// Ball setup
 		this.ball.anchor.setTo(0.5, 0.5);
@@ -167,6 +170,7 @@ var gameState = {
 			this.walls.children[i].body.immovable = true;
 			this.walls.children[i].body.allowGravity = false;
 		}
+
 		// Reset ceiling size
 		this.walls.children[2].anchor.setTo(0.5);
 		this.walls.children[2].scale.setTo(50, 0.5);
@@ -180,16 +184,16 @@ var gameState = {
 
 		//set the goals tweens.
 		tween = this.game.add.tween(this.goal).to({
-    x: [this.tweenBPosition,this.tweenAPosition]
-    }, 5000);
-    tween.start();
+			x: [this.tweenBPosition,this.tweenAPosition]
+		}, 5000);
+		tween.start();
 		tween.onComplete.add(this.setNewTweenSpeed, this);
 
 		ingameEmitter = game.add.emitter(0, 0, 100);
 
-    ingameEmitter.makeParticles(['cloud_particle1','cloud_particle2','cloud_particle3']);
-    ingameEmitter.setScale(0.5, 0, 0.5, 0, 6000);
-    game.input.onDown.add(this.particleBurst, this);
+		ingameEmitter.makeParticles(['cloud_particle1','cloud_particle2','cloud_particle3']);
+		ingameEmitter.setScale(0.5, 0, 0.5, 0, 6000);
+		game.input.onDown.add(this.particleBurst, this);
 
 		//set score text
 		scoreText = game.add.text(game.world.centerX, 20, "0");
@@ -205,14 +209,14 @@ var gameState = {
 		scoreText.fill = '#FF2828';
 
 		textTween = game.add.tween(scoreText).to({ fontSize:100}, 100, Phaser.Easing.Linear.None, false, 0,0,true);
-  },
+	},
 
 	/** @method
-	* @name update
-	* @memberof gameState
-	* @description this is a update function that is fired after the create function,and updates every frame.
-	*/
-  update: function() {
+	 * @name update
+	 * @memberof gameState
+	 * @description this is a update function that is fired after the create function,and updates every frame.
+	 */
+	update: function() {
 		game.physics.arcade.collide(this.walls, this.ball, this.wallsCollisionHandler, null, this);
 		game.physics.arcade.collide(this.goal, this.ball, this.goalCollisionHandler, null, this);
 
@@ -221,92 +225,96 @@ var gameState = {
 		}
 
 		if (this.goal.world.x == this.tweenAPosition) {
-		//	tweenB.start();
-
+			//	tweenB.start();
 		} else if(this.goal.world.x == this.tweenBPosition) {
-		//	tweenA.start();
-
+			//	tweenA.start();
 		}
 
 		if (this.ballIsAnimated && this.ball.animations.currentAnim.isFinished) {
 			this.ball.animations.play('idle');
 		}
-  },
-		particleBurst: function() {
-    //  Position the emitter where the mouse/touch event was
-    ingameEmitter.x = this.ball.world.x;
-    ingameEmitter.y = this.ball.world.y;
-
-    //  The first parameter sets the effect to "explode" which means all particles are emitted at once
-    //  The second gives each particle a 2000ms lifespan
-    //  The third is ignored when using burst/explode mode
-    //  The final parameter is how many particles will be emitted in this single burst
-    ingameEmitter.start(true, 2000, null, 10);
 	},
-  // Custom functions
-  	/** @method
-	* @name wallsCollisionHandler
-	* @memberof gameState
-	* @description this is a collision function that is fired when hitting a wall and is used for adding score for a skill shot
-	*/
-  wallsCollisionHandler: function() {
-    this.tempScore++;
-  },
-    	/** @method
-	* @name startBG
-	* @memberof gameState
-	* @description this is a function that starts the background music.
-	*/
-   startBG: function() {
-   	inGameBGMusic.volume = 0.2;
-    inGameBGMusic.play();
-    inGameBGMusic.loop = true;
-  },
 
- 	/** @method
-	* @name goalCollisionHandler
-	* @memberof gameState
-	* @description this is a collision function that is fired when the ball hits the goal and is used for adding score for a skill shot
-	*/
-  goalCollisionHandler: function() {
-    //game.state.start('game');
-    this.score += this.tempScore + 1;
-    this.tempScore = 0;
+	particleBurst: function() {
+		// Position the emitter where the mouse/touch event was
+		ingameEmitter.x = this.ball.world.x;
+		ingameEmitter.y = this.ball.world.y;
 
-    this.setScoreText();
-    this.ball.body.velocity.setTo(0, 0);
-    this.ball.body.angularVelocity = 0;
-    this.ball.position.x = game.rnd.integerInRange(this.tweenAPosition,this.tweenBPosition);
-    this.ball.position.y = 0;
-  },
-  /** @method
-	* @name setNewTweenSpeed
-	* @memberof gameState
-	* @description this function is fired when the goal tween is completed and keeps looping with a random speed.
-	*/
-  setNewTweenSpeed: function(){
- 		tween = this.game.add.tween(this.goal).to({
-        x: [this.tweenBPosition,this.tweenAPosition]
-        }, game.rnd.integerInRange(2500,5000));
-        tween.start();
-        tween.onComplete.add(this.setNewTweenSpeed, this);
-  },
+		// The first parameter sets the effect to "explode" which means all particles are emitted at once
+		// The second gives each particle a 2000ms lifespan
+		// The third is ignored when using burst/explode mode
+		// The final parameter is how many particles will be emitted in this single burst
+		ingameEmitter.start(true, 2000, null, 10);
+	},
+
+	 // Custom functions
+	 /** @method
+		* @name wallsCollisionHandler
+		* @memberof gameState
+		* @description this is a collision function that is fired when hitting a wall and is used for adding score for a skill shot
+		*/
+	wallsCollisionHandler: function() {
+		this.tempScore++;
+	},
+
+	 /** @method
+		* @name startBG
+		* @memberof gameState
+		* @description this is a function that starts the background music.
+		*/
+	startBG: function() {
+		inGameBGMusic.volume = 0.2;
+		inGameBGMusic.loop = true;
+		inGameBGMusic.play();
+	},
+
+	 /** @method
+		* @name goalCollisionHandler
+		* @memberof gameState
+		* @description this is a collision function that is fired when the ball hits the goal and is used for adding score for a skill shot
+		*/
+	goalCollisionHandler: function() {
+		//game.state.start('game');
+		this.score += this.tempScore + 1;
+		this.tempScore = 0;
+
+		this.setScoreText();
+		this.ball.body.velocity.setTo(0, 0);
+		this.ball.body.angularVelocity = 0;
+		this.ball.position.x = game.rnd.integerInRange(this.tweenAPosition,this.tweenBPosition);
+		this.ball.position.y = 0;
+	},
 
 	/** @method
-	* @name setScoreText
-	* @memberof gameState
-	* @description this is a function that is fired when the ball hits the goal and is used for updateing the score text on the UI.
-	*/
-  setScoreText: function() {
-   scoreText.text = this.score;
-   textTween.start();
-  },
+	 * @name setNewTweenSpeed
+	 * @memberof gameState
+	 * @description this function is fired when the goal tween is completed and keeps looping with a random speed.
+	 */
+	setNewTweenSpeed: function(){
+		tween = this.game.add.tween(this.goal).to({
+			x: [this.tweenBPosition,this.tweenAPosition]
+		}, game.rnd.integerInRange(2500,5000));
+
+		tween.start();
+		tween.onComplete.add(this.setNewTweenSpeed, this);
+	},
+
 	/** @method
-	* @name bounce
-	* @memberof gameState
-	* @description this is a function that is fired when the player taps the screen and is used for the ball movement.
-	*/
-  bounce: function() {
+	 * @name setScoreText
+	 * @memberof gameState
+	 * @description this is a function that is fired when the ball hits the goal and is used for updateing the score text on the UI.
+	 */
+	setScoreText: function() {
+		scoreText.text = this.score;
+		textTween.start();
+	},
+
+	/** @method
+	 * @name bounce
+	 * @memberof gameState
+	 * @description this is a function that is fired when the player taps the screen and is used for the ball movement.
+	 */
+	bounce: function() {
 		var yVelocity = 0;
 		this.tempScore = 0;
 		tapSound.play();
@@ -316,11 +324,11 @@ var gameState = {
 		}
 
 		if (game.input.activePointer.y > this.ball.y) {
-		  yVelocity = -800;
+			yVelocity = -800;
 		} else {
 			this.tempScore++;
 
-		  yVelocity = this.ball.body.velocity.y + 800;
+			yVelocity = this.ball.body.velocity.y + 800;
 		}
 
 		if (hardMode == true) {
@@ -329,24 +337,25 @@ var gameState = {
 			this.ball.body.angularVelocity = angVelocity = this.ball.x - game.input.activePointer.x;
 
 			if (game.input.activePointer.x > this.ball.x) {
-			  this.ball.body.velocity.setTo(this.ball.body.velocity.x + -xVelocity, yVelocity);
+				this.ball.body.velocity.setTo(this.ball.body.velocity.x + -xVelocity, yVelocity);
 			} else {
-		  	this.ball.body.velocity.setTo(this.ball.body.velocity.x + xVelocity, yVelocity);
+				this.ball.body.velocity.setTo(this.ball.body.velocity.x + xVelocity, yVelocity);
 			}
 		} else {
-		  this.ball.body.velocity.setTo(this.ball.body.velocity.x, yVelocity);
+			this.ball.body.velocity.setTo(this.ball.body.velocity.x, yVelocity);
 		}
-  },
+	},
 
 	/** @method
-	* @name goToMain
-	* @memberof gameState
-	* @description this is a function that returns the player to the main menu.
-	*/
+	 * @name goToMain
+	 * @memberof gameState
+	 * @description this is a function that returns the player to the main menu.
+	 */
 	goToMain: function() {
 		inGameBGMusic.stop();
 		startSound.onStop.remove(this.startBG,this);
 		startSound.stop();
+
 		if (this.score > localStorage.getItem('highestScore') && this.score != 0 || this.score > 0 && this.currentHighscore[0] == null) {
 			this.currentHighscore.push("\n" + this.score);
 			localStorage.setItem('highScore', JSON.stringify(this.currentHighscore));
