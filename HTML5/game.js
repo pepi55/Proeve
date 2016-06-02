@@ -49,12 +49,12 @@ var gameState = {
 	tempScore: 0,
 
   currentHighscore: new Array(),
-
- 	/** @method
-	* @name preload
-	* @memberof gameState
-	* @description this is a preload function that is fired before the create function, this is where we create variables and images
-	*/
+  
+  /** @method
+   * @name preload
+   * @memberof gameState
+   * @description this is a preload function that is fired before the create function, this is where we create variables and images
+   */
   preload: function() {
 		// Load tapsound.
 		menuBGMusic.stop();
@@ -75,7 +75,7 @@ var gameState = {
 		var randomValue = Math.floor(Math.random() * 4) + 0;
 		setName = "backgroundGame" + randomValue;
 	},
-
+	
 	/** @method
 	* @name create
 	* @memberof gameState
@@ -206,12 +206,12 @@ var gameState = {
 
 		textTween = game.add.tween(scoreText).to({ fontSize:100}, 100, Phaser.Easing.Linear.None, false, 0,0,true);
   },
-
-	/** @method
-	* @name update
-	* @memberof gameState
-	* @description this is a update function that is fired after the create function,and updates every frame.
-	*/
+  
+  /** @method
+   * @name update
+   * @memberof gameState
+   * @description this is a update function that is fired after the create function,and updates every frame.
+   */
   update: function() {
 		game.physics.arcade.collide(this.walls, this.ball, this.wallsCollisionHandler, null, this);
 		game.physics.arcade.collide(this.goal, this.ball, this.goalCollisionHandler, null, this);
@@ -219,15 +219,6 @@ var gameState = {
 		if (this.ball.world.y >= game.world.height) {
 			this.goToMain();
 		}
-
-		if (this.goal.world.x == this.tweenAPosition) {
-		//	tweenB.start();
-
-		} else if(this.goal.world.x == this.tweenBPosition) {
-		//	tweenA.start();
-
-		}
-
 		if (this.ballIsAnimated && this.ball.animations.currentAnim.isFinished) {
 			this.ball.animations.play('idle');
 		}
@@ -244,32 +235,30 @@ var gameState = {
     ingameEmitter.start(true, 2000, null, 10);
 	},
   // Custom functions
-  	/** @method
-	* @name wallsCollisionHandler
-	* @memberof gameState
-	* @description this is a collision function that is fired when hitting a wall and is used for adding score for a skill shot
-	*/
+  /** @method
+   * @name wallsCollisionHandler
+   * @memberof gameState
+   * @description this is a collision function that is fired when hitting a wall and is used for adding score for a skill shot
+   */
   wallsCollisionHandler: function() {
     this.tempScore++;
   },
-    	/** @method
-	* @name startBG
-	* @memberof gameState
-	* @description this is a function that starts the background music.
-	*/
+  /** @method
+   * @name startBG
+   * @memberof gameState
+   * @description this is a function that starts the background music.
+   */
    startBG: function() {
    	inGameBGMusic.volume = 0.2;
     inGameBGMusic.play();
     inGameBGMusic.loop = true;
   },
-
- 	/** @method
-	* @name goalCollisionHandler
-	* @memberof gameState
-	* @description this is a collision function that is fired when the ball hits the goal and is used for adding score for a skill shot
-	*/
+  /** @method
+   * @name goalCollisionHandler
+   * @memberof gameState
+   * @description this is a collision function that is fired when the ball hits the goal and is used for adding score for a skill shot
+   */
   goalCollisionHandler: function() {
-    //game.state.start('game');
     this.score += this.tempScore + 1;
     this.tempScore = 0;
 
@@ -280,10 +269,10 @@ var gameState = {
     this.ball.position.y = 0;
   },
   /** @method
-	* @name setNewTweenSpeed
-	* @memberof gameState
-	* @description this function is fired when the goal tween is completed and keeps looping with a random speed.
-	*/
+   * @name setNewTweenSpeed
+   * @memberof gameState
+   * @description this function is fired when the goal tween is completed and keeps looping with a random speed.
+   */
   setNewTweenSpeed: function(){
  		tween = this.game.add.tween(this.goal).to({
         x: [this.tweenBPosition,this.tweenAPosition]
@@ -291,21 +280,20 @@ var gameState = {
         tween.start();
         tween.onComplete.add(this.setNewTweenSpeed, this);
   },
-
-	/** @method
-	* @name setScoreText
-	* @memberof gameState
-	* @description this is a function that is fired when the ball hits the goal and is used for updateing the score text on the UI.
-	*/
+  /** @method
+   * @name setScoreText
+   * @memberof gameState
+   * @description this is a function that is fired when the ball hits the goal and is used for updateing the score text on the UI.
+   */
   setScoreText: function() {
    scoreText.text = this.score;
    textTween.start();
   },
-	/** @method
-	* @name bounce
-	* @memberof gameState
-	* @description this is a function that is fired when the player taps the screen and is used for the ball movement.
-	*/
+  /** @method
+   * @name bounce
+   * @memberof gameState
+   * @description this is a function that is fired when the player taps the screen and is used for the ball movement.
+   */
   bounce: function() {
 		var yVelocity = 0;
 		this.tempScore = 0;
