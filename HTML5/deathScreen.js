@@ -15,7 +15,8 @@ var deathState = {
   	this.deathScreenBGMusic = game.add.audio('gameOverSound');
   	this.deathScreenBGMusic.volume = 0.2;
   },
-	 	/** @method
+	 
+	 /** @method
 	* @name create
 	* @memberof deathState
 	* @description this is a create function that is fired after the preload function, this is where we create variables and images
@@ -43,17 +44,12 @@ var deathState = {
 
 
 		style = {};
-		 //	Font style
+		// Font style
 		style.font = 'Passion One';
 		style.fontSize = 75;
 		style.fontWeight = 'bold';
 
-		//	Stroke color and thickness
-		//style.stroke = '#0C090A';
-		//style.strokeThickness = 7;
-		//style.fill = '#52D017';
-
-					//	Stroke color and thickness
+		// Stroke color and thickness
 		style.stroke = '#FFFF00';
 		style.strokeThickness = 3;
 		style.fill = '#FF2828';
