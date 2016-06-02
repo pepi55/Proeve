@@ -51,15 +51,12 @@ var highscoreState = {
   			//highscoreList[0] = 0;
   		} else {
   			highscoreList = str_highscore;
-  		}
-
-  		var str_users = localStorage.getItem('users');
-
-  		if (str_users == null || str_users == "null") {
-  		} else {
-  			highscoreNameList = str_users;
   			this.checkScoreValues();
   		}
+
+
+
+
   		var backButton;
 		  backButton = game.add.button(100, 100, 'backButton', function() {
 		  game.state.start('mainMenu');
@@ -91,6 +88,7 @@ var highscoreState = {
     highscoreLadderList = []
     var sortedList = highscoreList;
     sortedList.sort( function(a,b) { return b - a; } );
+    console.log(sortedList);
       for (var i = 0; i < sortedList.length; i++) {
      highscoreLadderList.push("" + (i+1) + ".\n");
     }
