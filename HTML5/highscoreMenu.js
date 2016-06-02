@@ -6,9 +6,6 @@ var highscoreLadderList = new Array();
  * @Class
  * @name highscoreState
  * @desc state that shows the highscores you have obtained.
- * @property {number}			deathScoreValue			   		 -	current score that is shown in the death screen.
- * @property {number}			deathHighestScoreValue		 -	highest score the player had that is shown in the death screen.
- * @property {sound}			deathScreenBGMusic				 -	sound that is played on lose.
  * @property {fontStyle}	style				 							 -	style of the font in the score.
  * @property {text}	titleStyle				 							 -	style of the font in the screen.
  */
@@ -48,7 +45,6 @@ var highscoreState = {
   		var str_highscore = JSON.parse(localStorage.getItem('highScore'));
 
   		if (str_highscore == null || str_highscore == "null") {
-  			//highscoreList[0] = 0;
   		} else {
   			highscoreList = str_highscore;
   		}
