@@ -58,43 +58,39 @@ public class BallAnimationController : MonoBehaviour
     /// <param name="obj">Givven parameter that contains the ball direction and the current ball position</param>
     private void OnBallMoveParticle(Events.IBallMove obj)
     {
-        if (Input.GetMouseButtonDown(0))
+        for (int j = 0; j < noOfActiveParticleSystems; j++)
         {
+            ParticleSystemStruct selected = Systems[j];
 
-            for (int j = 0; j < noOfActiveParticleSystems; j++)
+            selected.setup();
+
+            selected.System.Emit(Random.Range(1, 3));
+
+            ParticleSystem.Particle p;
+            int pmcount = selected.System.GetParticles(selected.Particles);
+
+            Vector2 dir;
+            dir = obj.direction;
+
+            float angle = Util.Common.VectorToAngle(dir);
+            angle -= 180;
+
+            for (int i = 0; i < pmcount; i++)
             {
-                ParticleSystemStruct selected = Systems[j];
-
-                selected.setup();
-
-                selected.System.Emit(Random.Range(1, 3));
-
-                ParticleSystem.Particle p;
-                int pmcount = selected.System.GetParticles(selected.Particles);
-
-                Vector2 dir;
-                dir = obj.direction;
-
-                float angle = Util.Common.VectorToAngle(dir);
-                angle -= 180;
-
-                for (int i = 0; i < pmcount; i++)
+                p = selected.Particles[i];
+                if (p.velocity == Vector3.zero)
                 {
-                    p = selected.Particles[i];
-                    if (p.velocity == Vector3.zero)
-                    {
-                        dir = Util.Common.AngleToVector(angle + Random.Range(-10f, 10f));
-                        p.position = (dir * radius) + obj.position;
-                        p.startSize = 0.5f;
-                        p.startLifetime = 0.5f;
-                        p.velocity = dir * Random.Range(0.3f, 2f);
-                        p.rotation = Random.Range(0, 360f);
-                        selected.Particles[i] = p;
-                    }
+                    dir = Util.Common.AngleToVector(angle + Random.Range(-10f, 10f));
+                    p.position = (dir * radius) + obj.position;
+                    p.startSize = 0.5f;
+                    p.startLifetime = 0.5f;
+                    p.velocity = dir * Random.Range(0.3f, 2f);
+                    p.rotation = Random.Range(0, 360f);
+                    selected.Particles[i] = p;
                 }
-
-                selected.System.SetParticles(selected.Particles, pmcount);
             }
+
+            selected.System.SetParticles(selected.Particles, pmcount);
         }
     }
 
@@ -123,20 +119,5 @@ public class BallAnimationController : MonoBehaviour
         animator.SetTrigger("click");
     }
 
-    /// <summary>
-    /// Struct for particle sytems so i don't have to repeat much code
-    /// </summary>
-    [System.Serializable]
-    public struct ParticleSystemStruct
-    {
-        public bool enabled;
-        public ParticleSystem System;
-        public ParticleSystem.Particle[] Particles;
-
-        public void setup()
-        {
-            if (Particles == null || Particles.Length < System.maxParticles)
-                Particles = new ParticleSystem.Particle[System.maxParticles];
-        }
-    }
+    
 }
