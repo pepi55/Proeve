@@ -2,6 +2,7 @@
 
 public class GoalAnimationController : MonoBehaviour
 {
+    [SerializeField]
     ParticleSystemStruct[] Systems;
 
     [SerializeField]
@@ -17,7 +18,57 @@ public class GoalAnimationController : MonoBehaviour
 
     public void Start()
     {
+        Events.GlobalEvents.AddEventListener<Events.IScore>(OnScoredPoint);
 
+        setupParticleSystems();
+
+    }
+
+    public void OnDestroy()
+    {
+        Events.GlobalEvents.RemoveEventListener<Events.IScore>(OnScoredPoint);
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            OnScoredPoint(new Events.IScore(0, Vector2.zero));
+        }
+    }
+
+    public void OnScoredPoint(Events.IScore obj)
+    {
+        for (int j = 0; j < noOfActiveParticleSystems; j++)
+        {
+            ParticleSystemStruct selected = Systems[j];
+
+            selected.setup();
+
+            selected.System.Emit(Random.Range(2, 5));
+
+            ParticleSystem.Particle p;
+            int pmcount = selected.System.GetParticles(selected.Particles);
+            Vector3 dir;
+            Vector3 newPos;
+            for (int i = 0; i < pmcount; i++)
+            {
+                p = selected.Particles[i];
+                if (p.velocity == Vector3.zero)
+                {
+                    dir = Util.Common.AngleToVector(angle + Random.Range(arcSize / -2f, arcSize / 2f));
+                    newPos = (dir * radius) + transform.position;
+                    newPos.z = -3f;
+                    p.startSize = 0.5f;
+                    p.startLifetime = 0.5f;
+                    p.velocity = dir * Random.Range(0.5f, 2f);
+                    p.rotation = Random.Range(0, 360f);
+                    selected.Particles[i] = p;
+                }
+            }
+
+            selected.System.SetParticles(selected.Particles, pmcount);
+        }
     }
 
     /// <summary>
@@ -26,13 +77,11 @@ public class GoalAnimationController : MonoBehaviour
     /// </summary>
     public void setupParticleSystems()
     {
-        noOfActiveParticleSystems = Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial.Length > Systems.Length ? Systems.Length : Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial.Length;
-        Material[] materials = Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].ParticleMaterial;
-
+        noOfActiveParticleSystems = Systems.Length;
         for (int i = 0; i < noOfActiveParticleSystems; i++)
         {
-            Systems[i].System.GetComponent<ParticleSystemRenderer>().material = materials[i];
             Systems[i].setup();
+            Systems[i].System.GetComponent<ParticleSystemRenderer>().sortingLayerName = "ForGround";
         }
     }
 }

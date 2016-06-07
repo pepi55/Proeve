@@ -45,3 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: ForGround
+    uniqueID: 316613137
+    locked: 0
+  - name: Interface
+    uniqueID: 1513981735
+    locked: 0

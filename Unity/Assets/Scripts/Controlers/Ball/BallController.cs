@@ -104,7 +104,7 @@ public class BallController : MonoBehaviour
                 dir = ((Vector2)Camera.main.WorldToViewportPoint(transform.position));
                 dir.Scale(new Vector2(Screen.width, Screen.height));
 
-                if (Vector2.Distance(dir, position) > 100)
+                if (Vector2.Distance(dir, position) > 150)
                 {
                     return;
                 }
@@ -150,16 +150,20 @@ public class BallController : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.transform.tag == "Bottom")
-        {           
+        if (collision.transform.tag == "Bottom")
+        {
             rigidbody2D.velocity = Vector2.zero;
-           // StartCoroutine(ballResetDelay(0.2f));
-           // StartCoroutine(ballFreeze(0.5f, 0.2f));
+            // StartCoroutine(ballResetDelay(0.2f));
+            // StartCoroutine(ballFreeze(0.5f, 0.2f));
             Events.GlobalEvents.Invoke(new Events.IBallHitBottom());
         }
-        else if(collision.transform.tag == "Side")
+        else if (collision.transform.tag == "Side")
         {
             wallBoucnes++;
+        }
+        else if (collision.transform.tag == "ScoreTarget")
+        {
+            rigidbody2D.velocity = rigidbody2D.velocity * 0.5f;
         }
     }
 
