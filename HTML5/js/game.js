@@ -188,6 +188,7 @@ var gameState = {
 		}, 5000);
 		tween.start();
 		tween.onComplete.add(this.setNewTweenSpeed, this);
+		
 
 		ingameEmitter = game.add.emitter(0, 0, 100);
 
@@ -233,6 +234,11 @@ var gameState = {
 		if (this.ballIsAnimated && this.ball.animations.currentAnim.isFinished) {
 			this.ball.animations.play('idle');
 		}
+		
+		//goal move
+		//goal speed = 0.5f + (-1 * Mathf.Exp(-GameManager.Score / (float)scoreCurvMax) + 1) * MaxSpeed;
+		
+		var speed = 0.5 + (-1 * Math.exp(-score/scoreCurvMax)+1)*maxSpeed;
 	},
 
 	particleBurst: function() {

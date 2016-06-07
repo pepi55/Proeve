@@ -44,7 +44,7 @@ public class InputManager : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            if (touches[i].phase == TouchPhase.Began)
+            if (touches[i].phase == TouchPhase.Ended)
             {
                 OnClick(touches[i].position);
             }
