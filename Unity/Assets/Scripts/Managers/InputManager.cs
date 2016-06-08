@@ -12,6 +12,8 @@ public class InputManager : MonoBehaviour
     /// </summary>
     public static event VoidDelegate onEscapePress;
 
+    public bool paused = false;
+
     void Awake()
     {
         Events.GlobalEvents.AddEventListener<Events.IPause>(OnPause);
@@ -24,13 +26,17 @@ public class InputManager : MonoBehaviour
 
     void OnPause(Events.IPause pause)
     {
-        enabled = !pause.State;
+        paused = pause.State;
     }
 
     void Update()
     {
-        CheckTouches();
-        CheckMouse();
+        if (!paused)
+        {
+            CheckTouches();
+            CheckMouse();
+        }
+        KeyBoardChecks();
     }
 
     /// <summary>

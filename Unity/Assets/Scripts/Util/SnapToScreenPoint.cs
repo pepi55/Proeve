@@ -23,6 +23,8 @@ public class SnapToScreenPoint : MonoBehaviour
     [Tooltip("Sprite's Size in pixel used to make sure it's scaled correctly")]
     public Vector2 StartSize = Vector2.one;
 
+    public Vector2 PivotPosition = Vector2.one / 2f;
+
     /// <summary>
     /// Should the object be moved in this direction
     /// </summary>
@@ -50,6 +52,11 @@ public class SnapToScreenPoint : MonoBehaviour
         //}
     }
 
+    void Update()
+    {
+        DoMove();
+    }
+
     void DoMove()
     {
         Vector3 p1 = camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
@@ -69,15 +76,15 @@ public class SnapToScreenPoint : MonoBehaviour
         {
             if (Vertical)
                 if (screenPosition.y > 0)
-                    p1.y -= (transform.localScale.y / 2f) * StartSize.y;
+                    p1.y -= (transform.localScale.y * PivotPosition.y) * StartSize.y;
                 else
-                    p1.y += (transform.localScale.y / 2f) * StartSize.y;
+                    p1.y += (transform.localScale.y * PivotPosition.y) * StartSize.y;
 
             if (Horizontal)
                 if (screenPosition.x > 0)
-                    p1.x -= (transform.localScale.x / 2f) * StartSize.x;
+                    p1.x -= (transform.localScale.x * PivotPosition.x) * StartSize.x;
                 else
-                    p1.x += (transform.localScale.x / 2f) * StartSize.x;
+                    p1.x += (transform.localScale.x * PivotPosition.x) * StartSize.x;
 
         }
 

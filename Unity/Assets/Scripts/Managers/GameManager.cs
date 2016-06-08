@@ -48,6 +48,21 @@ public class GameManager : MonoBehaviour
         instance = this;
         Events.GlobalEvents.AddEventListener<Events.IScore>(AddPoint);
         Events.GlobalEvents.AddEventListener<Events.IBallHitBottom>(BallHitGround);
+
+        InputManager.onEscapePress += OnEscapePress;
+    }
+
+    private void OnEscapePress()
+    {
+        Debug.Log(gamePaused);
+        if(gamePaused)
+        {
+            ContinueGame();
+        }
+        else
+        {
+            PauseGame();
+        }
     }
 
     public void OnDestroy()
