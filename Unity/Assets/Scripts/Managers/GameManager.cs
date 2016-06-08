@@ -108,7 +108,13 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            if (score == 0)
+            {
+                lastScoreWasHighScore = false;
+            }
+
             ResetGame();
+            
             gamePaused = false;
 
         }

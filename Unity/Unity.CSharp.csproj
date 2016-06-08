@@ -63,9 +63,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Controlers\BallAnimationController.cs" />
-    <Compile Include="Assets\Scripts\Controlers\BallController.cs" />
-    <Compile Include="Assets\Scripts\Controlers\TargetController.cs" />
+    <Compile Include="Assets\Scripts\Controlers\Ball\BallAnimationController.cs" />
+    <Compile Include="Assets\Scripts\Controlers\Ball\BallController.cs" />
+    <Compile Include="Assets\Scripts\Controlers\Goal\GoalAnimationController.cs" />
+    <Compile Include="Assets\Scripts\Controlers\Goal\GoalController.cs" />
     <Compile Include="Assets\Scripts\Events\Delegates.cs" />
     <Compile Include="Assets\Scripts\Events\IBallMove.cs" />
     <Compile Include="Assets\Scripts\Events\IPause.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Assets\Scripts\Util\Events\LocalEvents.cs" />
     <Compile Include="Assets\Scripts\Util\GridLayoutHeightSetter.cs" />
     <Compile Include="Assets\Scripts\Util\GridlayoutWidthSetter.cs" />
+    <Compile Include="Assets\Scripts\Util\ParticleSystemStruct.cs" />
     <Compile Include="Assets\Scripts\Util\ResetCameraFOV.cs" />
     <Compile Include="Assets\Scripts\Util\Saving\SerializableDictionary.cs" />
     <Compile Include="Assets\Scripts\Util\Saving\Serialization.cs" />
