@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
 
     private void OnEscapePress()
     {
-        Debug.Log(gamePaused);
         if(gamePaused)
         {
             ContinueGame();

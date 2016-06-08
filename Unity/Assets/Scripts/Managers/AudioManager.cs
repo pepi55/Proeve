@@ -70,6 +70,8 @@ public class AudioManager : MonoBehaviour
 
         Events.GlobalEvents.AddEventListener<Events.IBallHitBottom>(onBallhitGround);
 
+        Events.GlobalEvents.AddEventListener<Events.IPause>(onGamePause);
+
 
     }
 
@@ -87,6 +89,8 @@ public class AudioManager : MonoBehaviour
         Events.GlobalEvents.RemoveEventListener<Events.IResetGameState>(onGameReset);
 
         Events.GlobalEvents.RemoveEventListener<Events.IBallHitBottom>(onBallhitGround);
+
+        Events.GlobalEvents.RemoveEventListener<Events.IPause>(onGamePause);
     }
 
     void onBallClick(Events.IBallMove obj)
@@ -113,6 +117,12 @@ public class AudioManager : MonoBehaviour
         {
             StartCoroutine(playGameOver());
         }
+    }
+
+    void onGamePause(Events.IPause obj)
+    {
+        StartCoroutine(PauseBMGSound(obj.State));
+        StartCoroutine(PauseSFXSound(obj.State));
     }
 
     /// <summary>
@@ -152,7 +162,68 @@ public class AudioManager : MonoBehaviour
         BGM.loop = false;
         BGM.Play();
         BGM.volume = 0.75f;
+    }
 
+    IEnumerator PauseBMGSound(bool pauseState)
+    {
+        if (pauseState)
+        {
+            float volume = 0.75f;
 
+            while (volume > 0f)
+            {
+                volume -= Time.deltaTime / 0.1f;
+                BGM.volume = volume;
+                yield return new WaitForEndOfFrame();
+            }
+
+            BGM.Pause();
+        }
+        else
+        {
+            float volume = 0f;
+            BGM.UnPause();
+
+            while (volume < 0.75f)
+            {
+                volume += Time.deltaTime / 0.1f;
+                BGM.volume = volume;
+                yield return new WaitForEndOfFrame();
+            }
+        }
+    }
+
+    IEnumerator PauseSFXSound(bool pauseState)
+    {
+        if (pauseState)
+        {
+            float volume = 1f;
+
+            while (volume > 0f)
+            {
+                volume -= Time.deltaTime / 0.1f;
+                SFX_Click.volume = volume;
+                SFX_BallScore.volume = volume;
+                yield return new WaitForEndOfFrame();
+            }
+
+            SFX_BallScore.Pause();
+            SFX_Click.Pause();
+        }
+        else
+        {
+            float volume = 0f;
+
+            SFX_BallScore.UnPause();
+            SFX_Click.UnPause();
+
+            while (volume < 0.75f)
+            {
+                volume += Time.deltaTime / 0.1f;
+                SFX_Click.volume = volume;
+                SFX_BallScore.volume = volume;
+                yield return new WaitForEndOfFrame();
+            }
+        }
     }
 }
