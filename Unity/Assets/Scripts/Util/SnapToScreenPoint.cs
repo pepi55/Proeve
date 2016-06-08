@@ -76,15 +76,15 @@ public class SnapToScreenPoint : MonoBehaviour
         {
             if (Vertical)
                 if (screenPosition.y > 0)
-                    p1.y -= (transform.localScale.y * PivotPosition.y) * StartSize.y;
-                else
                     p1.y += (transform.localScale.y * PivotPosition.y) * StartSize.y;
+                else
+                    p1.y -= (transform.localScale.y * PivotPosition.y) * StartSize.y;
 
             if (Horizontal)
                 if (screenPosition.x > 0)
-                    p1.x -= (transform.localScale.x * PivotPosition.x) * StartSize.x;
-                else
                     p1.x += (transform.localScale.x * PivotPosition.x) * StartSize.x;
+                else
+                    p1.x -= (transform.localScale.x * PivotPosition.x) * StartSize.x;
 
         }
 
