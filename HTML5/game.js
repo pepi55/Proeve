@@ -42,6 +42,7 @@ var gameState = {
 	gameobjects: null,
 	backgrounds: null,
 	walls: null,
+	balls: null,
 
 	charNr: 0,
 
@@ -73,6 +74,7 @@ var gameState = {
 		this.gameobjects = game.add.group();
 		this.backgrounds = game.add.group();
 		this.walls = game.add.group();
+		this.balls = game.add.group();
 
 		var randomValue = Math.floor(Math.random() * 5) + 0;
 		setName = "backgroundGame" + randomValue;
@@ -105,9 +107,6 @@ var gameState = {
 			this.currentHighscore = str_score;
 		}
 
-		// this has to be active for the fps to be counting.
-		game.time.advancedTiming = true;
-
 		//set the game physics.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.physics.arcade.gravity.y = 1500;
@@ -116,6 +115,7 @@ var gameState = {
 		game.world.bringToTop(this.backgrounds);
 		game.world.bringToTop(this.walls);
 		game.world.bringToTop(this.gameobjects);
+		game.world.bringToTop(this.balls);
 
 		// sounds
 		tapSound = game.add.audio('tapSound');
@@ -124,21 +124,21 @@ var gameState = {
 		this.tweenAPosition = game.world.width - 300;
 
 		// Add gameobjects to game
-		this.ball = game.add.sprite(game.world.centerX, 20, 'character' + characterInt);
-		this.goal = game.add.sprite(this.tweenAPosition, game.world.height - 50, 'goal');
+		var ball = game.add.sprite(game.world.centerX, 20, 'character' + characterInt);
+		var goal = game.add.sprite(this.tweenAPosition, game.world.height - 50, 'goal');
 
-		this.ballIsAnimated = this.ball.animations.validateFrames([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+		this.ballIsAnimated = ball.animations.validateFrames([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 		if (this.ballIsAnimated) {
-			this.ball.animations.add('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 10, false);
-			this.ball.animations.add('tapnimation', [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], 24, false);
-			this.ball.animations.play('idle');
+			ball.animations.add('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 10, false);
+			ball.animations.add('tapnimation', [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], 24, false);
+			ball.animations.play('idle');
 		}
 
-		this.walls.create(-70, game.world.height, 'wall');
-		this.walls.create(game.world.width + 70, game.world.height, 'wall');
-		this.walls.create(game.world.width / 2, game.world.height + (game.world.height / 2), 'wall');
+		walls.create(-70, game.world.height, 'wall');
+		walls.create(game.world.width + 70, game.world.height, 'wall');
+		walls.create(game.world.width / 2, game.world.height + (game.world.height / 2), 'wall');
 
-		this.background = game.add.tileSprite(0, 0, game.world.width, game.world.height, setName);
+		var background = game.add.tileSprite(0, 0, game.world.width, game.world.height, setName);
 
 		game.physics.arcade.enable([
 			this.ball,
@@ -147,21 +147,22 @@ var gameState = {
 		]);
 
 		// Background setup
-		this.backgrounds.add(this.background);
+		backgrounds.add(this.background);
 
 		// Ball setup
-		this.ball.anchor.setTo(0.5, 0.5);
-		this.ball.body.bounce.setTo(0.5, 0.5);
+		ball.anchor.setTo(0.5, 0.5);
+		ball.body.bounce.setTo(0.5, 0.5);
 
-		this.gameobjects.add(this.ball);
+		this.gameobjects.add(ball);
+		this.balls.add(ball);
 
 		// Goal setup
-		this.goal.anchor.setTo(0.5, 0.5);
-		this.goal.body.immovable = true;
-		this.goal.body.allowGravity = false;
-		this.goal.body.setSize(64, 64, 0, 0);
+		goal.anchor.setTo(0.5, 0.5);
+		goal.body.immovable = true;
+		goal.body.allowGravity = false;
+		goal.body.setSize(64, 64, 0, 0);
 
-		this.gameobjects.add(this.goal);
+		this.gameobjects.add(goal);
 
 		// Walls setup
 		for (var i = 0; i < this.walls.children.length; i++) {
