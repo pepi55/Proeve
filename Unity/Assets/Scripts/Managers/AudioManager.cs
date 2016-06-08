@@ -164,6 +164,10 @@ public class AudioManager : MonoBehaviour
         BGM.volume = 0.75f;
     }
 
+    /// <summary>
+    /// Pauses the background music and unpauses
+    /// </summary>
+    /// <param name="pauseState">if the game is paused</param>
     IEnumerator PauseBMGSound(bool pauseState)
     {
         if (pauseState)
@@ -193,6 +197,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Paused and unpaused the Sound effects
+    /// </summary>
+    /// <param name="pauseState">if the game is paused</param>
+    /// <returns></returns>
     IEnumerator PauseSFXSound(bool pauseState)
     {
         if (pauseState)

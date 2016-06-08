@@ -31,7 +31,14 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public static bool GamePaused
     {
-        get { return instance.gamePaused; }
+        get
+        {
+            if (!instance)
+            {
+                instance = FindObjectOfType<GameManager>();
+            }
+            return instance.gamePaused;
+        }
     }
 
     private bool gamePaused;
