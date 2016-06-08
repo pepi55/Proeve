@@ -12,6 +12,14 @@ var loadState = {
 	*/
 	preload: function() {
 		// Loading image.
+		var	loadingText = game.add.text(game.world.centerX, 100, "Loading...");
+		loadingText.fontSize = 50;
+		loadingText.fontWeight = 'bold';
+		//	Stroke color and thickness
+		loadingText.stroke = '#0020C2';
+		loadingText.strokeThickness = 5;
+		loadingText.fill = '#2B65EC';
+		loadingText.anchor.setTo(0.5);
 		var loadingImage = game.add.sprite(game.world.centerX, game.world.centerY, 'loadingScreenSheet');
 		loadingImage.anchor.setTo(0.5);
 		loadingImage.animations.add('loading');
@@ -29,6 +37,7 @@ var loadState = {
 		game.load.image('backgroundGame2', 'assets/background/background.2.png');
 		game.load.image('backgroundGame3', 'assets/background/background.3.png');
 		game.load.image('backgroundGame4', 'assets/background/background.4.png');
+		game.load.image('backgroundGame5', 'assets/background/background.5.png');
 		game.load.image('goal', 'assets/goal/goal.0.png');
 		game.load.image('wall', 'assets/image.png');
 

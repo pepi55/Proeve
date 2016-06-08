@@ -122,7 +122,7 @@ var shopState = {
 		// Stroke color and thickness
 		pointsText.stroke = '#0020C2';
 		pointsText.strokeThickness = 5;
-		pointsText.fill = '#2B65EC';
+		pointsText.fill = '#DD692E';
   },
 
 	// Custom functions.
