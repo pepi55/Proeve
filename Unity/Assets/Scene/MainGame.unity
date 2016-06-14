@@ -2981,7 +2981,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 526051443}
   screenPosition: {x: 50, y: -150, z: 0}
-  StartSize: {x: 1, y: 1}
+  StartSize: {x: 100, y: 100}
   PivotPosition: {x: 0.5, y: 1}
   Vertical: 1
   Horizontal: 0
