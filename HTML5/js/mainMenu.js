@@ -17,8 +17,15 @@
 var mainMenuState = {
 	emitter: null,
 	menuBGMusic: null,
+	ingameBGMusic: null,
 	preload: function() {
 			menuBGMusic = game.add.audio('mainMenuBG');
+
+			this.inGameBGMusic = game.add.audio('inGameBG',0.2,true);
+
+			//this.inGameBGMusic.volume = 0.2;
+			//this.inGameBGMusic.loop = true;
+			//this.inGameBGMusic.stop();
 			menuBGMusic.volume = 0.4;
 	},
 
@@ -31,9 +38,11 @@ var mainMenuState = {
 		var logo = game.add.sprite(0, -200, 'logo');
 
 
+
 		var startButton;
 		startButton = game.add.button(game.world.centerX - 400, game.world.centerY - 200, 'playButton', function() {
 				menuBGMusic.stop();
+				this.inGameBGMusic.play();
 		    game.state.start('game');
 		}, this);
 		startButton.anchor.setTo(0.5, 0.5);
@@ -73,11 +82,17 @@ var mainMenuState = {
 		resetLocalStorageButton.anchor.setTo(0.5, 0.5);
 
 		var modeButton;
-		modeButton = game.add.button(20, 20, 'invisibleButton', function() {
+		modeButton = game.add.button(game.world.centerX - 650, game.world.centerY - 200, 'easyButtonFalse', function() {
 		    hardMode = !hardMode;
+		    easyButtonTrueImage.visible =! easyButtonTrueImage.visible;
 		}, this);
 		modeButton.anchor.setTo(0.5, 0.5);
 
+		var easyButtonTrueImage = game.add.sprite(game.world.centerX - 779, game.world.centerY - 329, 'easyButtonTrue');
+		if(hardMode)
+		{
+			easyButtonTrueImage.visible = false;
+		}
 		emitter = game.add.emitter(0, 0, 100);
 
     emitter.makeParticles(['pixel_yellow','pixel_pink','pixel_blue']);

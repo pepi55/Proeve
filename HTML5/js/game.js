@@ -28,13 +28,21 @@ var hardMode = true;
 var gameState = {
 	// Custom "variables".
 	ingameEmitter: null,
-	tweenAPosition: 0,
-	tweenBPosition: 300,
+	goalEmitter: null,
+	tweenAPosition: 300,
+	tweenBPosition: 0,
+	goalSpeed: 2,
+	moveLeft: true,
 
 	tween: null,
 	textTween: null,
+	goalTween: null,
 	text: null,
+	goalText: null,
+	genericTapSound: null,
 	tapSound: null,
+	dropSound: null,
+	applauseSound: null,
 	startSound: null,
 	inGameBGMusic: null,
 
@@ -59,16 +67,28 @@ var gameState = {
 	preload: function() {
 		// Load tapsound.
 		menuBGMusic.stop();
+
 		var tapSound = localStorage.getItem('characterSound');
 		if (tapSound == null || tapSound == "null") {
-			tapSound = 'click2.wav';
+			tapSound = 'rock/rockKlick.wav';
 		}
+
 		game.load.audio('tapSound', 'assets/audio/soundeffect/' + tapSound);
 
+		// NOTICE ME KUHWHAM SEMPAI NOTICE ME KUHWHAM SENPAI NOTICE ME KUHWHAM SENPAI NOTICE ME KUHWHAM SENPAI NOTICE ME KUHWHAM SENPAI NOTICE ME KUHWHAM SENPAI NOTICE ME KUHWHAM SENPAI NOTICE ME KUHWHAM SENPAI NOTICE ME KUHWHAM SENPAI
+		var particleImgs = JSON.parse(localStorage.getItem('characterParticles'));
+		if (particleImgs == null || particleImgs == "null") {
+			particleImgs = [ 'assets/particles/cloud1Particle.png', 'assets/particles/tumbleweed1Particle.png', 'assets/particles/sombrero1Particle.png' ];
+		}
+
+		for (var i = 0; i < particleImgs.length; i++) {
+			game.load.image('particle' + i, particleImgs[i]);
+		}
+		// NOTICE ME KUHWHAM SEMPAI NOTICE ME KUHWHAM SENPAI NOTICE ME KUHWHAM SENPAI NOTICE ME KUHWHAM SENPAI NOTICE ME KUHWHAM SENPAI NOTICE ME KUHWHAM SENPAI NOTICE ME KUHWHAM SENPAI NOTICE ME KUHWHAM SENPAI NOTICE ME KUHWHAM SENPAI
+
 		// setting game relevant sounds.
-		startSound = game.add.audio('startSound');
-		inGameBGMusic = game.add.audio('inGameBG');
-		startSound.onStop.add(this.startBG,this);
+		//startSound = game.add.audio('startSound');
+		//startSound.onStop.add(this.startBG,this);
 
 		//making object groups.
 		this.gameobjects = game.add.group();
@@ -86,19 +106,12 @@ var gameState = {
 		* @description this is a create function that is fired after the preload function, this is where we set all the variables
 		*/
 	create: function() {
+		this.score = 0;
+		this.goalSpeed = 2;
 		//set tween movement speed.
 		tweenValue = 5000;
-		startSound.volume = 0.2;
-		startSound.play();
-
-		// Load character number.
-		var characterInt = 0;
-		var str_character = parseInt(localStorage.getItem('characterImageNr'), 10);
-		if (str_character == null || str_character == "null" || isNaN(str_character)) {
-			characterInt = 0;
-		} else {
-			characterInt = str_character;
-		}
+		//startSound.volume = 0.2;
+		//startSound.play();
 
 		// Load highscore.
 		var str_score = JSON.parse(localStorage.getItem('highScore'));
@@ -109,7 +122,7 @@ var gameState = {
 
 		//set the game physics.
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		game.physics.arcade.gravity.y = 1500;
+		game.physics.arcade.gravity.y = 1000;
 
 		//bring game objects to the top of the screen(layering).
 		game.world.bringToTop(this.backgrounds);
@@ -119,58 +132,57 @@ var gameState = {
 
 		// sounds
 		tapSound = game.add.audio('tapSound');
-
+		genericTapSound = game.add.audio('genericTapSound');
+		dropSound = game.add.audio('dropSound');
+		applauseSound = game.add.audio('applauseSound');
 		//set tween position
 		this.tweenAPosition = game.world.width - 300;
+		this.tweenBPosition = 300;
+
+		goalEmitter = game.add.emitter(0, 0, 0);
+		goalEmitter.makeParticles(['star1','star2','star3']);
+		goalEmitter.minParticleSpeed.setTo(-300, -1500);
+    goalEmitter.maxParticleSpeed.setTo(300,-200 );
+    goalEmitter.minRotation = 0;
+    goalEmitter.maxRotation = 0;
+  	goalEmitter.setScale(0.5, 0, 0.5, 0, 6000);
 
 		// Add gameobjects to game
-		var ball = game.add.sprite(game.world.centerX, 20, 'character' + characterInt);
-		var goal = game.add.sprite(this.tweenAPosition, game.world.height - 50, 'goal');
-
-		this.ballIsAnimated = ball.animations.validateFrames([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-		if (this.ballIsAnimated) {
-			ball.animations.add('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 10, false);
-			ball.animations.add('tapnimation', [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], 24, false);
-			ball.animations.play('idle');
-		}
-
-		walls.create(-70, game.world.height, 'wall');
-		walls.create(game.world.width + 70, game.world.height, 'wall');
-		walls.create(game.world.width / 2, game.world.height + (game.world.height / 2), 'wall');
-
+		this.goal = game.add.sprite(this.tweenAPosition, game.world.height - 50, 'goal');
 		var background = game.add.tileSprite(0, 0, game.world.width, game.world.height, setName);
 
 		game.physics.arcade.enable([
-			this.ball,
 			this.goal,
+			this.balls,
 			this.walls
 		]);
 
+		this.addBall();
+
 		// Background setup
-		backgrounds.add(this.background);
-
-		// Ball setup
-		ball.anchor.setTo(0.5, 0.5);
-		ball.body.bounce.setTo(0.5, 0.5);
-
-		this.gameobjects.add(ball);
-		this.balls.add(ball);
+		this.backgrounds.add(background);
 
 		// Goal setup
-		goal.anchor.setTo(0.5, 0.5);
-		goal.body.immovable = true;
-		goal.body.allowGravity = false;
-		goal.body.setSize(64, 64, 0, 0);
+		this.goal.anchor.setTo(0.5, 0.5);
+		this.goal.body.immovable = true;
+		this.goal.body.allowGravity = false;
+		this.goal.body.setSize(64, 64, 0, 0);
 
-		this.gameobjects.add(goal);
+		this.gameobjects.add(this.goal);
 
 		// Walls setup
-		for (var i = 0; i < this.walls.children.length; i++) {
-			this.walls.children[i].anchor.setTo(0.5, 1);
-			this.walls.children[i].scale.setTo(0.5, game.world.height + (game.world.height / 2));
-			this.walls.children[i].body.immovable = true;
-			this.walls.children[i].body.allowGravity = false;
-		}
+		this.walls.create(-200, game.world.height, 'wall');
+		this.walls.create(game.world.width + 200, game.world.height, 'wall');
+		this.walls.create(game.world.width / 2, game.world.height + (game.world.height / 2), 'wall');
+
+		this.walls.forEach(function(wall) {
+			wall.anchor.setTo(0.5, 1);
+			wall.scale.setTo(05, game.world.height + (game.world.height / 2));
+
+			game.physics.arcade.enable(wall);
+			wall.body.immovable = true;
+			wall.body.allowGravity = false;
+		}, this);
 
 		// Reset ceiling size
 		this.walls.children[2].anchor.setTo(0.5);
@@ -183,26 +195,30 @@ var gameState = {
 		// Ball control.
 		game.input.onDown.add(this.bounce, this);
 
-		//set the goals tweens.
-		tween = this.game.add.tween(this.goal).to({
-			x: [this.tweenBPosition,this.tweenAPosition]
-		}, 5000);
-		tween.start();
-		tween.onComplete.add(this.setNewTweenSpeed, this);
-		
-
 		ingameEmitter = game.add.emitter(0, 0, 100);
-
-		ingameEmitter.makeParticles(['cloud_particle1','cloud_particle2','cloud_particle3']);
+		ingameEmitter.makeParticles(['particle0','particle1','particle2']);
 		ingameEmitter.setScale(0.5, 0, 0.5, 0, 6000);
+
 		game.input.onDown.add(this.particleBurst, this);
 
 		//set score text
 		scoreText = game.add.text(game.world.centerX, 20, "0");
+		goalText = game.add.text(game.world.centerX, game.world.centerY, "GOAL!!!");
 
+				//	Font style
+		goalText.font = 'Arial Black';
+		goalText.fontSize = 1;
+		goalText.fontWeight = 'bold';
+
+		//	Stroke color and thickness
+		goalText.stroke = '#FFFF00';
+		goalText.strokeThickness = 10;
+		goalText.fill = '#FFFF66';
+		goalText.anchor.setTo(0.5,0.5);
+		goalText.visible = false;
 		//	Font style
 		scoreText.font = 'Arial Black';
-		scoreText.fontSize = 50;
+		scoreText.fontSize = 100;
 		scoreText.fontWeight = 'bold';
 
 		//	Stroke color and thickness
@@ -210,7 +226,9 @@ var gameState = {
 		scoreText.strokeThickness = 3;
 		scoreText.fill = '#FF2828';
 
-		textTween = game.add.tween(scoreText).to({ fontSize:100}, 100, Phaser.Easing.Linear.None, false, 0,0,true);
+		goalTween = game.add.tween(goalText).to({ fontSize:200}, 200, Phaser.Easing.Linear.None, false, 0,0,true);
+		goalTween.onComplete.add(this.TextVisible,this);
+		textTween = game.add.tween(scoreText).to({ fontSize:200}, 100, Phaser.Easing.Linear.None, false, 0,0,true);
 	},
 
 	/** @method
@@ -219,41 +237,57 @@ var gameState = {
 	 * @description this is a update function that is fired after the create function,and updates every frame.
 	 */
 	update: function() {
-		game.physics.arcade.collide(this.walls, this.ball, this.wallsCollisionHandler, null, this);
-		game.physics.arcade.collide(this.goal, this.ball, this.goalCollisionHandler, null, this);
+		game.physics.arcade.collide(this.walls, this.balls, this.wallsCollisionHandler, null, this);
+		game.physics.arcade.collide(this.goal, this.balls, this.goalCollisionHandler, null, this);
 
-		if (this.ball.world.y >= game.world.height) {
-			this.goToMain();
+		this.balls.forEach(function(ball) {
+			if (ball.world.y >= game.world.height) {
+				ball.kill();
+
+				if (this.balls.total <= 0) {
+					this.goToMain();
+				}
+			}
+
+			if (ball.ballIsAnimated && ball.animations.currentAnim.isFinished) {
+				ball.animations.play('idle');
+			}
+		}, this);
+
+		if (this.goal.world.x >= this.tweenAPosition) {
+			moveLeft = true;
+		}
+		if(this.goal.world.x <= this.tweenBPosition) {
+			moveLeft = false;
+		}
+		if(moveLeft)
+		{
+			this.goal.x -= this.goalSpeed;
+		}
+		else{
+			this.goal.x += this.goalSpeed;
 		}
 
-		if (this.goal.world.x == this.tweenAPosition) {
-			//	tweenB.start();
-		} else if(this.goal.world.x == this.tweenBPosition) {
-			//	tweenA.start();
-		}
-
-		if (this.ballIsAnimated && this.ball.animations.currentAnim.isFinished) {
-			this.ball.animations.play('idle');
-		}
-		
 		//goal move
 		//goal speed = 0.5f + (-1 * Mathf.Exp(-GameManager.Score / (float)scoreCurvMax) + 1) * MaxSpeed;
-		
-		var speed = 0.5 + (-1 * Math.exp(-score/scoreCurvMax)+1)*maxSpeed;
 	},
 
 	particleBurst: function() {
-		// Position the emitter where the mouse/touch event was
-		ingameEmitter.x = this.ball.world.x;
-		ingameEmitter.y = this.ball.world.y;
-
-		// The first parameter sets the effect to "explode" which means all particles are emitted at once
-		// The second gives each particle a 2000ms lifespan
-		// The third is ignored when using burst/explode mode
-		// The final parameter is how many particles will be emitted in this single burst
-		ingameEmitter.start(true, 2000, null, 10);
+		this.balls.forEachAlive(function(ball) {
+			ball.practicles();
+		}, this);
 	},
+		goalParticleBurst: function() {
+		//  Position the emitter where the mouse/touch event was
+    goalEmitter.x = this.goal.world.x;
+  	goalEmitter.y = this.goal.world.y;
 
+    //  The first parameter sets the effect to "explode" which means all particles are emitted at once
+    //  The second gives each particle a 2000ms lifespan
+    //  The third is ignored when using burst/explode mode
+    //  The final parameter (10) is how many particles will be emitted in this single burst
+    goalEmitter.start(true, 2000, null, 20);
+		},
 	 // Custom functions
 	 /** @method
 		* @name wallsCollisionHandler
@@ -264,32 +298,41 @@ var gameState = {
 		this.tempScore++;
 	},
 
-	 /** @method
-		* @name startBG
-		* @memberof gameState
-		* @description this is a function that starts the background music.
-		*/
-	startBG: function() {
-		inGameBGMusic.volume = 0.2;
-		inGameBGMusic.loop = true;
-		inGameBGMusic.play();
+	/** @method
+	 * @name startBG
+	 * @memberof gameState
+	 * @description this is a function that starts the background music.
+	 */
+	TextVisible: function() {
+	goalText.visible = false;
 	},
 
-	 /** @method
-		* @name goalCollisionHandler
-		* @memberof gameState
-		* @description this is a collision function that is fired when the ball hits the goal and is used for adding score for a skill shot
-		*/
-	goalCollisionHandler: function() {
-		//game.state.start('game');
+	/** @method
+	 * @name goalCollisionHandler
+	 * @memberof gameState
+	 * @description this is a collision function that is fired when the ball hits the goal and is used for adding score for a skill shot
+	 */
+	goalCollisionHandler: function(goal, ball) {
 		this.score += this.tempScore + 1;
 		this.tempScore = 0;
-
 		this.setScoreText();
-		this.ball.body.velocity.setTo(0, 0);
-		this.ball.body.angularVelocity = 0;
-		this.ball.position.x = game.rnd.integerInRange(this.tweenAPosition,this.tweenBPosition);
-		this.ball.position.y = 0;
+
+		if (this.score % 5 == 0) {
+			this.addBall();
+		}
+
+		ball.body.velocity.setTo(0, 0);
+		ball.body.angularVelocity = 0;
+		ball.position.x = game.rnd.integerInRange(this.tweenAPosition, this.tweenBPosition);
+		ball.position.y = 100;
+
+		ball.addPointScored();
+		this.goalParticleBurst();
+		dropSound.play();
+		tapSound.play();
+		goalText.visible = true;
+		goalTween.start();
+		this.goalSpeed += 0.2;
 	},
 
 	/** @method
@@ -317,40 +360,32 @@ var gameState = {
 	},
 
 	/** @method
+	 * @name addBall
+	 * @memberof gameState
+	 * @description This function adds a ball to the game.
+	 */
+	addBall: function() {
+		var ball = new BallObject(game, game.rnd.integerInRange(this.tweenAPosition, this.tweenBPosition), 100);
+		ball.body.allowGravity = false;
+
+		this.balls.add(ball);
+	},
+
+	/** @method
 	 * @name bounce
 	 * @memberof gameState
 	 * @description this is a function that is fired when the player taps the screen and is used for the ball movement.
 	 */
 	bounce: function() {
-		var yVelocity = 0;
 		this.tempScore = 0;
-		tapSound.play();
+		genericTapSound.play();
+		this.balls.forEachAlive(function(ball) {
+			ball.bounce();
 
-		if (this.ballIsAnimated) {
-			this.ball.animations.play('tapnimation');
-		}
-
-		if (game.input.activePointer.y > this.ball.y) {
-			yVelocity = -800;
-		} else {
-			this.tempScore++;
-
-			yVelocity = this.ball.body.velocity.y + 800;
-		}
-
-		if (hardMode == true) {
-			var xVelocity = Phaser.Math.difference(game.input.activePointer.x, this.ball.x);
-
-			this.ball.body.angularVelocity = angVelocity = this.ball.x - game.input.activePointer.x;
-
-			if (game.input.activePointer.x > this.ball.x) {
-				this.ball.body.velocity.setTo(this.ball.body.velocity.x + -xVelocity, yVelocity);
-			} else {
-				this.ball.body.velocity.setTo(this.ball.body.velocity.x + xVelocity, yVelocity);
+			if (!ball.body.allowGravity) {
+				ball.body.allowGravity = true;
 			}
-		} else {
-			this.ball.body.velocity.setTo(this.ball.body.velocity.x, yVelocity);
-		}
+		}, this);
 	},
 
 	/** @method
@@ -359,9 +394,9 @@ var gameState = {
 	 * @description this is a function that returns the player to the main menu.
 	 */
 	goToMain: function() {
-		inGameBGMusic.stop();
-		startSound.onStop.remove(this.startBG,this);
-		startSound.stop();
+		//inGameBGMusic.stop();
+		//startSound.onStop.remove(this.startBG,this);
+		//startSound.stop();
 
 		if (this.score > localStorage.getItem('highestScore') && this.score != 0 || this.score > 0 && this.currentHighscore[0] == null) {
 			this.currentHighscore.push("\n" + this.score);
@@ -373,7 +408,6 @@ var gameState = {
 		points += this.score;
 
 		localStorage.setItem('points', points);
-		this.score = 0;
 
 		game.state.start('deathScreen');
 	},

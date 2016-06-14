@@ -72,7 +72,8 @@ var shopState = {
 				localStorage.setItem('characterImage', this.charImg);
 				localStorage.setItem('characterImageNr', this.charNr);
 				localStorage.setItem('characterSound', this.charSnd);
-			}, { charNr: i, charSnd: charactersJSON.characters[i].sound, charImg: charactersJSON.characters[i].image });
+				localStorage.setItem('characterParticles', JSON.stringify(this.charPrt));
+			}, { charNr: i, charSnd: charactersJSON.characters[i].sound, charImg: charactersJSON.characters[i].image, charPrt: charactersJSON.characters[i].particles });
 
 			if (localStorage.getItem('pricePaid' + i) != charactersJSON.characters[i].characterPrice
 			&& parseInt(charactersJSON.characters[i].characterPrice, 10) > 0) {

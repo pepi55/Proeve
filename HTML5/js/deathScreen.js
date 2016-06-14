@@ -8,12 +8,13 @@
  * @property {fontStyle}		style				 -	style of the font in the screen.
  */
 var deathState = {
+	deathEmitter: null,
   deathScoreValue: 0,
   deathHighestScoreValue: 0,
   deathScreenBGMusic: null,
   preload: function(){
   	this.deathScreenBGMusic = game.add.audio('gameOverSound');
-  	this.deathScreenBGMusic.volume = 0.2;
+  	this.deathScreenBGMusic.volume = 0.1;
   },
   /** @method
    * @name create
@@ -28,6 +29,7 @@ var deathState = {
   	this.screenSprite.scale.setTo(1.5,1.5);
 		var backButton;
 		backButton = game.add.button(100, 100, 'backButton', function() {
+			mainMenuState.inGameBGMusic.stop();
 			this.deathScreenBGMusic.stop();
 		game.state.start('mainMenu');
 		}, this);
@@ -60,7 +62,12 @@ var deathState = {
 		scoreText.anchor.setTo(0.5);
 		loseText.anchor.setTo(0.5);
 
+		deathEmitter = game.add.emitter(0, 0, 100);
 
+    deathEmitter.makeParticles(['pixel_yellow','pixel_pink','pixel_blue']);
+    deathEmitter.gravity = 200;
+    deathEmitter.setScale(0.5, 0, 0.5, 0, 6000);
+		game.input.onDown.add(this.particleBurst, this);
   },
   setScreenValues: function(score,highestscore) {
 	deathScoreValue = score;
@@ -73,5 +80,16 @@ var deathState = {
 	{
 		deathHighestScoreValue = deathHighestScoreValue;
 	}
-  }
+  },
+  	particleBurst: function() {
+    //  Position the emitter where the mouse/touch event was
+    deathEmitter.x = game.input.activePointer.x;
+    deathEmitter.y = game.input.activePointer.y;
+
+    //  The first parameter sets the effect to "explode" which means all particles are emitted at once
+    //  The second gives each particle a 2000ms lifespan
+    //  The third is ignored when using burst/explode mode
+    //  The final parameter (10) is how many particles will be emitted in this single burst
+    deathEmitter.start(true, 2000, null, 10);
+	},
 };
