@@ -64,7 +64,7 @@ public class BallAnimationController : MonoBehaviour
 
             selected.setup();
 
-            selected.System.Emit(Random.Range(1, 3));
+            selected.System.Emit(Random.Range(2, 5));
 
             ParticleSystem.Particle p;
             int pmcount = selected.System.GetParticles(selected.Particles);

@@ -145,8 +145,8 @@ public class BallController : MonoBehaviour
         if (collision.transform.tag == "ScoreTarget")
         {
             Events.GlobalEvents.Invoke(new Events.IScore(wallBoucnes, lastClickDir));
-            StartCoroutine(ballResetDelay(0.2f));
-            StartCoroutine(ballFreeze(0.5f, 0.2f));
+            StartCoroutine(ballResetDelay(0.4f));
+            StartCoroutine(ballFreeze(0.5f, 0.4f));
             rigidbody2D.velocity = Vector2.zero;
         }
     }
