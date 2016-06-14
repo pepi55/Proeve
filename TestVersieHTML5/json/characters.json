@@ -1,0 +1,92 @@
+{ "characters": [
+	{
+		"image":"image.0.png",
+		"sound":"rock/rockKlick.wav",
+		"characterPrice":"0",
+		"particles":"path/to/praktikles.png"
+	},
+
+	{
+		"image":"image.1.png",
+		"sound":"chicken/chickenClick.wav",
+		"characterPrice":"20",
+		"particles":"path/to/praktikles.png"
+	},
+
+	{
+		"image":"image.2.png",
+		"sound":"que_cut.mp3",
+		"characterPrice":"30",
+		"particles":"path/to/praktikles.png"
+	},
+
+	{
+		"image":"image.3.png",
+		"sound":"cat/catClick.wav",
+		"characterPrice":"40",
+		"particles":"path/to/praktikles.png"
+	},
+
+	{
+		"image":"image.5.png",
+		"sound":"donkey/donkey.wav",
+		"characterPrice":"60",
+		"particles":"path/to/praktikles.png"
+	},
+
+	{
+		"image":"image.6.png",
+		"sound":"tumbleweed/tumbleweed.wav",
+		"characterPrice":"70",
+		"particles":"path/to/praktikles.png"
+	},
+
+	{
+		"image":"image.7.png",
+		"sound":"pinata/pinataClick.wav",
+		"characterPrice":"80",
+		"particles":"path/to/praktikles.png"
+	},
+
+	{
+		"image":"image.9.png",
+		"sound":"spicyJuice/spicyJuice.wav",
+		"characterPrice":"90",
+		"particles":"path/to/praktikles.png"
+	},
+
+	{
+		"image":"image.10.png",
+		"sound":"sombrero/sombreroClick.wav",
+		"characterPrice":"100",
+		"particles":"path/to/praktikles.png"
+	},
+
+	{
+		"image":"image.11.png",
+		"sound":"cow/cowClick.wav",
+		"characterPrice":"110",
+		"particles":"path/to/praktikles.png"
+	},
+
+	{
+		"image":"image.12.png",
+		"sound":"skull/skullClick.wav",
+		"characterPrice":"120",
+		"particles":"path/to/praktikles.png"
+	},
+
+	{
+		"image":"image.13.png",
+		"sound":"sombrero/sombreroClick.wav",
+		"characterPrice":"130",
+		"particles":"path/to/praktikles.png"
+	},
+
+	{
+		"image":"image.14.png",
+		"sound":"sheep/sheepClick.wav",
+		"characterPrice":"140",
+		"particles":"path/to/praktikles.png"
+	}
+]}
