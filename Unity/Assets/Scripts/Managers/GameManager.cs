@@ -31,7 +31,14 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public static bool GamePaused
     {
-        get { return instance.gamePaused; }
+        get
+        {
+            if (!instance)
+            {
+                instance = FindObjectOfType<GameManager>();
+            }
+            return instance.gamePaused;
+        }
     }
 
     private bool gamePaused;
@@ -48,6 +55,20 @@ public class GameManager : MonoBehaviour
         instance = this;
         Events.GlobalEvents.AddEventListener<Events.IScore>(AddPoint);
         Events.GlobalEvents.AddEventListener<Events.IBallHitBottom>(BallHitGround);
+
+        InputManager.onEscapePress += OnEscapePress;
+    }
+
+    private void OnEscapePress()
+    {
+        if(gamePaused)
+        {
+            ContinueGame();
+        }
+        else
+        {
+            PauseGame();
+        }
     }
 
     public void OnDestroy()

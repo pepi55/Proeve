@@ -61,7 +61,7 @@ public class GoalAnimationController : MonoBehaviour
                     newPos.z = -3f;
                     p.startSize = 0.5f;
                     p.startLifetime = 0.5f;
-                    p.velocity = dir * Random.Range(0.5f, 2f);
+                    p.velocity = dir * Random.Range(0.9f, 4f);
                     p.rotation = Random.Range(0, 360f);
                     selected.Particles[i] = p;
                 }

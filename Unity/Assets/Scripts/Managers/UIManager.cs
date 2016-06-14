@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     Text ScoreText = null;
 
+    [SerializeField]
     float ScoreTextScaleMult = 1f;
 
     void Awake()
@@ -48,6 +49,6 @@ public class UIManager : MonoBehaviour
     private void GameManager_OnScoreUpdate()
     {
         ScoreText.text = GameManager.Score.ToString();
-        ScoreTextScaleMult = 1.3f;
+        ScoreTextScaleMult = 1.75f;
     }
 }

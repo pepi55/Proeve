@@ -41,6 +41,9 @@ public class BallController : MonoBehaviour
     public void ChangeLooks()
     {
         GetComponent<SpriteRenderer>().sprite = Menus.ShopMenuData.GetShopMenu().Characters[SaveManager.savaData.SelectedCharacter].LowRes;
+        PhysicsMaterial2D temp = GetComponent<PolygonCollider2D>().sharedMaterial;
+        Destroy(GetComponent<PolygonCollider2D>());
+        gameObject.AddComponent<PolygonCollider2D>().sharedMaterial = temp;
     }
 
     public void OnDestroy()
