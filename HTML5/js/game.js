@@ -135,6 +135,7 @@ var gameState = {
 		genericTapSound = game.add.audio('genericTapSound');
 		dropSound = game.add.audio('dropSound');
 		applauseSound = game.add.audio('applauseSound');
+		applauseSound.volume = 0.3;
 		//set tween position
 		this.tweenAPosition = game.world.width - 300;
 		this.tweenBPosition = 300;
@@ -330,6 +331,7 @@ var gameState = {
 		this.goalParticleBurst();
 		dropSound.play();
 		tapSound.play();
+		applauseSound.play();
 		goalText.visible = true;
 		goalTween.start();
 		this.goalSpeed += 0.2;
